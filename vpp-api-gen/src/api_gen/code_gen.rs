@@ -14,14 +14,14 @@ use std::fs;
 use std::fs::File;
 use std::io::prelude::*;
 
-use crate::alias::VppJsApiAlias;
-use crate::basetypes::{maxSizeUnion, sizeof_alias, sizeof_struct};
-use crate::enums::VppJsApiEnum;
-use crate::file_schema::VppJsApiFile;
-use crate::message::VppJsApiMessage;
-use crate::parser_helper::{camelize_ident, get_ident, get_type};
-use crate::types::VppJsApiType;
-use crate::types::{VppJsApiFieldSize, VppJsApiMessageFieldDef};
+use crate::api_gen::alias::VppJsApiAlias;
+use crate::api_gen::basetypes::{maxSizeUnion, sizeof_alias, sizeof_struct};
+use crate::api_gen::enums::VppJsApiEnum;
+use crate::api_gen::file_schema::VppJsApiFile;
+use crate::api_gen::message::VppJsApiMessage;
+use crate::api_gen::parser_helper::{camelize_ident, get_ident, get_type};
+use crate::api_gen::types::VppJsApiType;
+use crate::api_gen::types::{VppJsApiFieldSize, VppJsApiMessageFieldDef};
 
 pub fn gen_code_file(
     code: &VppJsApiFile,
@@ -32,52 +32,52 @@ pub fn gen_code_file(
     lazy_static! {
         static ref RE: Regex = Regex::new(r"[a-z_0-9]*.api.json").unwrap();
     }
-    let fileName = RE
+    let file_name = RE
         .find(&name)
         .unwrap()
         .as_str()
         .trim_end_matches(".api.json");
-    let mut file = File::create(format!("{}/{}.rs", package_path, fileName)).unwrap();
+    let mut file = File::create(format!("{}/{}.rs", package_path, file_name)).unwrap();
     file.write_all(code.generate_code(name, api_definition).as_bytes())
         .unwrap();
-    println!("Generated {}.rs", fileName.trim_start_matches("/"));
+    println!("Generated {}.rs", file_name.trim_start_matches("/"));
 }
 pub fn gen_code(
     code: &VppJsApiFile,
     name: &str,
     api_definition: &mut Vec<(String, String)>,
-    packageName: &str,
+    package_name: &str,
     package_path: &str,
 ) {
     // Using Regex to extract output filename
     lazy_static! {
         static ref RE: Regex = Regex::new(r"/[a-z_0-9]*.api.json").unwrap();
     }
-    let fileName = RE
+    let file_name = RE
         .find(&name)
         .unwrap()
         .as_str()
         .trim_end_matches(".api.json");
     let mut file = File::create(format!(
         "{}/{}/src/{}.rs",
-        package_path, packageName, fileName
+        package_path, package_name, file_name
     ))
     .unwrap();
     file.write_all(code.generate_code(name, api_definition).as_bytes())
         .unwrap();
 
-    println!("Generated {}.rs", fileName.trim_start_matches("/"));
+    println!("Generated {}.rs", file_name.trim_start_matches("/"));
 }
 
 fn vpp_api_crate(name: &str, vppapi_opts: &str) -> String {
     format!("{} = {}\n", name, &vppapi_opts.replace("{crate}", name))
 }
 
-pub fn create_cargo_toml(package_path: &str, packageName: &str, vppapi_opts: &str) {
+pub fn create_cargo_toml(package_path: &str, package_name: &str, vppapi_opts: &str) {
     println!("Generating Cargo file");
     let mut code = String::new();
     code.push_str("[package]\n");
-    code.push_str(&format!("name = \"{}\"\n", packageName));
+    code.push_str(&format!("name = \"{}\"\n", package_name));
     code.push_str("version = \"0.1.0\"\n");
     code.push_str("authors = [\"Andrew Yourtchenko <ayourtch@gmail.com>\"]\n");
     code.push_str("edition = \"2018\"\n\n");
@@ -109,14 +109,14 @@ pub fn create_cargo_toml(package_path: &str, packageName: &str, vppapi_opts: &st
     code.push_str("proc-macro2 = \"1.0.26\"\n");
     code.push_str(&vpp_api_crate("vpp-api-macros", &vppapi_opts));
 
-    let mut file = File::create(format!("{}/{}/Cargo.toml", package_path, packageName)).unwrap();
+    let mut file = File::create(format!("{}/{}/Cargo.toml", package_path, package_name)).unwrap();
     file.write_all(code.as_bytes()).unwrap();
 }
 
 pub fn generate_lib_file(
     package_path: &str,
     api_files: &LinkedHashMap<String, VppJsApiFile>,
-    packageName: &str,
+    package_name: &str,
 ) {
     let mut code = String::new();
     let mut names_vec: Vec<String> = vec![];
@@ -125,32 +125,32 @@ pub fn generate_lib_file(
         lazy_static! {
             static ref RE: Regex = Regex::new(r"/[a-z_0-9]*.api.json").unwrap();
         }
-        let fileName = RE
+        let file_name = RE
             .find(&name)
             .unwrap()
             .as_str()
             .trim_end_matches(".api.json");
-        names_vec.push(format!("{}", fileName.trim_start_matches("/")));
+        names_vec.push(format!("{}", file_name.trim_start_matches("/")));
     }
     names_vec.sort();
     for name in names_vec {
         code.push_str(&format!("pub mod {};\n", name));
     }
-    let mut file = File::create(format!("{}/{}/src/lib.rs", package_path, packageName)).unwrap();
+    let mut file = File::create(format!("{}/{}/src/lib.rs", package_path, package_name)).unwrap();
     file.write_all(code.as_bytes()).unwrap();
     // println!("{}", code);
 }
 pub fn copy_file_with_fixup(
     package_path: &str,
     example_file: &str,
-    packageName: &str,
+    package_name: &str,
     target_name: &str,
 ) {
     let data = fs::read_to_string(example_file)
         .expect(format!("Could not read example_file file {}", example_file).as_str());
-    let packageCodeName = &packageName.replace("-", "_");
-    let updated_test = data.replace("vpp_api_gen", packageCodeName);
-    let mut file = File::create(format!("{}/{}/{}", package_path, packageName, target_name))
+    let package_code_name = &package_name.replace("-", "_");
+    let updated_test = data.replace("vpp_api_gen", package_code_name);
+    let mut file = File::create(format!("{}/{}/{}", package_path, package_name, target_name))
         .expect("Error writing file");
     file.write_all(updated_test.as_bytes())
         .expect("error writing to file");

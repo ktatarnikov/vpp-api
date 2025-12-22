@@ -1,8 +1,9 @@
 use std::string::ToString;
 extern crate strum;
-use crate::file_schema::*;
-use crate::types::*;
-use crate::Opts;
+use crate::api_gen::file_schema::*;
+use crate::api_gen::opts::Opts;
+use crate::api_gen::types::*;
+
 use linked_hash_map::LinkedHashMap;
 use std::collections::HashMap;
 
@@ -64,7 +65,6 @@ pub fn get_ident(api_ident: &str) -> String {
 }
 
 pub fn get_rust_type_from_ctype(
-    _opts: &Opts,
     enum_containers: &HashMap<String, String>,
     ctype: &str,
 ) -> String {
@@ -90,7 +90,7 @@ pub fn get_rust_type_from_ctype(
     rtype
 }
 
-pub fn get_rust_field_name(opts: &Opts, name: &str) -> String {
+pub fn get_rust_field_name(name: &str) -> String {
     if name == "type" || name == "match" {
         format!("r#{}", name)
     } else {
@@ -99,16 +99,15 @@ pub fn get_rust_field_name(opts: &Opts, name: &str) -> String {
 }
 
 pub fn get_rust_field_type(
-    opts: &Opts,
     enum_containers: &HashMap<String, String>,
     fld: &VppJsApiMessageFieldDef,
     is_last: bool,
 ) -> String {
-    use crate::VppJsApiFieldSize::*;
-    let rtype = get_rust_type_from_ctype(opts, enum_containers, &fld.ctype);
+    use crate::api_gen::types::VppJsApiFieldSize::*;
+    let rtype = get_rust_type_from_ctype(enum_containers, &fld.ctype);
     let full_rtype = if let Some(size) = &fld.maybe_size {
         match size {
-            Variable(max_var) => {
+            Variable(_max_var) => {
                 if fld.ctype == "string" {
                     format!("VariableSizeString")
                 } else {
@@ -134,24 +133,24 @@ pub fn get_rust_field_type(
 }
 
 pub fn camelize_ident(ident: &str) -> String {
-    let mut c = ident.split("_");
+    let c = ident.split("_");
     let collection: Vec<&str> = c.collect();
-    let mut finalString = String::new();
+    let mut final_string = String::new();
 
     for x in collection {
         for (i, c) in x.chars().enumerate() {
             if i == 0 {
                 let c_upper: Vec<_> = c.to_uppercase().collect();
-                finalString.push_str(&c_upper[0].to_string());
+                final_string.push_str(&c_upper[0].to_string());
             } else {
-                finalString.push_str(&c.to_string());
+                final_string.push_str(&c.to_string());
             }
         }
     }
-    finalString
+    final_string
 }
 
-pub fn camelize(opts: &Opts, ident: &str) -> String {
+pub fn camelize(ident: &str) -> String {
     use convert_case::{Case, Casing};
     ident.to_case(Case::UpperCamel)
 }

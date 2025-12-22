@@ -1,8 +1,7 @@
 use serde::ser::SerializeSeq;
 use serde::{Deserialize, Serialize, Serializer};
 extern crate strum;
-use crate::basetypes::{maxSizeUnion, sizeof_alias, sizeof_struct};
-use crate::parser_helper::{camelize_ident, get_ident, get_type};
+use crate::api_gen::parser_helper::{camelize_ident, get_ident};
 use serde::de::{Deserializer, SeqAccess, Visitor};
 use std::fmt;
 
@@ -108,7 +107,7 @@ impl<'de> Deserialize<'de> for VppJsApiEnum {
         deserializer.deserialize_seq(VppJsApiEnumVisitor)
     }
 }
-pub fn isPowerOfTwo(n: &mut i64) -> bool {
+pub fn is_power_of_two(n: &mut i64) -> bool {
     if *n == 0 {
         return false;
     }
@@ -130,7 +129,7 @@ impl VppJsApiEnum {
             if self.values[x].value == 0 {
                 continue;
             }
-            if !isPowerOfTwo(&mut self.values[x].value.clone()) {
+            if !is_power_of_two(&mut self.values[x].value.clone()) {
                 return false;
             }
             let next = prev + 1;
@@ -142,7 +141,7 @@ impl VppJsApiEnum {
                     // avoid panic in the next if
                     return false;
                 }
-                if isPowerOfTwo(&mut self.values[x + 1].value.clone()) {
+                if is_power_of_two(&mut self.values[x + 1].value.clone()) {
                     return true;
                 }
                 return false;

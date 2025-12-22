@@ -1,5 +1,4 @@
-use crate::basetypes::{maxSizeUnion, sizeof_alias, sizeof_struct};
-use crate::parser_helper::{camelize_ident, get_ident, get_type};
+use crate::api_gen::parser_helper::{camelize_ident, get_ident, get_type};
 use linked_hash_map::LinkedHashMap;
 use serde::ser::SerializeMap;
 use serde::{Deserialize, Serialize, Serializer};
@@ -58,7 +57,7 @@ impl VppJsApiAlias {
                             if &import_table[k].0 == &api_definition[j].1 {
                                 if !import_table[k].1.contains(&x) {
                                     // println!("Pushing");
-                                    import_table[k].1.push(x.clone().to_string());
+                                    import_table[k].1.push(x.to_string());
                                     return false;
                                 } else {
                                     // println!("Ignoring");
@@ -67,11 +66,11 @@ impl VppJsApiAlias {
                             }
                         }
                         import_table
-                            .push((api_definition[j].1.clone(), vec![x.clone().to_string()]));
+                            .push((api_definition[j].1.clone(), vec![x.to_string()]));
                         return false;
                     }
                 }
-                api_definition.push((x.clone().to_string(), name.to_string().clone()));
+                api_definition.push((x.to_string(), name.to_string().clone()));
                 return true;
             })
             .fold(String::new(), |mut acc, x| {

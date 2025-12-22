@@ -8,11 +8,11 @@
     non_snake_case
 )]
 
-use crate::alias::VppJsApiAlias;
-use crate::enums::VppJsApiEnum;
-use crate::file_schema::VppJsApiFile;
-use crate::types::VppJsApiMessageFieldDef;
-use crate::types::VppJsApiType;
+use crate::api_gen::alias::VppJsApiAlias;
+use crate::api_gen::enums::VppJsApiEnum;
+use crate::api_gen::file_schema::VppJsApiFile;
+use crate::api_gen::types::VppJsApiMessageFieldDef;
+use crate::api_gen::types::VppJsApiType;
 pub enum basetypes {
     U8,
     I8,

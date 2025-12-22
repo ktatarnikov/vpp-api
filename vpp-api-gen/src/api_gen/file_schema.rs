@@ -1,10 +1,10 @@
 use serde::{Deserialize, Serialize};
 extern crate strum;
-use crate::alias::VppJsApiAlias;
-use crate::enums::VppJsApiEnum;
-use crate::message::VppJsApiMessage;
-use crate::services::{VppJsApiOptions, VppJsApiService};
-use crate::types::VppJsApiType;
+use crate::api_gen::alias::VppJsApiAlias;
+use crate::api_gen::enums::VppJsApiEnum;
+use crate::api_gen::message::VppJsApiMessage;
+use crate::api_gen::services::{VppJsApiOptions, VppJsApiService};
+use crate::api_gen::types::VppJsApiType;
 use lazy_static::lazy_static;
 use linked_hash_map::LinkedHashMap;
 use regex::Regex;
@@ -146,13 +146,13 @@ impl VppJsApiFile {
 
         for x in 0..import_table.len() {
             let name = &import_table[x].0;
-            let fileName = RE
+            let file_name = RE
                 .find(&name)
                 .unwrap()
                 .as_str()
                 .trim_end_matches(".api.json")
                 .trim_start_matches("/");
-            preamble.push_str(&format!("use crate::{}::*;\n", fileName));
+            preamble.push_str(&format!("use crate::{}::*;\n", file_name));
         }
         preamble.push_str(&typstructs);
         preamble.push_str(&typunions);

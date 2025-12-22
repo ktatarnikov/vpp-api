@@ -1,10 +1,9 @@
 use serde::ser::SerializeSeq;
 use serde::{Deserialize, Serialize, Serializer};
 extern crate strum;
-use crate::basetypes::{field_size, maxSizeUnion, sizeof_alias, sizeof_struct};
-use crate::file_schema::VppJsApiFile;
-use crate::parser_helper::{camelize_ident, get_ident, get_type};
-use linked_hash_map::LinkedHashMap;
+use crate::api_gen::basetypes::{field_size, maxSizeUnion};
+use crate::api_gen::file_schema::VppJsApiFile;
+use crate::api_gen::parser_helper::{camelize_ident, get_ident, get_type};
 use serde::de::{self, Deserializer, SeqAccess, Visitor};
 use std::fmt;
 
@@ -104,7 +103,7 @@ impl VppJsApiType {
                             get_type(&self.fields[x].ctype),
                             len
                         )),
-                        VppJsApiFieldSize::Variable(t) => code.push_str(&format!(
+                        VppJsApiFieldSize::Variable(_t) => code.push_str(&format!(
                             "VariableSizeArray<{}>,\n",
                             get_type(&self.fields[x].ctype)
                         )),
@@ -251,7 +250,7 @@ impl Serialize for VppJsApiMessageFieldDef {
     where
         S: Serializer,
     {
-        use crate::VppJsApiFieldSize::*;
+        use crate::api_gen::types::VppJsApiFieldSize::*;
 
         let mut len = 2;
         if self.maybe_options.is_some() {
