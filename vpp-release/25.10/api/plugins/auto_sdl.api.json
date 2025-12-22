@@ -1,0 +1,78 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "auto_sdl_config",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "threshold",
+                {
+                    "default": 5
+                }
+            ],
+            [
+                "u32",
+                "remove_timeout",
+                {
+                    "default": 300
+                }
+            ],
+            [
+                "bool",
+                "enable"
+            ],
+            {
+                "crc": "0x14f30db8",
+                "options": {},
+                "comment": "/** \\brief auto sdl config\n    @param client_index - opaque cookie to identify the sender\n    @param threshold - number of times to hit for an auto SDL entry is created\n    @param remove_timeout - timeout value for the auto SDL entries after they are created\n    @param enable - enable/disable\n  */"
+            }
+        ],
+        [
+            "auto_sdl_config_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [],
+    "enumflags": [],
+    "services": {
+        "auto_sdl_config": {
+            "reply": "auto_sdl_config_reply"
+        }
+    },
+    "options": {
+        "version": "1.0.0"
+    },
+    "aliases": {},
+    "vl_api_version": "0x434063e5",
+    "imports": [],
+    "counters": [],
+    "paths": []
+}

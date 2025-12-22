@@ -1,0 +1,132 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "bpf_trace_filter_set",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "string",
+                "filter",
+                0
+            ],
+            {
+                "crc": "0x3171346e",
+                "options": {},
+                "comment": "/*\n * bpf_trace_filter.api - BPF Trace filter API\n *\n * Copyright (c) 2023 Cisco and/or its affiliates\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at:\n *\n *     http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */"
+            }
+        ],
+        [
+            "bpf_trace_filter_set_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "bpf_trace_filter_set_v2",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "bool",
+                "optimize",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "string",
+                "filter",
+                0
+            ],
+            {
+                "crc": "0x5615acbf",
+                "options": {}
+            }
+        ],
+        [
+            "bpf_trace_filter_set_v2_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [],
+    "enumflags": [],
+    "services": {
+        "bpf_trace_filter_set": {
+            "reply": "bpf_trace_filter_set_reply"
+        },
+        "bpf_trace_filter_set_v2": {
+            "reply": "bpf_trace_filter_set_v2_reply"
+        }
+    },
+    "options": {
+        "version": "0.1.0"
+    },
+    "aliases": {},
+    "vl_api_version": "0xb682a79a",
+    "imports": [],
+    "counters": [],
+    "paths": []
+}

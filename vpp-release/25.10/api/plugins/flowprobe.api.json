@@ -1,0 +1,631 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "flowprobe_tx_interface_add_del",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "vl_api_flowprobe_which_flags_t",
+                "which"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0xb782c976",
+                "options": {
+                    "replaced_by": "flowprobe_interface_add_del",
+                    "vat_help": "<intfc> [disable]"
+                },
+                "comment": "/** \\brief Enable / disable per-packet IPFIX recording on an interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add address if non-zero, else delete\n    @param which - flags indicating forwarding path\n    @param sw_if_index - index of the interface\n*/"
+            }
+        ],
+        [
+            "flowprobe_tx_interface_add_del_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "replaced_by": "flowprobe_interface_add_del",
+                    "vat_help": "<intfc> [disable]"
+                }
+            }
+        ],
+        [
+            "flowprobe_interface_add_del",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "vl_api_flowprobe_which_t",
+                "which"
+            ],
+            [
+                "vl_api_flowprobe_direction_t",
+                "direction"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x3420739c",
+                "options": {
+                    "in_progress": null,
+                    "vat_help": "(<intfc> | sw_if_index <if-idx>) [(ip4|ip6|l2)] [(rx|tx|both)] [disable]"
+                },
+                "comment": "/** \\brief Enable or disable IPFIX flow record generation on an interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add interface if non-zero, else delete\n    @param which - datapath on which to record flows\n    @param direction - direction of recorded flows\n    @param sw_if_index - index of the interface\n*/"
+            }
+        ],
+        [
+            "flowprobe_interface_add_del_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null,
+                    "vat_help": "(<intfc> | sw_if_index <if-idx>) [(ip4|ip6|l2)] [(rx|tx|both)] [disable]"
+                }
+            }
+        ],
+        [
+            "flowprobe_interface_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            {
+                "crc": "0xf9e6675e",
+                "options": {
+                    "in_progress": null,
+                    "vat_help": "[<if-idx>]"
+                },
+                "comment": "/** \\brief Dump interfaces for which IPFIX flow record generation is enabled\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - interface index to use as filter (0xffffffff is \"all\")\n*/"
+            }
+        ],
+        [
+            "flowprobe_interface_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_flowprobe_which_t",
+                "which"
+            ],
+            [
+                "vl_api_flowprobe_direction_t",
+                "direction"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x427d77e0",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Details about IPFIX flow record generation enabled on interface\n    @param context - sender context which was passed in the request\n    @param which - datapath on which to record flows\n    @param direction - direction of recorded flows\n    @param sw_if_index - index of the interface\n*/"
+            }
+        ],
+        [
+            "flowprobe_params",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_flowprobe_record_flags_t",
+                "record_flags"
+            ],
+            [
+                "u32",
+                "active_timer"
+            ],
+            [
+                "u32",
+                "passive_timer"
+            ],
+            {
+                "crc": "0xbaa46c09",
+                "options": {
+                    "replaced_by": "flowprobe_set_params",
+                    "vat_help": "record <[l2] [l3] [l4]> [active <timer> passive <timer>]"
+                }
+            }
+        ],
+        [
+            "flowprobe_params_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "replaced_by": "flowprobe_set_params",
+                    "vat_help": "record <[l2] [l3] [l4]> [active <timer> passive <timer>]"
+                }
+            }
+        ],
+        [
+            "flowprobe_set_params",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_flowprobe_record_flags_t",
+                "record_flags"
+            ],
+            [
+                "u32",
+                "active_timer",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "u32",
+                "passive_timer",
+                {
+                    "default": 4294967295
+                }
+            ],
+            {
+                "crc": "0xbaa46c09",
+                "options": {
+                    "in_progress": null,
+                    "vat_help": "record [l2] [l3] [l4] [active <timer>] [passive <timer>]"
+                },
+                "comment": "/** \\brief Set IPFIX flow record generation parameters\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param record_flags - flags indicating what data to record\n    @param active_timer - time in seconds after which active flow records are\n        to be exported (0 is \"off\", 0xffffffff is \"use default value\")\n    @param passive_timer - time in seconds after which passive flow records are\n        to be deleted (0 is \"off\", 0xffffffff is \"use default value\")\n*/"
+            }
+        ],
+        [
+            "flowprobe_set_params_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null,
+                    "vat_help": "record [l2] [l3] [l4] [active <timer>] [passive <timer>]"
+                }
+            }
+        ],
+        [
+            "flowprobe_get_params",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Get IPFIX flow record generation parameters\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "flowprobe_get_params_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_flowprobe_record_flags_t",
+                "record_flags"
+            ],
+            [
+                "u32",
+                "active_timer"
+            ],
+            [
+                "u32",
+                "passive_timer"
+            ],
+            {
+                "crc": "0xf350d621",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Reply to get IPFIX flow record generation parameters\n    @param context - sender context, to match reply w/ request\n    @param retval - error (0 is \"no error\")\n    @param record_flags - flags indicating what data to record\n    @param active_timer - time in seconds after which active flow records are\n        to be exported (0 is \"off\")\n    @param passive_timer - time in seconds after which passive flow records are\n        to be deleted (0 is \"off\")\n*/"
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "flowprobe_which_flags",
+            [
+                "FLOWPROBE_WHICH_FLAG_IP4",
+                1
+            ],
+            [
+                "FLOWPROBE_WHICH_FLAG_L2",
+                2
+            ],
+            [
+                "FLOWPROBE_WHICH_FLAG_IP6",
+                4
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "flowprobe_which",
+            [
+                "FLOWPROBE_WHICH_IP4",
+                0
+            ],
+            [
+                "FLOWPROBE_WHICH_IP6",
+                1
+            ],
+            [
+                "FLOWPROBE_WHICH_L2",
+                2
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "flowprobe_record_flags",
+            [
+                "FLOWPROBE_RECORD_FLAG_L2",
+                1
+            ],
+            [
+                "FLOWPROBE_RECORD_FLAG_L3",
+                2
+            ],
+            [
+                "FLOWPROBE_RECORD_FLAG_L4",
+                4
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "flowprobe_direction",
+            [
+                "FLOWPROBE_DIRECTION_RX",
+                0
+            ],
+            [
+                "FLOWPROBE_DIRECTION_TX",
+                1
+            ],
+            [
+                "FLOWPROBE_DIRECTION_BOTH",
+                2
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "flowprobe_tx_interface_add_del": {
+            "reply": "flowprobe_tx_interface_add_del_reply"
+        },
+        "flowprobe_interface_add_del": {
+            "reply": "flowprobe_interface_add_del_reply"
+        },
+        "flowprobe_interface_dump": {
+            "reply": "flowprobe_interface_details",
+            "stream": true
+        },
+        "flowprobe_params": {
+            "reply": "flowprobe_params_reply"
+        },
+        "flowprobe_set_params": {
+            "reply": "flowprobe_set_params_reply"
+        },
+        "flowprobe_get_params": {
+            "reply": "flowprobe_get_params_reply"
+        }
+    },
+    "options": {
+        "version": "2.1.0"
+    },
+    "aliases": {
+        "interface_index": {
+            "type": "u32"
+        }
+    },
+    "vl_api_version": "0x72c9c142",
+    "imports": [
+        "vnet/interface_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}
