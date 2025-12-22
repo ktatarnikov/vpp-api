@@ -58,11 +58,12 @@ pub fn gen_code(
         .unwrap()
         .as_str()
         .trim_end_matches(".api.json");
-    let mut file = File::create(format!(
+    
+    let target_file_name = format!(
         "{}/{}/src/{}.rs",
         package_path, package_name, file_name
-    ))
-    .unwrap();
+    );
+    let mut file = File::create(target_file_name).unwrap();
     file.write_all(code.generate_code(name, api_definition).as_bytes())
         .unwrap();
 

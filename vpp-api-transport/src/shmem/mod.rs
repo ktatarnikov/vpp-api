@@ -40,7 +40,7 @@ fn get_encoder() -> impl bincode::config::Options {
         .with_fixint_encoding()
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn shmem_default_cb(raw_data: *const u8, len: i32) {
     let data_slice = std::slice::from_raw_parts(raw_data, len as usize);
     let mut gs = GLOBAL.lock().unwrap();
@@ -59,7 +59,7 @@ pub unsafe extern "C" fn shmem_default_cb(raw_data: *const u8, len: i32) {
     }
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn vac_error_handler(_arg: *const u8, _msg: *const u8, _msg_len: i32) {
     println!("Error: {} bytes of message", _msg_len);
 }

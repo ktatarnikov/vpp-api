@@ -103,7 +103,7 @@ pub fn derive_unionident(input: proc_macro::TokenStream) -> proc_macro::TokenStr
                                     match arg.args[1] {
                                         syn::GenericArgument::Type(ref typt) => {
                                             match typt {
-                                                syn::Type::Path(ref typath) => {
+                                                syn::Type::Path(typath) => {
                                                     // eprintln!("{:#?}", typath.path.segments[1].ident);
                                                     ty = &typath.path.segments[1].ident;
                                                 }

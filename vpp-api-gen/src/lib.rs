@@ -1,9 +1,11 @@
+extern crate strum;
+extern crate strum_macros;
+
 pub mod api_gen;
+
 use api_gen::*;
 
 use std::string::ToString;
-extern crate strum;
-extern crate strum_macros;
 use linked_hash_map::LinkedHashMap;
 
 use api_gen::code_gen::{
@@ -66,10 +68,10 @@ pub fn parse_type_tree(opts: &Opts) {
         for (name, f) in &api_files {
             gen_code(
                 f,
-                name.trim_start_matches("testdata/vpp/api")
-                    .trim_end_matches("json"),
+                name.trim_start_matches("testdata/vpp/api"),
+                    // .trim_end_matches("json"),
                 &mut api_definition,
-                "test",
+                &opts.package_name,
                 &opts.package_path,
             );
         }
@@ -94,14 +96,14 @@ pub fn parse_type_tree(opts: &Opts) {
                 &x.file,
                 &x.name,
                 &mut api_definition,
-                "test",
+                &opts.package_name,
                 &opts.package_path,
             );
         }
         // Searching for non types
         for (name, f) in api_files.clone() {
             if !name.ends_with("_types.api.json") {
-                gen_code(&f, &name, &mut api_definition, "test", &opts.package_path);
+                gen_code(&f, &name, &mut api_definition, &opts.package_name, &opts.package_path);
             }
         }
     }

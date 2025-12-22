@@ -1,10 +1,17 @@
 [workspace]
-
+resolver = "2"
 members = [
 	"vpp-api-encoding",
 	"vpp-api-gen",
 	"vpp-api-macros",
 	"vpp-api-message",
 	"vpp-api-transport",
+	"vpp-api-client",
 ]
 
+[workspace.dependencies]
+vpp-api-gen = { path = "vpp-api-gen" }
+vpp-api-encoding = { path = "vpp-api-encoding" }
+vpp-api-macros = { path = "vpp-api-macros" }
+vpp-api-message = { path = "vpp-api-message" }
+vpp-api-transport = { path = "vpp-api-transport" }
