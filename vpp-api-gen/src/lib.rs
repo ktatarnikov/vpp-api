@@ -5,17 +5,17 @@ pub mod api_gen;
 
 use api_gen::*;
 
-use std::string::ToString;
 use linked_hash_map::LinkedHashMap;
+use std::string::ToString;
 
+use crate::api_gen::opts::Opts;
+use crate::api_gen::util::merge_sort;
+use crate::api_gen::util::ImportsFiles;
+use crate::file_schema::VppJsApiFile;
+use crate::parser_helper::*;
 use api_gen::code_gen::{
     copy_file_with_fixup, create_cargo_toml, gen_code, gen_code_file, generate_lib_file,
 };
-use crate::api_gen::opts::Opts;
-use crate::api_gen::util::ImportsFiles;
-use crate::api_gen::util::merge_sort;
-use crate::file_schema::VppJsApiFile;
-use crate::parser_helper::*;
 use std::fs;
 
 pub fn parse_type_file(opts: &Opts, data: &String) {
@@ -46,7 +46,6 @@ pub fn parse_type_file(opts: &Opts, data: &String) {
             &mut api_definition,
         );
     }
-
 }
 
 pub fn parse_type_tree(opts: &Opts) {
@@ -69,7 +68,7 @@ pub fn parse_type_tree(opts: &Opts) {
             gen_code(
                 f,
                 name.trim_start_matches("testdata/vpp/api"),
-                    // .trim_end_matches("json"),
+                // .trim_end_matches("json"),
                 &mut api_definition,
                 &opts.package_name,
                 &opts.package_path,
@@ -88,8 +87,7 @@ pub fn parse_type_tree(opts: &Opts) {
             }
         }
         let mut api_definition: Vec<(String, String)> = vec![];
-        import_collection =
-            merge_sort(import_collection.clone(), 0, import_collection.len());
+        import_collection = merge_sort(import_collection.clone(), 0, import_collection.len());
         for x in import_collection {
             println!("{}-{}", x.name, x.file.imports.len());
             gen_code(
@@ -103,7 +101,13 @@ pub fn parse_type_tree(opts: &Opts) {
         // Searching for non types
         for (name, f) in api_files.clone() {
             if !name.ends_with("_types.api.json") {
-                gen_code(&f, &name, &mut api_definition, &opts.package_name, &opts.package_path);
+                gen_code(
+                    &f,
+                    &name,
+                    &mut api_definition,
+                    &opts.package_name,
+                    &opts.package_path,
+                );
             }
         }
     }
@@ -151,8 +155,7 @@ pub fn parse_type_tree(opts: &Opts) {
                 })
             }
         }
-        import_collection =
-            merge_sort(import_collection.clone(), 0, import_collection.len());
+        import_collection = merge_sort(import_collection.clone(), 0, import_collection.len());
         for x in import_collection {
             gen_code(
                 &x.file,
@@ -174,6 +177,4 @@ pub fn parse_type_tree(opts: &Opts) {
             }
         }
     }
-
 }
-

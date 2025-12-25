@@ -1,9 +1,9 @@
+use crate::api_gen::parser_helper::{camelize_ident, get_ident, get_type};
+use crate::api_gen::types::{VppJsApiFieldSize, VppJsApiMessageFieldDef};
 use serde::de::{Deserializer, SeqAccess, Visitor};
 use serde::ser::SerializeSeq;
 use serde::{Deserialize, Serialize, Serializer};
 use std::fmt;
-use crate::api_gen::parser_helper::{camelize_ident, get_ident, get_type};
-use crate::api_gen::types::{VppJsApiFieldSize, VppJsApiMessageFieldDef};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VppJsApiMessageInfo {

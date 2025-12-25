@@ -6,8 +6,12 @@ pub struct ImportsFiles {
     pub file: Box<VppJsApiFile>,
 }
 
-
-pub fn merge(mut arr: Vec<ImportsFiles>, left: usize, mid: usize, right: usize) -> Vec<ImportsFiles> {
+pub fn merge(
+    mut arr: Vec<ImportsFiles>,
+    left: usize,
+    mid: usize,
+    right: usize,
+) -> Vec<ImportsFiles> {
     let n1 = mid - left;
     let n2 = right - mid;
     let l1 = arr.clone();

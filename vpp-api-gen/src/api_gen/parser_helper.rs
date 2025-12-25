@@ -64,10 +64,7 @@ pub fn get_ident(api_ident: &str) -> String {
     }
 }
 
-pub fn get_rust_type_from_ctype(
-    enum_containers: &HashMap<String, String>,
-    ctype: &str,
-) -> String {
+pub fn get_rust_type_from_ctype(enum_containers: &HashMap<String, String>, ctype: &str) -> String {
     use convert_case::{Case, Casing};
 
     let rtype = {

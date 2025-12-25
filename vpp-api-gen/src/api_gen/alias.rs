@@ -65,8 +65,7 @@ impl VppJsApiAlias {
                                 }
                             }
                         }
-                        import_table
-                            .push((api_definition[j].1.clone(), vec![x.to_string()]));
+                        import_table.push((api_definition[j].1.clone(), vec![x.to_string()]));
                         return false;
                     }
                 }

@@ -1,8 +1,7 @@
-use vpp_api_gen::api_gen::opts::Opts;
 use vpp_api_gen::api_gen::opts::OptParseType;
+use vpp_api_gen::api_gen::opts::Opts;
 
 fn main() {
-
     let opts = Opts {
         in_file: "../vpp-release/25.10/api".into(),
         out_file: "".into(),
@@ -21,4 +20,3 @@ fn main() {
 
     vpp_api_gen::parse_type_tree(&opts);
 }
-

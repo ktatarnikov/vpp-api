@@ -8,23 +8,20 @@
     non_snake_case
 )]
 use clap::{AppSettings, Parser};
+use std::string::ToString;
 use vpp_api_gen::api_gen::opts::OptParseType;
 use vpp_api_gen::api_gen::opts::Opts;
-use vpp_api_gen::api_gen::util::ImportsFiles;
 use vpp_api_gen::api_gen::util::merge_sort;
+use vpp_api_gen::api_gen::util::ImportsFiles;
+use vpp_api_gen::api_gen::*;
 use vpp_api_gen::parse_type_file;
 use vpp_api_gen::parse_type_tree;
-use std::string::ToString;
-use vpp_api_gen::api_gen::*;
 extern crate strum;
 #[macro_use]
 extern crate strum_macros;
 use env_logger;
 use linked_hash_map::LinkedHashMap;
 
-use vpp_api_gen::api_gen::code_gen::{
-    copy_file_with_fixup, create_cargo_toml, gen_code, gen_code_file, generate_lib_file,
-};
 use crate::file_schema::VppJsApiFile;
 use crate::message::*;
 use crate::parser_helper::*;
@@ -38,6 +35,9 @@ use std::fs;
 use std::io::{Read, Write};
 use std::ops::Add;
 use std::time::{Duration, SystemTime};
+use vpp_api_gen::api_gen::code_gen::{
+    copy_file_with_fixup, create_cargo_toml, gen_code, gen_code_file, generate_lib_file,
+};
 
 fn main() {
     env_logger::init();
