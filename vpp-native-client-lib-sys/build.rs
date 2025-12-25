@@ -1,9 +1,7 @@
-extern crate bindgen;
-use std::env;
-use std::fs;
-use std::path::PathBuf;
+use std::{env, fs, path::PathBuf};
 
 fn main() {
+    let manifest_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR").expect("CARGO_MANIFEST_DIR is expected"));
     let workspace_dir_path = std::env::var("CARGO_WORKSPACE_DIR")
         .map(PathBuf::from)
         .unwrap_or_else(|_| find_workspace_root());
@@ -11,8 +9,15 @@ fn main() {
         .to_str()
         .expect("CARGO_WORKSPACE_DIR is invalid");
 
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
     let arch = std::env::var("CARGO_CFG_TARGET_ARCH")
         .expect("architecture is not defined with CARGO_CFG_TARGET_ARCH variable");
+
+    // Pick the right library for the platform
+    match target_os.as_str() {
+        "linux" => (),
+        _ => panic!("unsupported target OS"),
+    };
 
     let cargo_toml_path = PathBuf::from(workspace_dir.to_owned()).join("Cargo.toml");
     let cargo_toml = std::fs::read_to_string(cargo_toml_path).expect("Cannot read Cargo.toml");
@@ -29,42 +34,26 @@ fn main() {
         panic!("vpp-version is not defined in the workspace Cargo.toml")
     };
 
-    // let vpp_lib_dir = format!("{}/vpp-release/{}/lib/{}", workspace_dir, vpp_version, arch);
-    // let library_filename = format!("libvppapiclient.so.{}", vpp_version);
-    let library_filename = "vppapiclient";
-    // println!("cargo:info=defined vpp_lib_dir '{}'", vpp_lib_dir);
+    let lib_path = format!("lib/{}", arch);
+    let library_filename = format!("libvppapiclient.so.{}", vpp_version);
+    let dst_library_filename = "libvppapiclient.so";
+    println!("cargo:info=defined lib_path '{}'", lib_path);
     println!("cargo:info=defined library_filename '{}'", library_filename);
+    
+    let src = manifest_dir.join(lib_path).join(library_filename);
+    
+    // Copy the library into OUT_DIR so Cargo treats it as a build artifact
+    let out_dir = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR is expected"));
+    let dst = out_dir.join(dst_library_filename);
+    fs::copy(&src, &dst).expect("failed to copy bundled library");
+    // Tell rustc where to find it
+    println!("cargo:rustc-link-search=native={}", out_dir.display());
 
-    // if !std::path::Path::new(&format!("{}/{}", &vpp_lib_dir, &library_filename)).exists() {
-    //     panic!(
-    //         "Can not find libvppapiclient.so.<version> at {}",
-    //         vpp_lib_dir
-    //     )
-    // };
+    // Tell rustc which library to link
+    println!("cargo:rustc-link-lib=vppapiclient");
 
-    // let flags = format!(
-    //     "cargo:rustc-flags=-L{},-l:{}",
-    //     &vpp_lib_dir, &library_filename
-    // );
-    let flags = format!(
-        "cargo:rustc-flags=-l{}", &library_filename
-    );
-
-    // Tell cargo to tell rustc to link the VPP client library
-    println!("{}", flags);
-
-    println!("cargo:rustc-env=GIT_VERSION=version {}", &git_version());
-
-    let bindings = bindgen::Builder::default()
-        .header("src/shmem_wrapper.h")
-        .generate()
-        .expect("Unable to generate bindings");
-
-    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
-    let out_file_name = out_path.join("bindings.rs");
-    bindings
-        .write_to_file(out_file_name.clone())
-        .expect("Couldn't write bindings!");
+    // Ensure rebuilds when library changes
+    println!("cargo:rerun-if-changed={}", src.display());
 }
 
 fn find_workspace_root() -> PathBuf {
@@ -86,19 +75,4 @@ fn find_workspace_root() -> PathBuf {
             panic!("Could not find workspace root");
         }
     }
-}
-
-fn git_version() -> String {
-    use std::process::Command;
-
-    let describe_output = Command::new("git")
-        .arg("describe")
-        .arg("--all")
-        .arg("--long")
-        .output()
-        .unwrap();
-
-    let mut describe = String::from_utf8_lossy(&describe_output.stdout).to_string();
-    describe.pop();
-    describe
 }

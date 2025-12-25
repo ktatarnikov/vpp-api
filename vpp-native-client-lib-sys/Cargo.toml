@@ -1,0 +1,10 @@
+[package]
+name = "vpp-native-client-lib-sys"
+version = "0.1.0"
+
+# Tells Cargo this crate provides a native library called "foo"
+# and prevents multiple crates from linking different versions.
+links = "vppclientlib"
+
+[build-dependencies]
+toml = "0.8"

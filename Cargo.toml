@@ -7,6 +7,7 @@ members = [
 	"vpp-api-message",
 	"vpp-api-transport",
 	"vpp-api-client",
+	"vpp-native-client-lib-sys",
 ]
 
 [workspace.metadata.build-config]
@@ -14,6 +15,7 @@ vpp-version = "25.10"
 
 [workspace.dependencies]
 vpp-api-gen = { path = "vpp-api-gen" }
+vpp-native-client-lib-sys = { path = "vpp-native-client-lib-sys" }
 vpp-api-encoding = { path = "vpp-api-encoding" }
 vpp-api-macros = { path = "vpp-api-macros" }
 vpp-api-message = { path = "vpp-api-message" }
