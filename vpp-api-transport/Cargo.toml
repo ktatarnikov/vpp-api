@@ -18,6 +18,7 @@ path = "src/lib.rs"
 name = "vpp-api-transport-test"
 
 [dependencies]
+vpp-native-client-lib-sys.workspace = true
 lazy_static = "1.4.0"
 serde = { version = "1.0", features = ["derive"] }
 bincode = "1.2.1"
@@ -31,5 +32,5 @@ clap = { version = "3.0.0", features = [ "derive" ] }
 
 [build-dependencies]
 vpp-native-client-lib-sys.workspace = true
-bindgen = "0.57.0"
+bindgen = "0.72.1"
 toml = "0.8"
