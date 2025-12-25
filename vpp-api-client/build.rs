@@ -3,7 +3,7 @@ use vpp_api_gen::api_gen::opts::Opts;
 
 fn main() {
     let opts = Opts {
-        in_file: "../vpp-release/25.10/api".into(),
+        in_file: "../vpp-native-client-lib-sys/api".into(),
         out_file: "".into(),
         parse_type: OptParseType::Tree,
         package_name: "25_10".into(),
