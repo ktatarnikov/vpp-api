@@ -9,6 +9,9 @@ members = [
 	"vpp-api-client",
 ]
 
+[workspace.metadata.build-config]
+vpp-version = "25.10"
+
 [workspace.dependencies]
 vpp-api-gen = { path = "vpp-api-gen" }
 vpp-api-encoding = { path = "vpp-api-encoding" }
