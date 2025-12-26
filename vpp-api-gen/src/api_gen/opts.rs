@@ -59,6 +59,6 @@ pub struct Opts {
     pub generate_code: bool,
 
     /// A level of verbosity, and can be used multiple times
-    #[clap(short, long, parse(from_occurrences))]
-    pub verbose: i32,
+    #[clap(short, long, action = clap::ArgAction::Count)]
+    pub verbose: u8,
 }

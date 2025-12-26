@@ -1,10 +1,11 @@
 [package]
 name = "vpp-native-client-lib-sys"
 version = "0.1.0"
+edition = "2024"
 
 # Tells Cargo this crate provides a native library called "foo"
 # and prevents multiple crates from linking different versions.
 links = "vppapiclient"
 
 [build-dependencies]
-toml = "0.8"
+toml = "0.9.8"

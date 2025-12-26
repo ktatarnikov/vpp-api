@@ -2,7 +2,7 @@ extern crate proc_macro;
 use quote::quote;
 use syn;
 use syn::{parse_macro_input, DeriveInput};
-
+use quote::ToTokens;
 use proc_macro2::TokenTree;
 
 #[proc_macro_derive(VppMessage, attributes(message_name_and_crc))]

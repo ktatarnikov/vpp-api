@@ -7,7 +7,7 @@
     unused_imports,
     non_snake_case
 )]
-use clap::{AppSettings, Parser};
+use clap::Parser;
 use std::string::ToString;
 use vpp_api_gen::api_gen::opts::OptParseType;
 use vpp_api_gen::api_gen::opts::Opts;
