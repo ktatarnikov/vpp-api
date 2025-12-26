@@ -1,5 +1,3 @@
-// Created with https://github.com/ayourtch/my-rust-boilerplate/
-
 fn main() {
     use std::process::Command;
 

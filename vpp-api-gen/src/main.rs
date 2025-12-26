@@ -26,7 +26,6 @@ use crate::file_schema::VppJsApiFile;
 use crate::message::*;
 use crate::parser_helper::*;
 use crate::types::*;
-use bincode::Options;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 use std::collections::HashMap;
@@ -76,7 +75,7 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use bincode::Options;
+
     use clap::Parser;
     use serde::{de::DeserializeOwned, Deserialize, Serialize};
     use serde_repr::{Deserialize_repr, Serialize_repr};
