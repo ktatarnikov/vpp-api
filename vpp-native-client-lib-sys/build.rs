@@ -19,20 +19,7 @@ fn main() {
         _ => panic!("unsupported target OS"),
     };
 
-    let cargo_toml_path = PathBuf::from(workspace_dir.to_owned()).join("Cargo.toml");
-    let cargo_toml = std::fs::read_to_string(cargo_toml_path).expect("Cannot read Cargo.toml");
-    let value: toml::Value = toml::from_str(&cargo_toml).expect("invalid Cargo.toml format");
-
-    // Navigate to `[workspace.metadata.build-config]`
-    let build_cfg = value
-        .get("workspace")
-        .and_then(|ws| ws.get("metadata"))
-        .and_then(|m| m.get("build-config"))
-        .expect("workspace.metadata.build-config not found");
-
-    let Some(vpp_version) = build_cfg.get("vpp-version").and_then(|v| v.as_str()) else {
-        panic!("vpp-version is not defined in the workspace Cargo.toml")
-    };
+    let vpp_version = read_version_from_workspace(workspace_dir);
 
     let lib_path = format!("{}/lib/{}", vpp_version, arch);
     let library_filename = format!("libvppapiclient.so.{}", vpp_version);
@@ -75,4 +62,22 @@ fn find_workspace_root() -> PathBuf {
             panic!("Could not find workspace root");
         }
     }
+}
+
+fn read_version_from_workspace(workspace_dir: &str) -> String {
+    let cargo_toml_path = PathBuf::from(workspace_dir.to_owned()).join("Cargo.toml");
+    let cargo_toml = std::fs::read_to_string(cargo_toml_path).expect("Cannot read Cargo.toml");
+    let value: toml::Value = toml::from_str(&cargo_toml).expect("invalid Cargo.toml format");
+
+    // Navigate to `[workspace.metadata.build-config]`
+    let build_cfg = value
+        .get("workspace")
+        .and_then(|ws| ws.get("metadata"))
+        .and_then(|m| m.get("build-config"))
+        .expect("workspace.metadata.build-config not found");
+
+    let Some(vpp_version) = build_cfg.get("vpp-version").and_then(|v| v.as_str()) else {
+        panic!("vpp-version is not defined in the workspace Cargo.toml")
+    };
+    vpp_version.into()
 }
