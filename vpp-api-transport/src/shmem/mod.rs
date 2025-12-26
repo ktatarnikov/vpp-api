@@ -42,7 +42,7 @@ fn get_encoder() -> impl bincode::config::Options {
 
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn shmem_default_cb(raw_data: *const u8, len: i32) {
-    let data_slice = std::slice::from_raw_parts(raw_data, len as usize);
+    let data_slice = unsafe { std::slice::from_raw_parts(raw_data, len as usize) };
     let mut gs = GLOBAL.lock().unwrap();
 
     let hdr = SockMsgHeader {
