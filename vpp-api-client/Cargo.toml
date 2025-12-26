@@ -10,6 +10,7 @@ homepage = "https://wiki.fd.io/view/VPP"
 [features]
 default = ["version_25_10"]
 version_25_10 = []
+version_25_06 = []
 
 [lib]
 name = "vpp_api_client"
