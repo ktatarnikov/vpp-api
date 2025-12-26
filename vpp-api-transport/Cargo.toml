@@ -7,6 +7,14 @@ description = "fd.io VPP API transport over shared memory and sockets"
 license = "MIT OR Apache-2.0"
 homepage = "https://wiki.fd.io/view/VPP"
 
+[features]
+25_10 = [
+    "vpp-native-client-lib-sys/25_10",
+]
+25_06 = [
+    "vpp-native-client-lib-sys/25_06"
+]
+
 [lib]
 name = "vpp_api_transport"
 path = "src/lib.rs"

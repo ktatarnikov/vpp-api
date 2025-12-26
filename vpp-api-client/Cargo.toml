@@ -7,9 +7,12 @@ license = "MIT OR Apache-2.0"
 homepage = "https://wiki.fd.io/view/VPP"
 
 [features]
-default = ["version_25_10"]
-version_25_10 = []
-version_25_06 = []
+25_10 = [
+    "vpp-api-transport/25_10",
+]
+25_06 = [
+    "vpp-api-transport/25_06"
+]
 
 [lib]
 name = "vpp_api_client"
@@ -24,4 +27,7 @@ serde.workspace = true
 serde_repr.workspace = true
 typenum.workspace = true
 bincode.workspace = true
+cfg-if.workspace = true
 
+[dev-dependencies]
+vpp-api-transport.workspace = true

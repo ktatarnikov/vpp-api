@@ -4,8 +4,6 @@ version = "0.1.6"
 authors = ["Andrew Yourtchenko <ayourtch@gmail.com>"]
 edition = "2024"
 
-[dev-dependencies]
-
 [dependencies]
 serde.workspace = true
 log.workspace = true

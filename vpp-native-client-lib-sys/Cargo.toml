@@ -7,5 +7,9 @@ edition = "2024"
 # and prevents multiple crates from linking different versions.
 links = "vppapiclient"
 
+[features]
+25_10 = []
+25_06 = []
+
 [build-dependencies]
 toml.workspace = true

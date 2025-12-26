@@ -10,9 +10,6 @@ members = [
 	"vpp-native-client-lib-sys",
 ]
 
-[workspace.metadata.build-config]
-vpp-version = "25.10"
-
 [workspace.dependencies]
 vpp-api-gen = { path = "vpp-api-gen" }
 vpp-native-client-lib-sys = { path = "vpp-native-client-lib-sys" }
@@ -43,3 +40,4 @@ lazy_static = "1.5.0"
 regex = "1.12.2"
 bindgen = "0.72.1"
 toml = "0.9.8"
+cfg-if = "1.0.4"
