@@ -48,6 +48,7 @@ download_and_extract() {
   echo "  $URL"
 
   wget -q -O "$TMP_DIR/$DEB_NAME" "$URL"
+  echo "Extracting vpp-core package into $EXTRACT_DIR ..."
   dpkg-deb -x "$TMP_DIR/$DEB_NAME" "$EXTRACT_DIR"
 
   # ------------------------------------------------------------
@@ -92,7 +93,7 @@ download_and_extract() {
 
   local PLUGIN_EXTRACT="$TMP_DIR/plugin_extract"
   mkdir -p "$PLUGIN_EXTRACT"
-  echo "Extracting pluging package into $PLUGIN_EXTRACT ..." 
+  echo "Extracting vpp-plugin package into $PLUGIN_EXTRACT ..." 
   dpkg-deb -x "$TMP_DIR/$PLUGIN_DEB" "$PLUGIN_EXTRACT"
 
   local PLUGIN_API_SRC="$PLUGIN_EXTRACT/usr/share/vpp/api"
