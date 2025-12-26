@@ -11,7 +11,7 @@ members = [
 ]
 
 [workspace.metadata.build-config]
-vpp-version = "25.06"
+vpp-version = "25.10"
 
 [workspace.dependencies]
 vpp-api-gen = { path = "vpp-api-gen" }

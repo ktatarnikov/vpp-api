@@ -23,7 +23,7 @@ fn main() {
         package_path: "./gen".into(),
         print_message_names: true,
         create_binding: true,
-        create_package: false,
+        create_package: true,
         generate_code: true,
         verbose: 2,
     };

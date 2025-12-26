@@ -14,7 +14,7 @@ use crate::api_gen::util::ImportsFiles;
 use crate::file_schema::VppJsApiFile;
 use crate::parser_helper::*;
 use api_gen::code_gen::{
-    copy_file_with_fixup, create_cargo_toml, gen_code, gen_code_file, generate_lib_file,
+    copy_file_with_fixup, gen_code, gen_code_file, generate_mod_file,
 };
 use std::fs;
 
@@ -129,8 +129,8 @@ pub fn parse_type_tree(opts: &Opts) {
             opts.package_path, opts.package_name
         ))
         .expect("Error creating package/examples dir");
-        generate_lib_file(&opts.package_path, &api_files, &opts.package_name);
-        create_cargo_toml(&opts.package_path, &opts.package_name, &opts.vppapi_opts);
+        generate_mod_file(&opts.package_path, &api_files, &opts.package_name);
+        // create_cargo_toml(&opts.package_path, &opts.package_name, &opts.vppapi_opts);
         let crate_dir = env!("CARGO_MANIFEST_DIR");
         eprintln!("package path: {}", &crate_dir);
         copy_file_with_fixup(

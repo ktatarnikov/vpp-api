@@ -21,6 +21,7 @@ vpp-api-gen.workspace = true
 vpp-api-encoding.workspace = true
 vpp-api-macros.workspace = true
 vpp-api-message.workspace = true
+vpp-api-transport.workspace = true
 serde = { version = "1.0", features = ["derive"] }
 serde_repr = "0.1"
 typenum = "*"

@@ -111,7 +111,7 @@ pub fn create_cargo_toml(package_path: &str, package_name: &str, vppapi_opts: &s
     file.write_all(code.as_bytes()).unwrap();
 }
 
-pub fn generate_lib_file(
+pub fn generate_mod_file(
     package_path: &str,
     api_files: &LinkedHashMap<String, VppJsApiFile>,
     package_name: &str,
@@ -134,7 +134,7 @@ pub fn generate_lib_file(
     for name in names_vec {
         code.push_str(&format!("pub mod {};\n", name));
     }
-    let mut file = File::create(format!("{}/{}/src/lib.rs", package_path, package_name)).unwrap();
+    let mut file = File::create(format!("{}/{}/src/mod.rs", package_path, package_name)).unwrap();
     file.write_all(code.as_bytes()).unwrap();
     // println!("{}", code);
 }
@@ -147,7 +147,7 @@ pub fn copy_file_with_fixup(
     let data = fs::read_to_string(example_file)
         .expect(format!("Could not read example_file file {}", example_file).as_str());
     let package_code_name = &package_name.replace("-", "_");
-    let updated_test = data.replace("vpp_api_gen", package_code_name);
+    let updated_test = data.replace("vpp_api_gen", "crate");
     let mut file = File::create(format!("{}/{}/{}", package_path, package_name, target_name))
         .expect("Error writing file");
     file.write_all(updated_test.as_bytes())

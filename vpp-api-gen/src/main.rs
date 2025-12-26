@@ -36,7 +36,7 @@ use std::io::{Read, Write};
 use std::ops::Add;
 use std::time::{Duration, SystemTime};
 use vpp_api_gen::api_gen::code_gen::{
-    copy_file_with_fixup, create_cargo_toml, gen_code, gen_code_file, generate_lib_file,
+    copy_file_with_fixup, create_cargo_toml, gen_code, gen_code_file, generate_mod_file,
 };
 
 fn main() {

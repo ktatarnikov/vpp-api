@@ -902,6 +902,7 @@ dependencies = [
  "vpp-api-gen",
  "vpp-api-macros",
  "vpp-api-message",
+ "vpp-api-transport",
 ]
 
 [[package]]
