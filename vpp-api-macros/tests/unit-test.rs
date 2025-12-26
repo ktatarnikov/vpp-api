@@ -1,5 +1,3 @@
-use generic_array::{ArrayLength, GenericArray};
-use serde::{Deserialize, Serialize};
 use std::convert::TryInto;
 use typenum;
 use vpp_api_encoding::typ::*;
