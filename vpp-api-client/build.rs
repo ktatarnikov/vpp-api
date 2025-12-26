@@ -31,7 +31,7 @@ fn main() {
         in_file: api_dir,
         out_file: "".into(),
         parse_type: OptParseType::Tree,
-        package_name: "25.10".into(),
+        package_name: vpp_version.into(),
         vppapi_opts: "".into(),
         package_path: "./gen".into(),
         print_message_names: true,
