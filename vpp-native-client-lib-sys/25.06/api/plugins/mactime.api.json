@@ -1,0 +1,461 @@
+{
+    "types": [
+        [
+            "time_range",
+            [
+                "f64",
+                "start"
+            ],
+            [
+                "f64",
+                "end"
+            ]
+        ],
+        [
+            "mactime_time_range",
+            [
+                "f64",
+                "start"
+            ],
+            [
+                "f64",
+                "end"
+            ]
+        ]
+    ],
+    "messages": [
+        [
+            "mactime_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "enable_disable"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x3865946c",
+                "options": {
+                    "vat_help": "<intfc> [disable]"
+                },
+                "comment": "/** @brief api to enable or disable the time-based src mac filter on\n    an interface\n*/"
+            }
+        ],
+        [
+            "mactime_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "vat_help": "<intfc> [disable]"
+                }
+            }
+        ],
+        [
+            "mactime_add_del_range",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "bool",
+                "drop"
+            ],
+            [
+                "bool",
+                "allow"
+            ],
+            [
+                "u8",
+                "allow_quota"
+            ],
+            [
+                "bool",
+                "no_udp_10001"
+            ],
+            [
+                "u64",
+                "data_quota"
+            ],
+            [
+                "vl_api_mac_address_t",
+                "mac_address"
+            ],
+            [
+                "string",
+                "device_name",
+                64
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "vl_api_time_range_t",
+                "ranges",
+                0,
+                "count"
+            ],
+            {
+                "crc": "0xcb56e877",
+                "options": {
+                    "vat_help": "name <devname> mac <mac-addr> allow drop allow-range Mon - Fri 9:00 - 17:00"
+                },
+                "comment": "/** @brief configure per src-mac time ranges\n *\n * Usage:\n *  to create a static allow entry:\n *   set mac_address, device_name, is_add=1, and allow=1.\n *\n *  to create a static drop entry:\n *   set mac_address, device_name, is_add=1, and drop=1.\n *\n *  to create a (time-range-based) dynamic allow entry:\n *   set mac_address, device_name, is_add=1, set allow=1.\n *   set count = number of ranges\n *   set each range start/end in seconds since Sunday began\n *   As in: start/end >= 0.0 && start/end < 7.0 *86400.0\n *\n *  to create a (time-range-based) dynamic allow entry with quota:\n *   Outside of stated time ranges, such entries revert to allow with no quota.\n *   previous setup, s/allow=1/allow_quota=1/\n *\n *  to create a (time-range-based) dynamic drop entry:\n *   Same procedure to create a dynamic allow entry,\n *   set drop=1 instead of allow=1\n *\n *  to delete a per src-mac entry (of any kind)\n *   set mac_address, is_add=0\n *   note: deletes all ranges.\n *\n * See mactime_test.c:api_mactime_add_del_range(...) for\n * a working example.\n */"
+            }
+        ],
+        [
+            "mactime_add_del_range_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "vat_help": "name <devname> mac <mac-addr> allow drop allow-range Mon - Fri 9:00 - 17:00"
+                }
+            }
+        ],
+        [
+            "mactime_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "my_table_epoch"
+            ],
+            {
+                "crc": "0x8f454e23",
+                "options": {},
+                "comment": "/** @brief dump mactime table\n *\n * Request a mactime client pool dump\n * Sequence:\n * client send vl_api_mactime_dump to vpp\n * vpp replies with zero or more vl_api_mactime_entry_t's\n * vpp replies with a vl_api_mactime_dump_reply_t\n * @param my_table_epoch dump table only if update needed, 0 => full dump\n */"
+            }
+        ],
+        [
+            "mactime_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "pool_index"
+            ],
+            [
+                "vl_api_mac_address_t",
+                "mac_address"
+            ],
+            [
+                "u64",
+                "data_quota"
+            ],
+            [
+                "u64",
+                "data_used_in_range"
+            ],
+            [
+                "u32",
+                "flags"
+            ],
+            [
+                "string",
+                "device_name",
+                64
+            ],
+            [
+                "u32",
+                "nranges"
+            ],
+            [
+                "vl_api_mactime_time_range_t",
+                "ranges",
+                0,
+                "nranges"
+            ],
+            {
+                "crc": "0xda25b13a",
+                "options": {},
+                "comment": "/** @brief mactime table entry details\n */"
+            }
+        ],
+        [
+            "mactime_dump_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "table_epoch"
+            ],
+            {
+                "crc": "0x49bcc753",
+                "options": {},
+                "comment": "/** @brief dump mactime table reply\n * Includes the vpp table epoch, needed to optimize API traffic\n */"
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "mactime_enable_disable": {
+            "reply": "mactime_enable_disable_reply"
+        },
+        "mactime_add_del_range": {
+            "reply": "mactime_add_del_range_reply"
+        },
+        "mactime_dump": {
+            "reply": "mactime_details",
+            "stream": true
+        }
+    },
+    "options": {
+        "version": "2.0.0"
+    },
+    "aliases": {
+        "mac_address": {
+            "type": "u8",
+            "length": 6
+        },
+        "interface_index": {
+            "type": "u32"
+        }
+    },
+    "vl_api_version": "0xc72e296e",
+    "imports": [
+        "vnet/ethernet/ethernet_types.api",
+        "vnet/interface_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}

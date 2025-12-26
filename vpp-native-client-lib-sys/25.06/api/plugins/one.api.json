@@ -1,0 +1,3732 @@
+{
+    "types": [
+        [
+            "address",
+            [
+                "vl_api_address_family_t",
+                "af"
+            ],
+            [
+                "vl_api_address_union_t",
+                "un"
+            ]
+        ],
+        [
+            "prefix",
+            [
+                "vl_api_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "len"
+            ]
+        ],
+        [
+            "ip4_address_and_mask",
+            [
+                "vl_api_ip4_address_t",
+                "addr"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "mask"
+            ]
+        ],
+        [
+            "ip6_address_and_mask",
+            [
+                "vl_api_ip6_address_t",
+                "addr"
+            ],
+            [
+                "vl_api_ip6_address_t",
+                "mask"
+            ]
+        ],
+        [
+            "mprefix",
+            [
+                "vl_api_address_family_t",
+                "af"
+            ],
+            [
+                "u16",
+                "grp_address_length"
+            ],
+            [
+                "vl_api_address_union_t",
+                "grp_address"
+            ],
+            [
+                "vl_api_address_union_t",
+                "src_address"
+            ]
+        ],
+        [
+            "ip6_prefix",
+            [
+                "vl_api_ip6_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "len"
+            ]
+        ],
+        [
+            "ip4_prefix",
+            [
+                "vl_api_ip4_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "len"
+            ]
+        ],
+        [
+            "prefix_matcher",
+            [
+                "u8",
+                "le"
+            ],
+            [
+                "u8",
+                "ge"
+            ]
+        ],
+        [
+            "local_locator",
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u8",
+                "priority"
+            ],
+            [
+                "u8",
+                "weight"
+            ]
+        ],
+        [
+            "remote_locator",
+            [
+                "u8",
+                "priority"
+            ],
+            [
+                "u8",
+                "weight"
+            ],
+            [
+                "vl_api_address_t",
+                "ip_address"
+            ]
+        ],
+        [
+            "nsh",
+            [
+                "u32",
+                "spi"
+            ],
+            [
+                "u8",
+                "si"
+            ]
+        ],
+        [
+            "eid",
+            [
+                "vl_api_eid_type_t",
+                "type"
+            ],
+            [
+                "vl_api_eid_address_t",
+                "address"
+            ]
+        ],
+        [
+            "hmac_key",
+            [
+                "vl_api_hmac_key_id_t",
+                "id"
+            ],
+            [
+                "u8",
+                "key",
+                64
+            ]
+        ],
+        [
+            "one_l2_arp_entry",
+            [
+                "vl_api_mac_address_t",
+                "mac"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip4"
+            ]
+        ],
+        [
+            "one_ndp_entry",
+            [
+                "vl_api_mac_address_t",
+                "mac"
+            ],
+            [
+                "vl_api_ip6_address_t",
+                "ip6"
+            ]
+        ],
+        [
+            "one_adjacency",
+            [
+                "vl_api_eid_t",
+                "reid"
+            ],
+            [
+                "vl_api_eid_t",
+                "leid"
+            ]
+        ]
+    ],
+    "messages": [
+        [
+            "one_add_del_locator_set",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "string",
+                "locator_set_name",
+                64
+            ],
+            [
+                "u32",
+                "locator_num"
+            ],
+            [
+                "vl_api_local_locator_t",
+                "locators",
+                0,
+                "locator_num"
+            ],
+            {
+                "crc": "0x6fcd6471",
+                "options": {},
+                "comment": "/** \\brief add or delete locator_set\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add address if non-zero, else delete\n    @param locator_set_name - locator name\n    @param locator_num - number of locators\n    @param locators - locator records\n*/"
+            }
+        ],
+        [
+            "one_add_del_locator_set_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "ls_index"
+            ],
+            {
+                "crc": "0xb6666db4",
+                "options": {},
+                "comment": "/** \\brief Reply for locator_set add/del\n    @param context - returned sender context, to match reply w/ request\n    @param retval - return code\n    @param ls_index - locator set index\n*/"
+            }
+        ],
+        [
+            "one_add_del_locator",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "string",
+                "locator_set_name",
+                64
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u8",
+                "priority"
+            ],
+            [
+                "u8",
+                "weight"
+            ],
+            {
+                "crc": "0xaf4d8f13",
+                "options": {},
+                "comment": "/** \\brief add or delete locator for locator set\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add address if non-zero, else delete\n    @param locator_set_name - name of locator_set to add/del locator\n    @param sw_if_index - index of the interface\n    @param priority - priority of the locator\n    @param weight - weight of the locator\n*/"
+            }
+        ],
+        [
+            "one_add_del_locator_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_add_del_local_eid",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "vl_api_eid_t",
+                "eid"
+            ],
+            [
+                "string",
+                "locator_set_name",
+                64
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            [
+                "vl_api_hmac_key_t",
+                "key"
+            ],
+            {
+                "crc": "0x4e5a83a2",
+                "options": {},
+                "comment": "/** \\brief add or delete ONE eid-table\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add address if non-zero, else delete\n    @param eid - endpoint identifier\n    @param locator_set_name - name of locator_set to add/del eid-table\n    @param vni - virtual network instance\n    @param key - secret key\n*/"
+            }
+        ],
+        [
+            "one_add_del_local_eid_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_map_register_set_ttl",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "ttl"
+            ],
+            {
+                "crc": "0xdd59f1f3",
+                "options": {},
+                "comment": "/** \\brief Set TTL for map register messages\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ttl - time to live\n*/"
+            }
+        ],
+        [
+            "one_map_register_set_ttl_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "show_one_map_register_ttl",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Get TTL for map register messages\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "show_one_map_register_ttl_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "ttl"
+            ],
+            {
+                "crc": "0xfa83dd66",
+                "options": {},
+                "comment": "/** \\brief Contains current TTL for map register messages\n    @param client_index - opaque cookie to identify the sender\n    @param retval - return code\n    @param ttl - time to live\n*/"
+            }
+        ],
+        [
+            "one_add_del_map_server",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "vl_api_address_t",
+                "ip_address"
+            ],
+            {
+                "crc": "0xce19e32d",
+                "options": {},
+                "comment": "/** \\brief Add/delete map server\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add address if non-zero; delete otherwise\n    @param is_ipv6 - if non-zero the address is ipv6, else ipv4\n    @param ip_address - map server IP address\n*/"
+            }
+        ],
+        [
+            "one_add_del_map_server_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_add_del_map_resolver",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "vl_api_address_t",
+                "ip_address"
+            ],
+            {
+                "crc": "0xce19e32d",
+                "options": {},
+                "comment": "/** \\brief add or delete map-resolver\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add address if non-zero, else delete\n    @param is_ipv6 - if non-zero the address is ipv6, else ipv4\n    @param ip_address - array of address bytes\n*/"
+            }
+        ],
+        [
+            "one_add_del_map_resolver_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_enable",
+                {
+                    "default": "true"
+                }
+            ],
+            {
+                "crc": "0xc264d7bf",
+                "options": {},
+                "comment": "/** \\brief enable or disable ONE feature\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_enable - enable protocol if non-zero, else disable\n*/"
+            }
+        ],
+        [
+            "one_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_nsh_set_locator_set",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "string",
+                "ls_name",
+                64
+            ],
+            {
+                "crc": "0x486e2b76",
+                "options": {},
+                "comment": "/** \\brief configure or delete ONE NSH mapping\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ls_name - locator set name\n    @param is_add - add locator set if non-zero; delete otherwise\n*/"
+            }
+        ],
+        [
+            "one_nsh_set_locator_set_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_pitr_set_locator_set",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "string",
+                "ls_name",
+                64
+            ],
+            {
+                "crc": "0x486e2b76",
+                "options": {},
+                "comment": "/** \\brief configure or disable ONE PITR node\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ls_name - locator set name\n    @param is_add - add locator set if non-zero, else disable pitr\n*/"
+            }
+        ],
+        [
+            "one_pitr_set_locator_set_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_use_petr",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_address_t",
+                "ip_address"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            {
+                "crc": "0xd87dbad9",
+                "options": {},
+                "comment": "/** \\brief configure or disable use of PETR\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_ip4 - Address is IPv4 if set and IPv6 otherwise\n    @param address - PETR IP address\n    @param is_add - add locator set if non-zero, else disable PETR\n*/"
+            }
+        ],
+        [
+            "one_use_petr_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "show_one_use_petr",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Request for ONE PETR status\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "show_one_use_petr_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "status"
+            ],
+            [
+                "vl_api_address_t",
+                "ip_address"
+            ],
+            {
+                "crc": "0x84a03528",
+                "options": {},
+                "comment": "/** \\brief ONE PETR status, enable or disable\n    @param context - sender context, to match reply w/ request\n    @param enable - ONE PETR enable if non-zero, else disable\n    @param is_ip4 - Address is IPv4 if non-zero, else IPv6\n    @param address - PETR IP address\n*/"
+            }
+        ],
+        [
+            "show_one_rloc_probe_state",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Get state of ONE RLOC probing\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "show_one_rloc_probe_state_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "is_enable"
+            ],
+            {
+                "crc": "0xf15abb16",
+                "options": {},
+                "comment": "/** \\brief Reply for show_one_rloc_probe_state\n    @param context - returned sender context, to match reply w/ request\n    @param retval - return code\n    @param is_enable - state of RLOC probing\n*/"
+            }
+        ],
+        [
+            "one_rloc_probe_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_enable",
+                {
+                    "default": "true"
+                }
+            ],
+            {
+                "crc": "0xc264d7bf",
+                "options": {},
+                "comment": "/** \\brief enable/disable ONE RLOC probing\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_enable - enable if non-zero; disable otherwise\n*/"
+            }
+        ],
+        [
+            "one_rloc_probe_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_map_register_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_enable",
+                {
+                    "default": "true"
+                }
+            ],
+            {
+                "crc": "0xc264d7bf",
+                "options": {},
+                "comment": "/** \\brief enable/disable ONE map-register\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_enable - enable if non-zero; disable otherwise\n*/"
+            }
+        ],
+        [
+            "one_map_register_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "show_one_map_register_state",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Get state of ONE map-register\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "show_one_map_register_state_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "is_enable"
+            ],
+            {
+                "crc": "0xf15abb16",
+                "options": {},
+                "comment": "/** \\brief Reply for show_one_map_register_state\n    @param context - returned sender context, to match reply w/ request\n    @param retval - return code\n*/"
+            }
+        ],
+        [
+            "one_map_request_mode",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_one_map_mode_t",
+                "mode"
+            ],
+            {
+                "crc": "0xffa5d2f5",
+                "options": {},
+                "comment": "/** \\brief set ONE map-request mode. Based on configuration VPP will send\n      src/dest or just normal destination map requests.\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param mode - new map-request mode. Supported values are:\n      0 - destination only\n      1 - source/destination\n*/"
+            }
+        ],
+        [
+            "one_map_request_mode_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "show_one_map_request_mode",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Request for ONE map-request mode\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "show_one_map_request_mode_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_one_map_mode_t",
+                "mode"
+            ],
+            {
+                "crc": "0xd41f3c1d",
+                "options": {},
+                "comment": "/** \\brief Reply for show_one_map_request_mode\n    @param context - returned sender context, to match reply w/ request\n    @param retval - return code\n    @param mode - map-request mode\n*/"
+            }
+        ],
+        [
+            "one_add_del_remote_mapping",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "bool",
+                "is_src_dst"
+            ],
+            [
+                "bool",
+                "del_all"
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            [
+                "u8",
+                "action"
+            ],
+            [
+                "vl_api_eid_t",
+                "deid"
+            ],
+            [
+                "vl_api_eid_t",
+                "seid"
+            ],
+            [
+                "u32",
+                "rloc_num"
+            ],
+            [
+                "vl_api_remote_locator_t",
+                "rlocs",
+                0,
+                "rloc_num"
+            ],
+            {
+                "crc": "0x6d5c789e",
+                "options": {},
+                "comment": "/** \\brief add or delete remote static mapping\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add address if non-zero, else delete\n    @param is_src_dst - flag indicating src/dst based routing policy\n    @param del_all - if set, delete all remote mappings\n    @param vni - virtual network instance\n    @param action - negative map-reply action\n    @param deid - dst EID\n    @param seid - src EID, valid only if is_src_dst is enabled\n    @param rloc_num - number of remote locators\n    @param rlocs - remote locator records\n*/"
+            }
+        ],
+        [
+            "one_add_del_remote_mapping_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_add_del_l2_arp_entry",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "u32",
+                "bd"
+            ],
+            [
+                "vl_api_one_l2_arp_entry_t",
+                "entry"
+            ],
+            {
+                "crc": "0x1aa5e8b3",
+                "options": {},
+                "comment": "/** \\brief Add/delete L2 ARP entries\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add if non-zero; delete otherwise\n    @param bd - bridge domain\n    @param entry - ARP entry\n*/"
+            }
+        ],
+        [
+            "one_add_del_l2_arp_entry_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_l2_arp_entries_get",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "bd"
+            ],
+            {
+                "crc": "0x4d418cf4",
+                "options": {},
+                "comment": "/** \\brief Request for L2 ARP entries from specified bridge domain\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param bd - bridge domain\n*/"
+            }
+        ],
+        [
+            "one_l2_arp_entries_get_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "vl_api_one_l2_arp_entry_t",
+                "entries",
+                0,
+                "count"
+            ],
+            {
+                "crc": "0xb0dd200f",
+                "options": {},
+                "comment": "/** \\brief Reply with L2 ARP entries from specified bridge domain\n    @param context - sender context, to match reply w/ request\n    @param retval - error code\n    @param count - number of elements in the list\n    @param vl_api_one_arp_entry_t - list of entries\n*/"
+            }
+        ],
+        [
+            "one_add_del_ndp_entry",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "u32",
+                "bd"
+            ],
+            [
+                "vl_api_one_ndp_entry_t",
+                "entry"
+            ],
+            {
+                "crc": "0x0f8a287c",
+                "options": {}
+            }
+        ],
+        [
+            "one_add_del_ndp_entry_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_ndp_entries_get",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "bd"
+            ],
+            {
+                "crc": "0x4d418cf4",
+                "options": {}
+            }
+        ],
+        [
+            "one_ndp_entries_get_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "vl_api_one_ndp_entry_t",
+                "entries",
+                0,
+                "count"
+            ],
+            {
+                "crc": "0x70719b1a",
+                "options": {}
+            }
+        ],
+        [
+            "one_set_transport_protocol",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "protocol"
+            ],
+            {
+                "crc": "0x07b6b85f",
+                "options": {},
+                "comment": "/** \\brief Set ONE transport protocol\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param protocol - supported values:\n      1: UDP based LISP (default)\n      2: binary API\n*/"
+            }
+        ],
+        [
+            "one_set_transport_protocol_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_get_transport_protocol",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "one_get_transport_protocol_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u8",
+                "protocol"
+            ],
+            {
+                "crc": "0x62a28eb3",
+                "options": {}
+            }
+        ],
+        [
+            "one_ndp_bd_get",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Request for list of bridge domains used by neighbor discovery\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "one_ndp_bd_get_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "u32",
+                "bridge_domains",
+                0,
+                "count"
+            ],
+            {
+                "crc": "0x221ac888",
+                "options": {},
+                "comment": "/** \\brief Reply with list of bridge domains used by neighbor discovery\n    @param context - sender context, to match reply w/ request\n    @param count - number of elements in the list\n    @param bridge_domains - list of BDs\n*/"
+            }
+        ],
+        [
+            "one_l2_arp_bd_get",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Request for list of bridge domains used by L2 ARP table\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "one_l2_arp_bd_get_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "u32",
+                "bridge_domains",
+                0,
+                "count"
+            ],
+            {
+                "crc": "0x221ac888",
+                "options": {},
+                "comment": "/** \\brief Reply with list of bridge domains used by L2 ARP table\n    @param context - sender context, to match reply w/ request\n    @param count - number of elements in the list\n    @param bridge_domains - list of BDs\n*/"
+            }
+        ],
+        [
+            "one_add_del_adjacency",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "is_add"
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            [
+                "vl_api_eid_t",
+                "reid"
+            ],
+            [
+                "vl_api_eid_t",
+                "leid"
+            ],
+            {
+                "crc": "0x9e830312",
+                "options": {},
+                "comment": "/** \\brief add or delete ONE adjacency adjacency\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add address if non-zero, else delete\n    @param vni - virtual network instance\n    @param reid - remote EID\n    @param leid - local EID\n*/"
+            }
+        ],
+        [
+            "one_add_del_adjacency_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_add_del_map_request_itr_rlocs",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "string",
+                "locator_set_name",
+                64
+            ],
+            {
+                "crc": "0x6be88e45",
+                "options": {},
+                "comment": "/** \\brief add or delete map request itr rlocs\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add address if non-zero, else delete\n    @param locator_set_name - locator set name\n*/"
+            }
+        ],
+        [
+            "one_add_del_map_request_itr_rlocs_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_eid_table_add_del_map",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            [
+                "u32",
+                "dp_table"
+            ],
+            [
+                "bool",
+                "is_l2"
+            ],
+            {
+                "crc": "0x9481416b",
+                "options": {},
+                "comment": "/** \\brief map/unmap vni/bd_index to vrf\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add or delete mapping\n    @param dp_table - virtual network id/bridge domain index\n    @param vrf - vrf\n    @param is_l2 - is l2\n*/"
+            }
+        ],
+        [
+            "one_eid_table_add_del_map_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_locator_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "ls_index"
+            ],
+            [
+                "string",
+                "ls_name",
+                64
+            ],
+            [
+                "bool",
+                "is_index_set"
+            ],
+            {
+                "crc": "0x9b11076c",
+                "options": {},
+                "comment": "/** \\brief Request for map one locator status\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param locator_set_index - index of locator_set\n    @param ls_name - locator set name\n    @param is_index_set - flag indicating whether ls_name or ls_index is set\n */"
+            }
+        ],
+        [
+            "one_locator_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "local"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "vl_api_address_t",
+                "ip_address"
+            ],
+            [
+                "u8",
+                "priority"
+            ],
+            [
+                "u8",
+                "weight"
+            ],
+            {
+                "crc": "0x2c620ffe",
+                "options": {},
+                "comment": "/** \\brief ONE locator_set status\n    @param local - if is set, then locator is local\n    @param locator_set_name - name of the locator_set\n    @param sw_if_index - sw_if_index of the locator\n    @param priority - locator priority\n    @param weight - locator weight\n  */"
+            }
+        ],
+        [
+            "one_locator_set_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "ls_index"
+            ],
+            [
+                "string",
+                "ls_name",
+                64
+            ],
+            {
+                "crc": "0x5b33a105",
+                "options": {},
+                "comment": "/** \\brief ONE locator_set status\n    @param context - sender context, to match reply w/ request\n    @param ls_index - locator set index\n    @param ls_name - name of the locator set\n */"
+            }
+        ],
+        [
+            "one_locator_set_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_one_filter_t",
+                "filter"
+            ],
+            {
+                "crc": "0x71190768",
+                "options": {},
+                "comment": "/** \\brief Request for locator_set summary status\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param filter - filter type\n      Supported values:\n        0: all locator sets\n        1: local locator sets\n        2: remote locator sets\n */"
+            }
+        ],
+        [
+            "one_eid_table_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "locator_set_index"
+            ],
+            [
+                "u8",
+                "action"
+            ],
+            [
+                "bool",
+                "is_local"
+            ],
+            [
+                "bool",
+                "is_src_dst"
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            [
+                "vl_api_eid_t",
+                "deid"
+            ],
+            [
+                "vl_api_eid_t",
+                "seid"
+            ],
+            [
+                "u32",
+                "ttl"
+            ],
+            [
+                "u8",
+                "authoritative"
+            ],
+            [
+                "vl_api_hmac_key_t",
+                "key"
+            ],
+            {
+                "crc": "0x1c29f792",
+                "options": {},
+                "comment": "// FIXME: action, authoritative"
+            }
+        ],
+        [
+            "one_eid_table_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "eid_set"
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            [
+                "vl_api_eid_t",
+                "eid"
+            ],
+            [
+                "vl_api_one_filter_t",
+                "filter"
+            ],
+            {
+                "crc": "0xbd190269",
+                "options": {},
+                "comment": "/** \\brief Request for eid table summary status\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param eid_set - if non-zero request info about specific mapping\n    @param vni - virtual network instance; valid only if eid_set != 0\n    @param eid - endpoint identifier\n    @param filter - filter type;\n      Support values:\n        0: all eid\n        1: local eid\n        2: remote eid\n */"
+            }
+        ],
+        [
+            "one_adjacencies_get_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "vl_api_one_adjacency_t",
+                "adjacencies",
+                0,
+                "count"
+            ],
+            {
+                "crc": "0x085bab89",
+                "options": {},
+                "comment": "/** \\brief ONE adjacency reply\n    @param count - number of adjacencies\n    @param adjacencies - array of adjacencies\n  */"
+            }
+        ],
+        [
+            "one_adjacencies_get",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            {
+                "crc": "0x8d1f2fe9",
+                "options": {},
+                "comment": "/** \\brief Request for ONE adjacencies\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param vni - filter adjacencies by VNI\n */"
+            }
+        ],
+        [
+            "one_eid_table_map_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            [
+                "u32",
+                "dp_table"
+            ],
+            {
+                "crc": "0x0b6859e2",
+                "options": {},
+                "comment": "/** \\brief Shows relationship between vni and vrf/bd\n    @param dp_table - VRF index or bridge domain index\n    @param vni - virtual network instance\n  */"
+            }
+        ],
+        [
+            "one_eid_table_map_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_l2"
+            ],
+            {
+                "crc": "0xd6cf0c3d",
+                "options": {},
+                "comment": "/** \\brief Request for one_eid_table_map_details\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_l2 - if set dump vni/bd mappings else vni/vrf\n */"
+            }
+        ],
+        [
+            "one_eid_table_vni_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Dumps all VNIs used in mappings\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n  */"
+            }
+        ],
+        [
+            "one_eid_table_vni_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            {
+                "crc": "0x64abc01e",
+                "options": {},
+                "comment": "/** \\brief reply to one_eid_table_vni_dump\n    @param context - sender context, to match reply w/ request\n    @param vni - virtual network instance\n */"
+            }
+        ],
+        [
+            "one_map_resolver_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_address_t",
+                "ip_address"
+            ],
+            {
+                "crc": "0x3e78fc57",
+                "options": {},
+                "comment": "/** \\brief ONE map resolver status\n    @param is_ipv6 - if non-zero the address is ipv6, else ipv4\n    @param ip_address - array of address bytes\n */"
+            }
+        ],
+        [
+            "one_map_resolver_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Request for map resolver summary status\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n */"
+            }
+        ],
+        [
+            "one_map_server_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_address_t",
+                "ip_address"
+            ],
+            {
+                "crc": "0x3e78fc57",
+                "options": {},
+                "comment": "/** \\brief ONE map server details\n    @param is_ipv6 - if non-zero the address is ipv6, else ipv4\n    @param ip_address - array of address bytes\n */"
+            }
+        ],
+        [
+            "one_map_server_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Request for map server summary status\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n */"
+            }
+        ],
+        [
+            "show_one_status",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Request for ONE status\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "show_one_status_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "feature_status"
+            ],
+            [
+                "bool",
+                "gpe_status"
+            ],
+            {
+                "crc": "0x961bb25b",
+                "options": {},
+                "comment": "/** \\brief ONE status\n    @param context - sender context, to match reply w/ request\n    @param feature_status - enabled if non-zero, else disabled\n    @param gpe_status - enabled if non-zero, else disabled\n*/"
+            }
+        ],
+        [
+            "one_get_map_request_itr_rlocs",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Get ONE map request itr rlocs status\n    @param context - sender context, to match reply w/ request\n    @param locator_set_name - name of the locator_set\n */"
+            }
+        ],
+        [
+            "one_get_map_request_itr_rlocs_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "string",
+                "locator_set_name",
+                64
+            ],
+            {
+                "crc": "0x76580f3a",
+                "options": {},
+                "comment": "/** \\brief Request for map request itr rlocs summary status\n */"
+            }
+        ],
+        [
+            "show_one_nsh_mapping",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Request for ONE NSH mapping\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "show_one_nsh_mapping_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "is_set"
+            ],
+            [
+                "string",
+                "locator_set_name",
+                64
+            ],
+            {
+                "crc": "0x46478c02",
+                "options": {},
+                "comment": "/** \\brief Reply for ONE NSH mapping\n    @param context - sender context, to match reply w/ request\n    @param is_set - is ONE NSH mapping set\n    @param locator_set_name - name of the locator_set if NSH mapping is set\n*/"
+            }
+        ],
+        [
+            "show_one_pitr",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Request for ONE PITR status\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "show_one_pitr_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "status"
+            ],
+            [
+                "string",
+                "locator_set_name",
+                64
+            ],
+            {
+                "crc": "0xa2d1a49f",
+                "options": {},
+                "comment": "/** \\brief Status of ONE PITR, enable or disable\n    @param context - sender context, to match reply w/ request\n    @param status - ONE PITR enable if non-zero, else disable\n    @param locator_set_name -  name of the locator_set\n*/"
+            }
+        ],
+        [
+            "one_stats_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "one_stats_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "vni"
+            ],
+            [
+                "vl_api_eid_t",
+                "deid"
+            ],
+            [
+                "vl_api_eid_t",
+                "seid"
+            ],
+            [
+                "vl_api_address_t",
+                "rloc"
+            ],
+            [
+                "vl_api_address_t",
+                "lloc"
+            ],
+            [
+                "u32",
+                "pkt_count"
+            ],
+            [
+                "u32",
+                "bytes"
+            ],
+            {
+                "crc": "0x2eb74678",
+                "options": {}
+            }
+        ],
+        [
+            "one_stats_flush",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "one_stats_flush_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_stats_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_enable",
+                {
+                    "default": "true"
+                }
+            ],
+            {
+                "crc": "0xc264d7bf",
+                "options": {}
+            }
+        ],
+        [
+            "one_stats_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "show_one_stats_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "show_one_stats_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "is_enable"
+            ],
+            {
+                "crc": "0xf15abb16",
+                "options": {}
+            }
+        ],
+        [
+            "one_map_register_fallback_threshold",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "value"
+            ],
+            {
+                "crc": "0xf7d4a475",
+                "options": {}
+            }
+        ],
+        [
+            "one_map_register_fallback_threshold_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "show_one_map_register_fallback_threshold",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "show_one_map_register_fallback_threshold_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "value"
+            ],
+            {
+                "crc": "0xc93a9113",
+                "options": {}
+            }
+        ],
+        [
+            "one_enable_disable_xtr_mode",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_enable",
+                {
+                    "default": "true"
+                }
+            ],
+            {
+                "crc": "0xc264d7bf",
+                "options": {}
+            }
+        ],
+        [
+            "one_enable_disable_xtr_mode_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_show_xtr_mode",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "one_show_xtr_mode_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "is_enable"
+            ],
+            {
+                "crc": "0xf15abb16",
+                "options": {}
+            }
+        ],
+        [
+            "one_enable_disable_petr_mode",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_enable",
+                {
+                    "default": "true"
+                }
+            ],
+            {
+                "crc": "0xc264d7bf",
+                "options": {}
+            }
+        ],
+        [
+            "one_enable_disable_petr_mode_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_show_petr_mode",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "one_show_petr_mode_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "is_enable"
+            ],
+            {
+                "crc": "0xf15abb16",
+                "options": {}
+            }
+        ],
+        [
+            "one_enable_disable_pitr_mode",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_enable",
+                {
+                    "default": "true"
+                }
+            ],
+            {
+                "crc": "0xc264d7bf",
+                "options": {}
+            }
+        ],
+        [
+            "one_enable_disable_pitr_mode_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "one_show_pitr_mode",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "one_show_pitr_mode_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "bool",
+                "is_enable"
+            ],
+            {
+                "crc": "0xf15abb16",
+                "options": {}
+            }
+        ]
+    ],
+    "unions": [
+        [
+            "address_union",
+            [
+                "vl_api_ip4_address_t",
+                "ip4"
+            ],
+            [
+                "vl_api_ip6_address_t",
+                "ip6"
+            ]
+        ],
+        [
+            "eid_address",
+            [
+                "vl_api_prefix_t",
+                "prefix"
+            ],
+            [
+                "vl_api_mac_address_t",
+                "mac"
+            ],
+            [
+                "vl_api_nsh_t",
+                "nsh"
+            ]
+        ]
+    ],
+    "enums": [
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "address_family",
+            [
+                "ADDRESS_IP4",
+                0
+            ],
+            [
+                "ADDRESS_IP6",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_feature_location",
+            [
+                "IP_API_FEATURE_INPUT",
+                0
+            ],
+            [
+                "IP_API_FEATURE_OUTPUT",
+                1
+            ],
+            [
+                "IP_API_FEATURE_LOCAL",
+                2
+            ],
+            [
+                "IP_API_FEATURE_PUNT",
+                3
+            ],
+            [
+                "IP_API_FEATURE_DROP",
+                4
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_ecn",
+            [
+                "IP_API_ECN_NONE",
+                0
+            ],
+            [
+                "IP_API_ECN_ECT0",
+                1
+            ],
+            [
+                "IP_API_ECN_ECT1",
+                2
+            ],
+            [
+                "IP_API_ECN_CE",
+                3
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_dscp",
+            [
+                "IP_API_DSCP_CS0",
+                0
+            ],
+            [
+                "IP_API_DSCP_CS1",
+                8
+            ],
+            [
+                "IP_API_DSCP_AF11",
+                10
+            ],
+            [
+                "IP_API_DSCP_AF12",
+                12
+            ],
+            [
+                "IP_API_DSCP_AF13",
+                14
+            ],
+            [
+                "IP_API_DSCP_CS2",
+                16
+            ],
+            [
+                "IP_API_DSCP_AF21",
+                18
+            ],
+            [
+                "IP_API_DSCP_AF22",
+                20
+            ],
+            [
+                "IP_API_DSCP_AF23",
+                22
+            ],
+            [
+                "IP_API_DSCP_CS3",
+                24
+            ],
+            [
+                "IP_API_DSCP_AF31",
+                26
+            ],
+            [
+                "IP_API_DSCP_AF32",
+                28
+            ],
+            [
+                "IP_API_DSCP_AF33",
+                30
+            ],
+            [
+                "IP_API_DSCP_CS4",
+                32
+            ],
+            [
+                "IP_API_DSCP_AF41",
+                34
+            ],
+            [
+                "IP_API_DSCP_AF42",
+                36
+            ],
+            [
+                "IP_API_DSCP_AF43",
+                38
+            ],
+            [
+                "IP_API_DSCP_CS5",
+                40
+            ],
+            [
+                "IP_API_DSCP_EF",
+                46
+            ],
+            [
+                "IP_API_DSCP_CS6",
+                48
+            ],
+            [
+                "IP_API_DSCP_CS7",
+                50
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_proto",
+            [
+                "IP_API_PROTO_HOPOPT",
+                0
+            ],
+            [
+                "IP_API_PROTO_ICMP",
+                1
+            ],
+            [
+                "IP_API_PROTO_IGMP",
+                2
+            ],
+            [
+                "IP_API_PROTO_TCP",
+                6
+            ],
+            [
+                "IP_API_PROTO_UDP",
+                17
+            ],
+            [
+                "IP_API_PROTO_GRE",
+                47
+            ],
+            [
+                "IP_API_PROTO_ESP",
+                50
+            ],
+            [
+                "IP_API_PROTO_AH",
+                51
+            ],
+            [
+                "IP_API_PROTO_ICMP6",
+                58
+            ],
+            [
+                "IP_API_PROTO_EIGRP",
+                88
+            ],
+            [
+                "IP_API_PROTO_OSPF",
+                89
+            ],
+            [
+                "IP_API_PROTO_SCTP",
+                132
+            ],
+            [
+                "IP_API_PROTO_RESERVED",
+                255
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "eid_type",
+            [
+                "EID_TYPE_API_PREFIX",
+                0
+            ],
+            [
+                "EID_TYPE_API_MAC",
+                1
+            ],
+            [
+                "EID_TYPE_API_NSH",
+                2
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "hmac_key_id",
+            [
+                "KEY_ID_API_HMAC_NO_KEY",
+                0
+            ],
+            [
+                "KEY_ID_API_HMAC_SHA_1_96",
+                1
+            ],
+            [
+                "KEY_ID_API_HMAC_SHA_256_128",
+                2
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "one_map_mode",
+            [
+                "ONE_MAP_MODE_API_DST_ONLY",
+                0
+            ],
+            [
+                "ONE_MAP_MODE_API_SRC_DST",
+                1
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "one_filter",
+            [
+                "ONE_FILTER_API_ALL",
+                0
+            ],
+            [
+                "ONE_FILTER_API_LOCAL",
+                1
+            ],
+            [
+                "ONE_FILTER_API_REMOTE",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "one_add_del_locator_set": {
+            "reply": "one_add_del_locator_set_reply"
+        },
+        "one_add_del_locator": {
+            "reply": "one_add_del_locator_reply"
+        },
+        "one_add_del_local_eid": {
+            "reply": "one_add_del_local_eid_reply"
+        },
+        "one_map_register_set_ttl": {
+            "reply": "one_map_register_set_ttl_reply"
+        },
+        "show_one_map_register_ttl": {
+            "reply": "show_one_map_register_ttl_reply"
+        },
+        "one_add_del_map_server": {
+            "reply": "one_add_del_map_server_reply"
+        },
+        "one_add_del_map_resolver": {
+            "reply": "one_add_del_map_resolver_reply"
+        },
+        "one_enable_disable": {
+            "reply": "one_enable_disable_reply"
+        },
+        "one_nsh_set_locator_set": {
+            "reply": "one_nsh_set_locator_set_reply"
+        },
+        "one_pitr_set_locator_set": {
+            "reply": "one_pitr_set_locator_set_reply"
+        },
+        "one_use_petr": {
+            "reply": "one_use_petr_reply"
+        },
+        "show_one_use_petr": {
+            "reply": "show_one_use_petr_reply"
+        },
+        "show_one_rloc_probe_state": {
+            "reply": "show_one_rloc_probe_state_reply"
+        },
+        "one_rloc_probe_enable_disable": {
+            "reply": "one_rloc_probe_enable_disable_reply"
+        },
+        "one_map_register_enable_disable": {
+            "reply": "one_map_register_enable_disable_reply"
+        },
+        "show_one_map_register_state": {
+            "reply": "show_one_map_register_state_reply"
+        },
+        "one_map_request_mode": {
+            "reply": "one_map_request_mode_reply"
+        },
+        "show_one_map_request_mode": {
+            "reply": "show_one_map_request_mode_reply"
+        },
+        "one_add_del_remote_mapping": {
+            "reply": "one_add_del_remote_mapping_reply"
+        },
+        "one_add_del_l2_arp_entry": {
+            "reply": "one_add_del_l2_arp_entry_reply"
+        },
+        "one_l2_arp_entries_get": {
+            "reply": "one_l2_arp_entries_get_reply"
+        },
+        "one_add_del_ndp_entry": {
+            "reply": "one_add_del_ndp_entry_reply"
+        },
+        "one_ndp_entries_get": {
+            "reply": "one_ndp_entries_get_reply"
+        },
+        "one_set_transport_protocol": {
+            "reply": "one_set_transport_protocol_reply"
+        },
+        "one_get_transport_protocol": {
+            "reply": "one_get_transport_protocol_reply"
+        },
+        "one_ndp_bd_get": {
+            "reply": "one_ndp_bd_get_reply"
+        },
+        "one_l2_arp_bd_get": {
+            "reply": "one_l2_arp_bd_get_reply"
+        },
+        "one_add_del_adjacency": {
+            "reply": "one_add_del_adjacency_reply"
+        },
+        "one_add_del_map_request_itr_rlocs": {
+            "reply": "one_add_del_map_request_itr_rlocs_reply"
+        },
+        "one_eid_table_add_del_map": {
+            "reply": "one_eid_table_add_del_map_reply"
+        },
+        "one_locator_dump": {
+            "reply": "one_locator_details",
+            "stream": true
+        },
+        "one_locator_set_dump": {
+            "reply": "one_locator_set_details",
+            "stream": true
+        },
+        "one_eid_table_dump": {
+            "reply": "one_eid_table_details",
+            "stream": true
+        },
+        "one_adjacencies_get": {
+            "reply": "one_adjacencies_get_reply"
+        },
+        "one_eid_table_map_dump": {
+            "reply": "one_eid_table_map_details",
+            "stream": true
+        },
+        "one_eid_table_vni_dump": {
+            "reply": "one_eid_table_vni_details",
+            "stream": true
+        },
+        "one_map_resolver_dump": {
+            "reply": "one_map_resolver_details",
+            "stream": true
+        },
+        "one_map_server_dump": {
+            "reply": "one_map_server_details",
+            "stream": true
+        },
+        "show_one_status": {
+            "reply": "show_one_status_reply"
+        },
+        "one_get_map_request_itr_rlocs": {
+            "reply": "one_get_map_request_itr_rlocs_reply"
+        },
+        "show_one_nsh_mapping": {
+            "reply": "show_one_nsh_mapping_reply"
+        },
+        "show_one_pitr": {
+            "reply": "show_one_pitr_reply"
+        },
+        "one_stats_dump": {
+            "reply": "one_stats_details",
+            "stream": true
+        },
+        "one_stats_flush": {
+            "reply": "one_stats_flush_reply"
+        },
+        "one_stats_enable_disable": {
+            "reply": "one_stats_enable_disable_reply"
+        },
+        "show_one_stats_enable_disable": {
+            "reply": "show_one_stats_enable_disable_reply"
+        },
+        "one_map_register_fallback_threshold": {
+            "reply": "one_map_register_fallback_threshold_reply"
+        },
+        "show_one_map_register_fallback_threshold": {
+            "reply": "show_one_map_register_fallback_threshold_reply"
+        },
+        "one_enable_disable_xtr_mode": {
+            "reply": "one_enable_disable_xtr_mode_reply"
+        },
+        "one_show_xtr_mode": {
+            "reply": "one_show_xtr_mode_reply"
+        },
+        "one_enable_disable_petr_mode": {
+            "reply": "one_enable_disable_petr_mode_reply"
+        },
+        "one_show_petr_mode": {
+            "reply": "one_show_petr_mode_reply"
+        },
+        "one_enable_disable_pitr_mode": {
+            "reply": "one_enable_disable_pitr_mode_reply"
+        },
+        "one_show_pitr_mode": {
+            "reply": "one_show_pitr_mode_reply"
+        }
+    },
+    "options": {
+        "version": "2.0.0"
+    },
+    "aliases": {
+        "interface_index": {
+            "type": "u32"
+        },
+        "mac_address": {
+            "type": "u8",
+            "length": 6
+        },
+        "ip4_address": {
+            "type": "u8",
+            "length": 4
+        },
+        "ip6_address": {
+            "type": "u8",
+            "length": 16
+        },
+        "address_with_prefix": {
+            "type": "vl_api_prefix_t"
+        },
+        "ip4_address_with_prefix": {
+            "type": "vl_api_ip4_prefix_t"
+        },
+        "ip6_address_with_prefix": {
+            "type": "vl_api_ip6_prefix_t"
+        }
+    },
+    "vl_api_version": "0x9f64600e",
+    "imports": [
+        "vnet/interface_types.api",
+        "plugins/lisp/lisp-cp/lisp_types.api",
+        "vnet/interface_types.api",
+        "vnet/ethernet/ethernet_types.api",
+        "vnet/ip/ip_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}

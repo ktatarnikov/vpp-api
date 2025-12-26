@@ -1,0 +1,369 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "af_xdp_create_v3",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "string",
+                "host_if",
+                64
+            ],
+            [
+                "string",
+                "name",
+                64
+            ],
+            [
+                "u16",
+                "rxq_num",
+                {
+                    "default": 1
+                }
+            ],
+            [
+                "u16",
+                "rxq_size",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "u16",
+                "txq_size",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "vl_api_af_xdp_mode_t",
+                "mode",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "vl_api_af_xdp_flag_t",
+                "flags",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "string",
+                "prog",
+                256
+            ],
+            [
+                "string",
+                "netns",
+                64
+            ],
+            {
+                "crc": "0xcf4b1827",
+                "options": {
+                    "vat_help": "<host-if linux-ifname> [name ifname] [rx-queue-size size] [tx-queue-size size] [num-rx-queues <num|all>] [prog pathname] [netns ns] [zero-copy|no-zero-copy] [no-syscall-lock]"
+                },
+                "comment": "/** \\brief\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param host_if - Linux netdev interface name\n    @param name - new af_xdp interface name (optional)\n    @param rxq_num - number of receive queues. 65535 can be used as special value to request all available queues (optional)\n    @param rxq_size - receive queue size (optional)\n    @param txq_size - transmit queue size (optional)\n    @param mode - operation mode (optional)\n    @param flags - flags (optional)\n    @param prog - eBPF program path (optional)\n    @param netns - netns of nic (optional)\n*/"
+            }
+        ],
+        [
+            "af_xdp_create_v3_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x5383d31f",
+                "options": {},
+                "comment": "/** \\brief\n    @param context - sender context, to match reply w/ request\n    @param retval - return value for request\n    @param sw_if_index - software index for the new af_xdp interface\n*/"
+            }
+        ],
+        [
+            "af_xdp_delete",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0xf9e6675e",
+                "options": {
+                    "vat_help": "<sw_if_index index>"
+                }
+            }
+        ],
+        [
+            "af_xdp_delete_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "vat_help": "<sw_if_index index>"
+                }
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "af_xdp_mode",
+            [
+                "AF_XDP_API_MODE_AUTO",
+                0
+            ],
+            [
+                "AF_XDP_API_MODE_COPY",
+                1
+            ],
+            [
+                "AF_XDP_API_MODE_ZERO_COPY",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ]
+    ],
+    "enumflags": [
+        [
+            "af_xdp_flag",
+            [
+                "AF_XDP_API_FLAGS_NO_SYSCALL_LOCK",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ]
+    ],
+    "services": {
+        "af_xdp_create_v3": {
+            "reply": "af_xdp_create_v3_reply"
+        },
+        "af_xdp_delete": {
+            "reply": "af_xdp_delete_reply"
+        }
+    },
+    "options": {
+        "version": "1.0.0"
+    },
+    "aliases": {
+        "interface_index": {
+            "type": "u32"
+        }
+    },
+    "vl_api_version": "0x2d18a436",
+    "imports": [
+        "vnet/interface_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}

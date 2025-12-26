@@ -1,0 +1,876 @@
+{
+    "types": [
+        [
+            "address",
+            [
+                "vl_api_address_family_t",
+                "af"
+            ],
+            [
+                "vl_api_address_union_t",
+                "un"
+            ]
+        ],
+        [
+            "prefix",
+            [
+                "vl_api_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "len"
+            ]
+        ],
+        [
+            "ip4_address_and_mask",
+            [
+                "vl_api_ip4_address_t",
+                "addr"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "mask"
+            ]
+        ],
+        [
+            "ip6_address_and_mask",
+            [
+                "vl_api_ip6_address_t",
+                "addr"
+            ],
+            [
+                "vl_api_ip6_address_t",
+                "mask"
+            ]
+        ],
+        [
+            "mprefix",
+            [
+                "vl_api_address_family_t",
+                "af"
+            ],
+            [
+                "u16",
+                "grp_address_length"
+            ],
+            [
+                "vl_api_address_union_t",
+                "grp_address"
+            ],
+            [
+                "vl_api_address_union_t",
+                "src_address"
+            ]
+        ],
+        [
+            "ip6_prefix",
+            [
+                "vl_api_ip6_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "len"
+            ]
+        ],
+        [
+            "ip4_prefix",
+            [
+                "vl_api_ip4_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "len"
+            ]
+        ],
+        [
+            "prefix_matcher",
+            [
+                "u8",
+                "le"
+            ],
+            [
+                "u8",
+                "ge"
+            ]
+        ],
+        [
+            "proxy_arp",
+            [
+                "u32",
+                "table_id"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "low"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "hi"
+            ]
+        ]
+    ],
+    "messages": [
+        [
+            "proxy_arp_add_del",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "vl_api_proxy_arp_t",
+                "proxy"
+            ],
+            {
+                "crc": "0x1823c3e7",
+                "options": {},
+                "comment": "/** \\brief Proxy ARP add / del request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - 1 if adding the Proxy ARP range, 0 if deleting\n    @param proxy - Proxy configuration\n*/"
+            }
+        ],
+        [
+            "proxy_arp_add_del_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "proxy_arp_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Proxy ARP dump request\n */"
+            }
+        ],
+        [
+            "proxy_arp_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_proxy_arp_t",
+                "proxy"
+            ],
+            {
+                "crc": "0x5b948673",
+                "options": {},
+                "comment": "/** \\brief Proxy ARP dump details reply\n * @param proxy - Same data as used to configure\n */"
+            }
+        ],
+        [
+            "proxy_arp_intfc_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "bool",
+                "enable"
+            ],
+            {
+                "crc": "0xae6cfcfb",
+                "options": {},
+                "comment": "/** \\brief Proxy ARP add / del interface request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - Which interface to enable / disable Proxy Arp on\n    @param enable - 1 to enable Proxy ARP on interface, 0 to disable\n*/"
+            }
+        ],
+        [
+            "proxy_arp_intfc_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "proxy_arp_intfc_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Proxy ARP interface dump request\n */"
+            }
+        ],
+        [
+            "proxy_arp_intfc_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0xf6458e5f",
+                "options": {},
+                "comment": "/** \\brief Proxy ARP interface dump details reply\n * @param sw_if_index The interface on which ARP proxy is enabled.\n */"
+            }
+        ]
+    ],
+    "unions": [
+        [
+            "address_union",
+            [
+                "vl_api_ip4_address_t",
+                "ip4"
+            ],
+            [
+                "vl_api_ip6_address_t",
+                "ip6"
+            ]
+        ]
+    ],
+    "enums": [
+        [
+            "address_family",
+            [
+                "ADDRESS_IP4",
+                0
+            ],
+            [
+                "ADDRESS_IP6",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_feature_location",
+            [
+                "IP_API_FEATURE_INPUT",
+                0
+            ],
+            [
+                "IP_API_FEATURE_OUTPUT",
+                1
+            ],
+            [
+                "IP_API_FEATURE_LOCAL",
+                2
+            ],
+            [
+                "IP_API_FEATURE_PUNT",
+                3
+            ],
+            [
+                "IP_API_FEATURE_DROP",
+                4
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_ecn",
+            [
+                "IP_API_ECN_NONE",
+                0
+            ],
+            [
+                "IP_API_ECN_ECT0",
+                1
+            ],
+            [
+                "IP_API_ECN_ECT1",
+                2
+            ],
+            [
+                "IP_API_ECN_CE",
+                3
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_dscp",
+            [
+                "IP_API_DSCP_CS0",
+                0
+            ],
+            [
+                "IP_API_DSCP_CS1",
+                8
+            ],
+            [
+                "IP_API_DSCP_AF11",
+                10
+            ],
+            [
+                "IP_API_DSCP_AF12",
+                12
+            ],
+            [
+                "IP_API_DSCP_AF13",
+                14
+            ],
+            [
+                "IP_API_DSCP_CS2",
+                16
+            ],
+            [
+                "IP_API_DSCP_AF21",
+                18
+            ],
+            [
+                "IP_API_DSCP_AF22",
+                20
+            ],
+            [
+                "IP_API_DSCP_AF23",
+                22
+            ],
+            [
+                "IP_API_DSCP_CS3",
+                24
+            ],
+            [
+                "IP_API_DSCP_AF31",
+                26
+            ],
+            [
+                "IP_API_DSCP_AF32",
+                28
+            ],
+            [
+                "IP_API_DSCP_AF33",
+                30
+            ],
+            [
+                "IP_API_DSCP_CS4",
+                32
+            ],
+            [
+                "IP_API_DSCP_AF41",
+                34
+            ],
+            [
+                "IP_API_DSCP_AF42",
+                36
+            ],
+            [
+                "IP_API_DSCP_AF43",
+                38
+            ],
+            [
+                "IP_API_DSCP_CS5",
+                40
+            ],
+            [
+                "IP_API_DSCP_EF",
+                46
+            ],
+            [
+                "IP_API_DSCP_CS6",
+                48
+            ],
+            [
+                "IP_API_DSCP_CS7",
+                50
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_proto",
+            [
+                "IP_API_PROTO_HOPOPT",
+                0
+            ],
+            [
+                "IP_API_PROTO_ICMP",
+                1
+            ],
+            [
+                "IP_API_PROTO_IGMP",
+                2
+            ],
+            [
+                "IP_API_PROTO_TCP",
+                6
+            ],
+            [
+                "IP_API_PROTO_UDP",
+                17
+            ],
+            [
+                "IP_API_PROTO_GRE",
+                47
+            ],
+            [
+                "IP_API_PROTO_ESP",
+                50
+            ],
+            [
+                "IP_API_PROTO_AH",
+                51
+            ],
+            [
+                "IP_API_PROTO_ICMP6",
+                58
+            ],
+            [
+                "IP_API_PROTO_EIGRP",
+                88
+            ],
+            [
+                "IP_API_PROTO_OSPF",
+                89
+            ],
+            [
+                "IP_API_PROTO_SCTP",
+                132
+            ],
+            [
+                "IP_API_PROTO_RESERVED",
+                255
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "proxy_arp_add_del": {
+            "reply": "proxy_arp_add_del_reply"
+        },
+        "proxy_arp_dump": {
+            "reply": "proxy_arp_details",
+            "stream": true
+        },
+        "proxy_arp_intfc_enable_disable": {
+            "reply": "proxy_arp_intfc_enable_disable_reply"
+        },
+        "proxy_arp_intfc_dump": {
+            "reply": "proxy_arp_intfc_details",
+            "stream": true
+        }
+    },
+    "options": {
+        "version": "1.0.0"
+    },
+    "aliases": {
+        "ip4_address": {
+            "type": "u8",
+            "length": 4
+        },
+        "ip6_address": {
+            "type": "u8",
+            "length": 16
+        },
+        "address_with_prefix": {
+            "type": "vl_api_prefix_t"
+        },
+        "ip4_address_with_prefix": {
+            "type": "vl_api_ip4_prefix_t"
+        },
+        "ip6_address_with_prefix": {
+            "type": "vl_api_ip6_prefix_t"
+        },
+        "mac_address": {
+            "type": "u8",
+            "length": 6
+        },
+        "interface_index": {
+            "type": "u32"
+        }
+    },
+    "vl_api_version": "0xb57796ae",
+    "imports": [
+        "vnet/ip/ip_types.api",
+        "vnet/ethernet/ethernet_types.api",
+        "vnet/interface_types.api"
+    ],
+    "counters": [
+        {
+            "name": "arp",
+            "elements": [
+                {
+                    "name": "replies_sent",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "ARP replies sent"
+                },
+                {
+                    "name": "disabled",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "ARP Disabled"
+                },
+                {
+                    "name": "l2_type_not_ethernet",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "L2 type not ethernet"
+                },
+                {
+                    "name": "l3_type_not_ip4",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "L3 type not IP4"
+                },
+                {
+                    "name": "l3_src_address_not_local",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "IP4 source address not local to subnet"
+                },
+                {
+                    "name": "l3_dst_address_not_local",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "IP4 destination address not local to subnet"
+                },
+                {
+                    "name": "l3_dst_address_unset",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "IP4 destination address is unset"
+                },
+                {
+                    "name": "l3_src_address_is_local",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "IP4 source address matches local interface"
+                },
+                {
+                    "name": "l3_src_address_learned",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "ARP request IP4 source address learned"
+                },
+                {
+                    "name": "replies_received",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "ARP replies received"
+                },
+                {
+                    "name": "opcode_not_request",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "ARP opcode not request"
+                },
+                {
+                    "name": "proxy_arp_replies_sent",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "Proxy ARP replies sent"
+                },
+                {
+                    "name": "l2_address_mismatch",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "ARP hw addr does not match L2 frame src addr"
+                },
+                {
+                    "name": "gratuitous_arp",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "ARP probe or announcement dropped"
+                },
+                {
+                    "name": "interface_no_table",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "Interface is not mapped to an IP table"
+                },
+                {
+                    "name": "interface_not_ip_enabled",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "Interface is not IP enabled"
+                },
+                {
+                    "name": "unnumbered_mismatch",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "RX interface is unnumbered to different subnet"
+                }
+            ]
+        }
+    ],
+    "paths": [
+        [
+            {
+                "path": "/err/arp-reply",
+                "counter": "arp"
+            },
+            {
+                "path": "/err/arp-disabled",
+                "counter": "arp"
+            },
+            {
+                "path": "/err/arp-input",
+                "counter": "arp"
+            },
+            {
+                "path": "/err/arp-proxy",
+                "counter": "arp"
+            }
+        ]
+    ]
+}

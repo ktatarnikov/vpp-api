@@ -1,0 +1,39 @@
+{
+    "types": [],
+    "messages": [],
+    "unions": [],
+    "enums": [
+        [
+            "sr_mobile_nhtype",
+            [
+                "SRV6_NHTYPE_API_NONE",
+                0
+            ],
+            [
+                "SRV6_NHTYPE_API_IPV4",
+                1
+            ],
+            [
+                "SRV6_NHTYPE_API_IPV6",
+                2
+            ],
+            [
+                "SRV6_NHTYPE_API_NON_IP",
+                3
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {},
+    "options": {
+        "version": "0.1.0"
+    },
+    "aliases": {},
+    "vl_api_version": "0x7afa7d45",
+    "imports": [],
+    "counters": [],
+    "paths": []
+}
