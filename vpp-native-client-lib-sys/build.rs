@@ -34,7 +34,7 @@ fn main() {
         panic!("vpp-version is not defined in the workspace Cargo.toml")
     };
 
-    let lib_path = format!("lib/{}", arch);
+    let lib_path = format!("{}/lib/{}", vpp_version, arch);
     let library_filename = format!("libvppapiclient.so.{}", vpp_version);
     let dst_library_filename = "libvppapiclient.so";
     println!("cargo:info=defined lib_path '{}'", lib_path);

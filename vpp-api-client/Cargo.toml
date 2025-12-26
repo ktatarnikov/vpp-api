@@ -27,4 +27,5 @@ bincode = "1.2.1"
 
 [build-dependencies]
 vpp-api-gen.workspace = true
+toml = "0.8"
 
