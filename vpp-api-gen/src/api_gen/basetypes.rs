@@ -161,7 +161,7 @@ pub fn sizeof_alias(alias: &VppJsApiAlias, file: &VppJsApiFile) -> u8 {
         match alias.length {
             Some(len) => {
                 let typ = basetypes::ctoSizeR(&alias.ctype);
-                
+
                 typ.basetypeSizes() * len as u8
             }
             _ => {

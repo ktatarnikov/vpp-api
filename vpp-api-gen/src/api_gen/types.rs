@@ -84,9 +84,7 @@ impl VppJsApiType {
                         VppJsApiFieldSize::Fixed(len) => {
                             code.push_str(&format!("FixedSizeString<typenum::U{}>,\n", len))
                         }
-                        VppJsApiFieldSize::Variable(None) => {
-                            code.push_str("VariableSizeString,\n")
-                        }
+                        VppJsApiFieldSize::Variable(None) => code.push_str("VariableSizeString,\n"),
                         _ => code.push_str(&format!("{},\n", get_ident(&self.fields[x].name))),
                     },
                     _ => code.push_str(&format!("{},\n", get_ident(&self.fields[x].name))),
@@ -253,11 +251,11 @@ impl Serialize for VppJsApiMessageFieldDef {
             len += 1
         }
         len += match &self.maybe_size {
-                None => 0,
-                Some(Fixed(_n)) => 1,
-                Some(Variable(None)) => 1,
-                Some(Variable(Some(_x))) => 2,
-            };
+            None => 0,
+            Some(Fixed(_n)) => 1,
+            Some(Variable(None)) => 1,
+            Some(Variable(Some(_x))) => 2,
+        };
         let mut seq = serializer.serialize_seq(Some(len))?;
         seq.serialize_element(&self.ctype)?;
         seq.serialize_element(&self.name)?;

@@ -61,9 +61,10 @@ where
     pub fn equals_str(&self, compare_to: &str) -> bool {
         let v = &self.0;
         if let Ok(val_str) = std::str::from_utf8(v)
-            && compare_to == val_str.trim_end_matches("\u{0}") {
-                return true;
-            }
+            && compare_to == val_str.trim_end_matches("\u{0}")
+        {
+            return true;
+        }
         false
     }
 }

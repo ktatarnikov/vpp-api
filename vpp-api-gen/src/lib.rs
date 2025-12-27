@@ -117,11 +117,8 @@ pub fn parse_type_tree(opts: &Opts) {
             .expect("Error creating package dir");
         fs::create_dir_all(format!("{}/{}/src", opts.package_path, opts.package_name))
             .expect("Error creating package/src dir");
-        fs::create_dir_all(format!(
-            "{}/{}/tests",
-            opts.package_path, opts.package_name
-        ))
-        .expect("Error creating package/tests dir");
+        fs::create_dir_all(format!("{}/{}/tests", opts.package_path, opts.package_name))
+            .expect("Error creating package/tests dir");
         fs::create_dir_all(format!(
             "{}/{}/examples",
             opts.package_path, opts.package_name

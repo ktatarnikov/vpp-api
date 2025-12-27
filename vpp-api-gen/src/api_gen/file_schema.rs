@@ -81,7 +81,7 @@ impl VppJsApiFile {
 
     pub fn from_str(data: &str) -> std::result::Result<VppJsApiFile, serde_json::Error> {
         // use serde_json::Value;
-        
+
         serde_json::from_str::<VppJsApiFile>(data)
     }
 

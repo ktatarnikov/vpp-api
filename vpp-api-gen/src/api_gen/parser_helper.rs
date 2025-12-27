@@ -65,7 +65,6 @@ pub fn get_ident(api_ident: &str) -> String {
 pub fn get_rust_type_from_ctype(enum_containers: &HashMap<String, String>, ctype: &str) -> String {
     use convert_case::{Case, Casing};
 
-    
     {
         let rtype: String = if ctype.starts_with("vl_api_") {
             let ctype_trimmed = ctype.trim_start_matches("vl_api_").trim_end_matches("_t");
