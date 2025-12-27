@@ -70,6 +70,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./docker
+          file: ./docker/Dockerfile
           push: true
           provenance: true
           platforms: ${{ matrix.platform }}
