@@ -1,0 +1,3136 @@
+{
+    "types": [
+        [
+            "address",
+            [
+                "vl_api_address_family_t",
+                "af"
+            ],
+            [
+                "vl_api_address_union_t",
+                "un"
+            ]
+        ],
+        [
+            "prefix",
+            [
+                "vl_api_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "len"
+            ]
+        ],
+        [
+            "ip4_address_and_mask",
+            [
+                "vl_api_ip4_address_t",
+                "addr"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "mask"
+            ]
+        ],
+        [
+            "ip6_address_and_mask",
+            [
+                "vl_api_ip6_address_t",
+                "addr"
+            ],
+            [
+                "vl_api_ip6_address_t",
+                "mask"
+            ]
+        ],
+        [
+            "mprefix",
+            [
+                "vl_api_address_family_t",
+                "af"
+            ],
+            [
+                "u16",
+                "grp_address_length"
+            ],
+            [
+                "vl_api_address_union_t",
+                "grp_address"
+            ],
+            [
+                "vl_api_address_union_t",
+                "src_address"
+            ]
+        ],
+        [
+            "ip6_prefix",
+            [
+                "vl_api_ip6_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "len"
+            ]
+        ],
+        [
+            "ip4_prefix",
+            [
+                "vl_api_ip4_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "len"
+            ]
+        ],
+        [
+            "prefix_matcher",
+            [
+                "u8",
+                "le"
+            ],
+            [
+                "u8",
+                "ge"
+            ]
+        ],
+        [
+            "nat_timeouts",
+            [
+                "u32",
+                "udp"
+            ],
+            [
+                "u32",
+                "tcp_established"
+            ],
+            [
+                "u32",
+                "tcp_transitory"
+            ],
+            [
+                "u32",
+                "icmp"
+            ]
+        ]
+    ],
+    "messages": [
+        [
+            "nat44_ei_plugin_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "inside_vrf"
+            ],
+            [
+                "u32",
+                "outside_vrf"
+            ],
+            [
+                "u32",
+                "users"
+            ],
+            [
+                "u32",
+                "user_memory"
+            ],
+            [
+                "u32",
+                "sessions"
+            ],
+            [
+                "u32",
+                "session_memory"
+            ],
+            [
+                "u32",
+                "user_sessions"
+            ],
+            [
+                "bool",
+                "enable"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            {
+                "crc": "0xbf692144",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Enable/disable NAT44 plugin\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param inside_vrf - inside vrf id\n    @param outside_vrf - outside vrf id\n    @param users - maximum number of users per thread\n    @param user_memory - overwrite hash allocation parameter\n    @param sessions - maximum number of sessions per thread\n    @param session_memory - overwrite hash allocation parameter\n    @param user_sessions - maximum number of sessions per user\n    @param enable - true if enable, false if disable\n    @param flags - flag NAT44_EI_IS_STATIC_MAPPING_ONLY,\n                        NAT44_EI_IS_CONNECTION_TRACKING,\n                        NAT44_EI_IS_OUT2IN_DPO\n*/"
+            }
+        ],
+        [
+            "nat44_ei_plugin_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_show_running_config",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Show NAT44 plugin running config\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_show_running_config_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "inside_vrf"
+            ],
+            [
+                "u32",
+                "outside_vrf"
+            ],
+            [
+                "u32",
+                "users"
+            ],
+            [
+                "u32",
+                "sessions"
+            ],
+            [
+                "u32",
+                "user_sessions"
+            ],
+            [
+                "u32",
+                "user_buckets"
+            ],
+            [
+                "u32",
+                "translation_buckets"
+            ],
+            [
+                "bool",
+                "forwarding_enabled"
+            ],
+            [
+                "bool",
+                "ipfix_logging_enabled"
+            ],
+            [
+                "vl_api_nat_timeouts_t",
+                "timeouts"
+            ],
+            [
+                "vl_api_nat_log_level_t",
+                "log_level"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            {
+                "crc": "0x41b66a81",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Show NAT44 plugin running config reply\n    @param context - sender context, to match reply w/ request\n    @param retval - return code for the request\n    @param inside_vrf - default inside VRF id\n    @param outside_vrf - outside VRF id\n    @param users - maximum number of users per worker thread\n    @param sessions - maximum number of sessions per worker thread\n    @param user_sessions - maximum number of sessions per user\n    @param user_buckets - number of user hash buckets\n    @param translation_buckets - number of translation hash buckets\n    @param flags - flag NAT44_EI_IS_STATIC_MAPPING_ONLY,\n                        NAT44_EI_IS_CONNECTION_TRACKING,\n                        NAT44_EI_IS_OUT2IN_DPO\n*/"
+            }
+        ],
+        [
+            "nat44_ei_set_log_level",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_nat_log_level_t",
+                "log_level"
+            ],
+            {
+                "crc": "0x70076bfe",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Set NAT44 logging level\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param log_level - logging level\n*/"
+            }
+        ],
+        [
+            "nat44_ei_set_log_level_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "deprecated": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_set_workers",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u64",
+                "worker_mask"
+            ],
+            {
+                "crc": "0xda926638",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Set NAT workers\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param worker_mask - NAT workers mask\n*/"
+            }
+        ],
+        [
+            "nat44_ei_set_workers_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_worker_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Dump NAT workers\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_worker_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "worker_index"
+            ],
+            [
+                "u32",
+                "lcore_id"
+            ],
+            [
+                "string",
+                "name",
+                64
+            ],
+            {
+                "crc": "0x84bf06fc",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief NAT workers details response\n    @param context - sender context, to match reply w/ request\n    @param worker_index - worker index\n    @param lcore_id - lcore ID\n    @param name - worker name\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ipfix_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "domain_id"
+            ],
+            [
+                "u16",
+                "src_port"
+            ],
+            [
+                "bool",
+                "enable"
+            ],
+            {
+                "crc": "0x9af4a2d2",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Enable/disable NAT IPFIX logging\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param domain_id - observation domain ID\n    @param src_port - source port number\n    @param enable - true if enable, false if disable\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ipfix_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_set_timeouts",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "udp"
+            ],
+            [
+                "u32",
+                "tcp_established"
+            ],
+            [
+                "u32",
+                "tcp_transitory"
+            ],
+            [
+                "u32",
+                "icmp"
+            ],
+            {
+                "crc": "0xd4746b16",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Set values of timeouts for NAT sessions (seconds)\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param udp - UDP timeout (default 300sec)\n    @param tcp_established - TCP established timeout (default 7440sec)\n    @param tcp_transitory - TCP transitory timeout (default 240sec)\n    @param icmp - ICMP timeout (default 60sec)\n*/"
+            }
+        ],
+        [
+            "nat44_ei_set_timeouts_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_set_addr_and_port_alloc_alg",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "alg"
+            ],
+            [
+                "u8",
+                "psid_offset"
+            ],
+            [
+                "u8",
+                "psid_length"
+            ],
+            [
+                "u16",
+                "psid"
+            ],
+            [
+                "u16",
+                "start_port"
+            ],
+            [
+                "u16",
+                "end_port"
+            ],
+            {
+                "crc": "0xdeeb746f",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Set address and port assignment algorithm\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param alg - address and port assignment algorithm:\n                 0 - default, 1 - MAP-E, 2 - port range\n                 (see nat44_ei_addr_and_port_alloc_alg_t in nat.h)\n    @param psid_offset - number of offset bits (valid only for MAP-E alg)\n    @param psid_length - length of PSID (valid only for MAP-E alg)\n    @param psid - Port Set Identifier (PSID) value (valid only for MAP-E alg)\n    @param start_port - beginning of the port range\n    @param end_port - end of the port range\n*/"
+            }
+        ],
+        [
+            "nat44_ei_set_addr_and_port_alloc_alg_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_get_addr_and_port_alloc_alg",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Get address and port assignment algorithm\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_get_addr_and_port_alloc_alg_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u8",
+                "alg"
+            ],
+            [
+                "u8",
+                "psid_offset"
+            ],
+            [
+                "u8",
+                "psid_length"
+            ],
+            [
+                "u16",
+                "psid"
+            ],
+            [
+                "u16",
+                "start_port"
+            ],
+            [
+                "u16",
+                "end_port"
+            ],
+            {
+                "crc": "0x3607a7d0",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Get address and port assignment algorithm reply\n    @param context - sender context, to match reply w/ request\n    @param retval - return code\n    @param alg - address and port assignment algorithm:\n                 0 - default, 1 - MAP-E, 2 - port range\n                 (see nat44_ei_addr_and_port_alloc_alg_t in nat.h)\n    @param psid_offset - number of offset bits (valid only for MAP-E alg)\n    @param psid_length - length of PSID (valid only for MAP-E alg)\n    @param psid - Port Set Identifier (PSID) value (valid only for MAP-E alg)\n    @param start_port - beginning of the port range\n    @param end_port - end of the port range\n*/"
+            }
+        ],
+        [
+            "nat44_ei_set_mss_clamping",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u16",
+                "mss_value"
+            ],
+            [
+                "bool",
+                "enable"
+            ],
+            {
+                "crc": "0x25e90abb",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Set TCP MSS rewriting configuration\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param mss_value - MSS value to be used for MSS rewriting\n    @param enable - if true enable MSS rewriting feature else disable\n*/"
+            }
+        ],
+        [
+            "nat44_ei_set_mss_clamping_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_get_mss_clamping",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Get TCP MSS rewriting configuration\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_get_mss_clamping_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u16",
+                "mss_value"
+            ],
+            [
+                "bool",
+                "enable"
+            ],
+            {
+                "crc": "0x1c0b2a78",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Get TCP MSS rewriting configuration reply\n    @param context - sender context, to match reply w/ request\n    @param retval - return code\n    @param mss_value - MSS value to be used for MSS rewriting\n    @param enable - if true enable MSS rewriting feature else disable\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ha_set_listener",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u16",
+                "port"
+            ],
+            [
+                "u32",
+                "path_mtu"
+            ],
+            {
+                "crc": "0xe4a8cb4e",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Set HA listener (local settings)\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ip_address - local IP4 address\n    @param port - local UDP port number\n    @param path_mtu - path MTU between local and failover\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ha_set_listener_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_ha_set_failover",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u16",
+                "port"
+            ],
+            [
+                "u32",
+                "session_refresh_interval"
+            ],
+            {
+                "crc": "0x718246af",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Set HA failover (remote settings)\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ip_address - failover IP4 address\n    @param port - failvoer UDP port number\n    @param session_refresh_interval - number of seconds after which to send\n                                      session counters refresh\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ha_set_failover_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_ha_get_listener",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Get HA listener/local configuration\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ha_get_listener_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u16",
+                "port"
+            ],
+            [
+                "u32",
+                "path_mtu"
+            ],
+            {
+                "crc": "0x123ea41f",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Get HA listener/local configuration reply\n    @param context - sender context, to match reply w/ request\n    @param retval - return code\n    @param ip_address - local IP4 address\n    @param port - local UDP port number\n    @param path_mtu - Path MTU between local and failover\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ha_get_failover",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Get HA failover/remote settings\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ha_get_failover_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u16",
+                "port"
+            ],
+            [
+                "u32",
+                "session_refresh_interval"
+            ],
+            {
+                "crc": "0xa67d8752",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Get HA failover/remote settings reply\n    @param context - sender context, to match reply w/ request\n    @param retval - return code\n    @param ip_address - failover IP4 address\n    @param port - failvoer UDP port number\n    @param session_refresh_interval - number of seconds after which to send\n                                      session counters refresh\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ha_flush",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Flush the current HA data (for testing)\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ha_flush_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_ha_resync",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "want_resync_event"
+            ],
+            [
+                "u32",
+                "pid"
+            ],
+            {
+                "crc": "0xc8ab9e03",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Resync HA (resend existing sessions to new failover)\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param want_resync_event - resync completed event sent to the sender via\n                               nat44_ei_ha_resync_completed_event API message if\n                               non-zero\n    @param pid - sender's pid\n*/"
+            }
+        ],
+        [
+            "nat44_ei_ha_resync_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_ha_resync_completed_event",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "pid"
+            ],
+            [
+                "u32",
+                "missed_count"
+            ],
+            {
+                "crc": "0xfdc598fb",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Tell client about a HA resync completion event\n    @param client_index - opaque cookie to identify the sender\n    @param pid - client pid registered to receive notification\n    @param missed_count - number of missed (not ACKed) messages\n*/"
+            }
+        ],
+        [
+            "nat44_ei_del_user",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u32",
+                "fib_index"
+            ],
+            {
+                "crc": "0x99a9f998",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Del NAT44 user\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ip_address - IPv4 address\n    @param fib_index - FIB index\n*/"
+            }
+        ],
+        [
+            "nat44_ei_del_user_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_add_del_address_range",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "first_ip_address"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "last_ip_address"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            {
+                "crc": "0x35f21abc",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Add/del NAT44 address range\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param first_ip_address - first IPv4 address\n    @param last_ip_address - last IPv4 address\n    @param vrf_id - VRF id of tenant, ~0 means independent of VRF\n    @param is_add - true if add, false if delete\n\n*/"
+            }
+        ],
+        [
+            "nat44_ei_add_del_address_range_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_address_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Dump NAT44 addresses\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_address_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            {
+                "crc": "0x318f1202",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief NAT44 address details response\n    @param context - sender context, to match reply w/ request\n    @param ip_address - IPv4 address\n    @param vrf_id - VRF id of tenant, ~0 means independent of VRF\n*/"
+            }
+        ],
+        [
+            "nat44_ei_interface_add_del_feature",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x63a2db8b",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Enable/disable NAT44 feature on the interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - true if add, false if delete\n    @param flags - flag NAT_IS_INSIDE if interface is inside else\n                   interface is outside\n    @param sw_if_index - software index of the interface\n*/"
+            }
+        ],
+        [
+            "nat44_ei_interface_add_del_feature_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_interface_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Dump interfaces with NAT44 feature\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_interface_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0xf446e508",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief NAT44 interface details response\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - software index of the interface\n    @param flags - flag NAT_IS_INSIDE if interface is inside,\n                   flag NAT_IS_OUTSIDE if interface is outside\n                   and if both flags are set the interface is\n                   both inside and outside\n*/"
+            }
+        ],
+        [
+            "nat44_ei_interface_add_del_output_feature",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x63a2db8b",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Enable/disbale NAT44 as an interface output feature (postrouting\n           in2out translation)\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - true if add, false if delete\n    @param flags - flag NAT_IS_INSIDE if interface is inside else\n                   interface is outside\n    @param sw_if_index - software index of the interface\n*/"
+            }
+        ],
+        [
+            "nat44_ei_interface_add_del_output_feature_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "deprecated": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_interface_output_feature_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Dump interfaces with NAT44 output feature\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_interface_output_feature_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0xf446e508",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief NAT44 interface with output feature details response\n    @param context - sender context, to match reply w/ request\n    @param flags - flag NAT_IS_INSIDE if interface is inside else\n                   interface is outside\n    @param sw_if_index - software index of the interface\n*/"
+            }
+        ],
+        [
+            "nat44_ei_add_del_output_interface",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x47d6e753",
+                "options": {},
+                "comment": "/** \\brief add/del NAT output interface (postrouting\n           in2out translation)\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - true if add, false if delete\n    @param sw_if_index - software index of the interface\n*/"
+            }
+        ],
+        [
+            "nat44_ei_add_del_output_interface_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "nat44_ei_output_interface_get",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "cursor"
+            ],
+            {
+                "crc": "0xf75ba505",
+                "options": {}
+            }
+        ],
+        [
+            "nat44_ei_output_interface_get_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "cursor"
+            ],
+            {
+                "crc": "0x53b48f5d",
+                "options": {}
+            }
+        ],
+        [
+            "nat44_ei_output_interface_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x0b45011c",
+                "options": {}
+            }
+        ],
+        [
+            "nat44_ei_add_del_static_mapping",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "local_ip_address"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "external_ip_address"
+            ],
+            [
+                "u8",
+                "protocol"
+            ],
+            [
+                "u16",
+                "local_port"
+            ],
+            [
+                "u16",
+                "external_port"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "external_sw_if_index"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            [
+                "string",
+                "tag",
+                64
+            ],
+            {
+                "crc": "0xb404b7fe",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Add/delete NAT44 static mapping\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - true if add, false if delete\n    @param flags - flag NAT44_EI_IS_ADDR_ONLY if address only mapping\n    @param local_ip_address - local IPv4 address\n    @param external_ip_address - external IPv4 address\n    @param protocol - IP protocol, used only if addr_only=0\n    @param local_port - local port number, used only if addr_only=0\n    @param external_port - external port number, used only if addr_only=0\n    @param external_sw_if_index - external interface (if set\n                                  external_ip_address is ignored, ~0 means not\n                                  used)\n    @param vfr_id - VRF ID\n    @param tag - opaque string tag\n*/"
+            }
+        ],
+        [
+            "nat44_ei_add_del_static_mapping_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_static_mapping_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Dump NAT44 static mappings\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_static_mapping_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "local_ip_address"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "external_ip_address"
+            ],
+            [
+                "u8",
+                "protocol"
+            ],
+            [
+                "u16",
+                "local_port"
+            ],
+            [
+                "u16",
+                "external_port"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "external_sw_if_index"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            [
+                "string",
+                "tag",
+                64
+            ],
+            {
+                "crc": "0x6b51ca6e",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief NAT44 static mapping details response\n    @param context - sender context, to match reply w/ request\n    @param flags - flag NAT44_EI_IS_ADDR_ONLY if address only mapping,\n    @param local_ip_address - local IPv4 address\n    @param external_ip_address - external IPv4 address\n    @param protocol - IP protocol, valid only if no NAT_ADDR_ONLY flag\n    @param local_port - local port number, valid only if no NAT_ADDR_ONLY flag\n    @param external_port - external port number, valid only if no NAT_ADDR_ONLY flag\n    @param external_sw_if_index - external interface\n    @param vfr_id - VRF ID\n    @param tag - opaque string tag\n*/"
+            }
+        ],
+        [
+            "nat44_ei_add_del_identity_mapping",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u8",
+                "protocol"
+            ],
+            [
+                "u16",
+                "port"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            [
+                "string",
+                "tag",
+                64
+            ],
+            {
+                "crc": "0xcb8606b9",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Add/delete NAT44 identity mapping\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - true if add, false if delete\n    @param flags - flag NAT44_EI_IS_ADDR_ONLY if address only mapping\n    @param ip_address - IPv4 address\n    @param protocol - IP protocol\n    @param port - port number\n    @param sw_if_index - interface (if set ip_address is ignored, ~0 means not\n                                    used)\n    @param vfr_id - VRF ID (if ~0 use default VRF)\n    @param tag - opaque string tag\n*/"
+            }
+        ],
+        [
+            "nat44_ei_add_del_identity_mapping_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "deprecated": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_identity_mapping_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Dump NAT44 identity mappings\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_identity_mapping_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u8",
+                "protocol"
+            ],
+            [
+                "u16",
+                "port"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            [
+                "string",
+                "tag",
+                64
+            ],
+            {
+                "crc": "0x30d53e26",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief NAT44 identity mapping details response\n    @param context - sender context, to match reply w/ request\n    @param flags - flag NAT44_EI_ADDR_ONLY if address only mapping\n    @param ip_address - IPv4 address\n    @param protocol - IP protocol\n    @param port - port number\n    @param sw_if_index - interface\n    @param vfr_id - VRF ID\n    @param tag - opaque string tag\n*/"
+            }
+        ],
+        [
+            "nat44_ei_add_del_interface_addr",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            {
+                "crc": "0x883abbcc",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Add/delete NAT44 pool address from specific interfce\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - true if add, false if delete\n    @param sw_if_index - software index of the interface\n    @param flags - flag NAT_TWICE_NAT if NAT address range for external hosts\n*/"
+            }
+        ],
+        [
+            "nat44_ei_add_del_interface_addr_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "deprecated": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_interface_addr_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Dump NAT44 pool addresses interfaces\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_interface_addr_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x0b45011c",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief NAT44 pool addresses interfaces details response\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - software index of the interface\n\n*/"
+            }
+        ],
+        [
+            "nat44_ei_user_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Dump NAT44 users\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_user_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u32",
+                "nsessions"
+            ],
+            [
+                "u32",
+                "nstaticsessions"
+            ],
+            {
+                "crc": "0x355896c2",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief NAT44 users response\n    @param context - sender context, to match reply w/ request\n    @vrf_id - VRF ID\n    @param ip_address - IPv4 address\n    @param nsessions - number of dynamic sessions\n    @param nstaticsessions - number of static sessions\n*/"
+            }
+        ],
+        [
+            "nat44_ei_user_session_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            {
+                "crc": "0xe1899c98",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief NAT44 user's sessions\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ip_address - IPv4 address of the user to dump\n    @param vrf_id - VRF_ID\n*/"
+            }
+        ],
+        [
+            "nat44_ei_user_session_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "outside_ip_address"
+            ],
+            [
+                "u16",
+                "outside_port"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "inside_ip_address"
+            ],
+            [
+                "u16",
+                "inside_port"
+            ],
+            [
+                "u16",
+                "protocol"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "u64",
+                "last_heard"
+            ],
+            [
+                "u64",
+                "total_bytes"
+            ],
+            [
+                "u32",
+                "total_pkts"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ext_host_address"
+            ],
+            [
+                "u16",
+                "ext_host_port"
+            ],
+            {
+                "crc": "0x19b7c0ac",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief NAT44 user's sessions response\n    @param context - sender context, to match reply w/ request\n    @param outside_ip_address - outside IPv4 address\n    @param outside_port - outside port\n    @param inside_ip_address - inside IPv4 address\n    @param inside_port - inside port\n    @param protocol - protocol\n    @param flags - flag NAT_IS_STATIC if session is static\n    @param last_heard - last heard timer\n    @param total_bytes - count of bytes sent through session\n    @param total_pkts - count of pakets sent through session\n    @param ext_host_address - external host IPv4 address\n    @param ext_host_port - external host port\n*/"
+            }
+        ],
+        [
+            "nat44_ei_user_session_v2_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ip_address"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            {
+                "crc": "0xe1899c98",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief NAT44 user's sessions\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ip_address - IPv4 address of the user to dump\n    @param vrf_id - VRF_ID\n*/"
+            }
+        ],
+        [
+            "nat44_ei_user_session_v2_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "outside_ip_address"
+            ],
+            [
+                "u16",
+                "outside_port"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "inside_ip_address"
+            ],
+            [
+                "u16",
+                "inside_port"
+            ],
+            [
+                "u16",
+                "protocol"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "u64",
+                "last_heard"
+            ],
+            [
+                "u64",
+                "time_since_last_heard"
+            ],
+            [
+                "u64",
+                "total_bytes"
+            ],
+            [
+                "u32",
+                "total_pkts"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ext_host_address"
+            ],
+            [
+                "u16",
+                "ext_host_port"
+            ],
+            {
+                "crc": "0x5bd3e9d6",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief NAT44 user's sessions response\n    @param context - sender context, to match reply w/ request\n    @param outside_ip_address - outside IPv4 address\n    @param outside_port - outside port\n    @param inside_ip_address - inside IPv4 address\n    @param inside_port - inside port\n    @param protocol - protocol\n    @param flags - flag NAT_IS_STATIC if session is static\n    @param last_heard - last heard timer since VPP start\n    @param time_since_last_heard - difference between current vpp time and last_heard value\n    @param total_bytes - count of bytes sent through session\n    @param total_pkts - count of pakets sent through session\n    @param ext_host_address - external host IPv4 address\n    @param ext_host_port - external host port\n*/"
+            }
+        ],
+        [
+            "nat44_ei_del_session",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "address"
+            ],
+            [
+                "u8",
+                "protocol"
+            ],
+            [
+                "u16",
+                "port"
+            ],
+            [
+                "u32",
+                "vrf_id"
+            ],
+            [
+                "vl_api_nat44_ei_config_flags_t",
+                "flags"
+            ],
+            [
+                "vl_api_ip4_address_t",
+                "ext_host_address"
+            ],
+            [
+                "u16",
+                "ext_host_port"
+            ],
+            {
+                "crc": "0x74969ffe",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Delete NAT44 session\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ip_address - IPv4 address\n    @param protocol - IP protocol\n    @param port - port number\n    @param vfr_id - VRF ID\n    @param flags - flag NAT_IS_INSIDE if interface is inside or\n                   interface is outside,\n                   flag NAT_IS_EXT_HOST_VALID if external host address and\n                   port are valid\n    @param ext_host_address - external host IPv4 address\n    @param ext_host_port - external host port\n*/"
+            }
+        ],
+        [
+            "nat44_ei_del_session_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_forwarding_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "enable"
+            ],
+            {
+                "crc": "0xb3e225d2",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Enable/disable forwarding for NAT44\n    Forward packets which don't match existing translation\n    or static mapping instead of dropping them.\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param enable - true for enable, false for disable\n*/"
+            }
+        ],
+        [
+            "nat44_ei_forwarding_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_set_fq_options",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "frame_queue_nelts"
+            ],
+            {
+                "crc": "0x2399bd71",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Set NAT handoff frame queue options\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param frame_queue_nelts - number of worker handoff frame queue elements\n*/"
+            }
+        ],
+        [
+            "nat44_ei_set_fq_options_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "in_progress": null
+                }
+            }
+        ],
+        [
+            "nat44_ei_show_fq_options",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Show NAT handoff frame queue options\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "nat44_ei_show_fq_options_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "frame_queue_nelts"
+            ],
+            {
+                "crc": "0x7213b545",
+                "options": {
+                    "in_progress": null
+                },
+                "comment": "/** \\brief Show NAT handoff frame queue options reply\n    @param context - sender context, to match reply w/ request\n    @param retval - return code for the request\n    @param frame_queue_nelts - number of worker handoff frame queue elements\n*/"
+            }
+        ]
+    ],
+    "unions": [
+        [
+            "address_union",
+            [
+                "vl_api_ip4_address_t",
+                "ip4"
+            ],
+            [
+                "vl_api_ip6_address_t",
+                "ip6"
+            ]
+        ]
+    ],
+    "enums": [
+        [
+            "address_family",
+            [
+                "ADDRESS_IP4",
+                0
+            ],
+            [
+                "ADDRESS_IP6",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_feature_location",
+            [
+                "IP_API_FEATURE_INPUT",
+                0
+            ],
+            [
+                "IP_API_FEATURE_OUTPUT",
+                1
+            ],
+            [
+                "IP_API_FEATURE_LOCAL",
+                2
+            ],
+            [
+                "IP_API_FEATURE_PUNT",
+                3
+            ],
+            [
+                "IP_API_FEATURE_DROP",
+                4
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_ecn",
+            [
+                "IP_API_ECN_NONE",
+                0
+            ],
+            [
+                "IP_API_ECN_ECT0",
+                1
+            ],
+            [
+                "IP_API_ECN_ECT1",
+                2
+            ],
+            [
+                "IP_API_ECN_CE",
+                3
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_dscp",
+            [
+                "IP_API_DSCP_CS0",
+                0
+            ],
+            [
+                "IP_API_DSCP_CS1",
+                8
+            ],
+            [
+                "IP_API_DSCP_AF11",
+                10
+            ],
+            [
+                "IP_API_DSCP_AF12",
+                12
+            ],
+            [
+                "IP_API_DSCP_AF13",
+                14
+            ],
+            [
+                "IP_API_DSCP_CS2",
+                16
+            ],
+            [
+                "IP_API_DSCP_AF21",
+                18
+            ],
+            [
+                "IP_API_DSCP_AF22",
+                20
+            ],
+            [
+                "IP_API_DSCP_AF23",
+                22
+            ],
+            [
+                "IP_API_DSCP_CS3",
+                24
+            ],
+            [
+                "IP_API_DSCP_AF31",
+                26
+            ],
+            [
+                "IP_API_DSCP_AF32",
+                28
+            ],
+            [
+                "IP_API_DSCP_AF33",
+                30
+            ],
+            [
+                "IP_API_DSCP_CS4",
+                32
+            ],
+            [
+                "IP_API_DSCP_AF41",
+                34
+            ],
+            [
+                "IP_API_DSCP_AF42",
+                36
+            ],
+            [
+                "IP_API_DSCP_AF43",
+                38
+            ],
+            [
+                "IP_API_DSCP_CS5",
+                40
+            ],
+            [
+                "IP_API_DSCP_EF",
+                46
+            ],
+            [
+                "IP_API_DSCP_CS6",
+                48
+            ],
+            [
+                "IP_API_DSCP_CS7",
+                50
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "ip_proto",
+            [
+                "IP_API_PROTO_HOPOPT",
+                0
+            ],
+            [
+                "IP_API_PROTO_ICMP",
+                1
+            ],
+            [
+                "IP_API_PROTO_IGMP",
+                2
+            ],
+            [
+                "IP_API_PROTO_TCP",
+                6
+            ],
+            [
+                "IP_API_PROTO_UDP",
+                17
+            ],
+            [
+                "IP_API_PROTO_GRE",
+                47
+            ],
+            [
+                "IP_API_PROTO_ESP",
+                50
+            ],
+            [
+                "IP_API_PROTO_AH",
+                51
+            ],
+            [
+                "IP_API_PROTO_ICMP6",
+                58
+            ],
+            [
+                "IP_API_PROTO_EIGRP",
+                88
+            ],
+            [
+                "IP_API_PROTO_OSPF",
+                89
+            ],
+            [
+                "IP_API_PROTO_SCTP",
+                132
+            ],
+            [
+                "IP_API_PROTO_RESERVED",
+                255
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "nat_log_level",
+            [
+                "NAT_LOG_NONE",
+                0
+            ],
+            [
+                "NAT_LOG_ERROR",
+                1
+            ],
+            [
+                "NAT_LOG_WARNING",
+                2
+            ],
+            [
+                "NAT_LOG_NOTICE",
+                3
+            ],
+            [
+                "NAT_LOG_INFO",
+                4
+            ],
+            [
+                "NAT_LOG_DEBUG",
+                5
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "nat_config_flags",
+            [
+                "NAT_IS_NONE",
+                0
+            ],
+            [
+                "NAT_IS_TWICE_NAT",
+                1
+            ],
+            [
+                "NAT_IS_SELF_TWICE_NAT",
+                2
+            ],
+            [
+                "NAT_IS_OUT2IN_ONLY",
+                4
+            ],
+            [
+                "NAT_IS_ADDR_ONLY",
+                8
+            ],
+            [
+                "NAT_IS_OUTSIDE",
+                16
+            ],
+            [
+                "NAT_IS_INSIDE",
+                32
+            ],
+            [
+                "NAT_IS_STATIC",
+                64
+            ],
+            [
+                "NAT_IS_EXT_HOST_VALID",
+                128
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "nat44_ei_config_flags",
+            [
+                "NAT44_EI_NONE",
+                0
+            ],
+            [
+                "NAT44_EI_STATIC_MAPPING_ONLY",
+                1
+            ],
+            [
+                "NAT44_EI_CONNECTION_TRACKING",
+                2
+            ],
+            [
+                "NAT44_EI_OUT2IN_DPO",
+                4
+            ],
+            [
+                "NAT44_EI_ADDR_ONLY_MAPPING",
+                8
+            ],
+            [
+                "NAT44_EI_IF_INSIDE",
+                16
+            ],
+            [
+                "NAT44_EI_IF_OUTSIDE",
+                32
+            ],
+            [
+                "NAT44_EI_STATIC_MAPPING",
+                64
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "nat44_ei_ha_resync": {
+            "reply": "nat44_ei_ha_resync_reply",
+            "events": [
+                "nat44_ei_ha_resync_completed_event"
+            ]
+        },
+        "nat44_ei_output_interface_get": {
+            "reply": "nat44_ei_output_interface_get_reply",
+            "stream": true,
+            "stream_msg": "nat44_ei_output_interface_details"
+        },
+        "nat44_ei_plugin_enable_disable": {
+            "reply": "nat44_ei_plugin_enable_disable_reply"
+        },
+        "nat44_ei_show_running_config": {
+            "reply": "nat44_ei_show_running_config_reply"
+        },
+        "nat44_ei_set_log_level": {
+            "reply": "nat44_ei_set_log_level_reply"
+        },
+        "nat44_ei_set_workers": {
+            "reply": "nat44_ei_set_workers_reply"
+        },
+        "nat44_ei_worker_dump": {
+            "reply": "nat44_ei_worker_details",
+            "stream": true
+        },
+        "nat44_ei_ipfix_enable_disable": {
+            "reply": "nat44_ei_ipfix_enable_disable_reply"
+        },
+        "nat44_ei_set_timeouts": {
+            "reply": "nat44_ei_set_timeouts_reply"
+        },
+        "nat44_ei_set_addr_and_port_alloc_alg": {
+            "reply": "nat44_ei_set_addr_and_port_alloc_alg_reply"
+        },
+        "nat44_ei_get_addr_and_port_alloc_alg": {
+            "reply": "nat44_ei_get_addr_and_port_alloc_alg_reply"
+        },
+        "nat44_ei_set_mss_clamping": {
+            "reply": "nat44_ei_set_mss_clamping_reply"
+        },
+        "nat44_ei_get_mss_clamping": {
+            "reply": "nat44_ei_get_mss_clamping_reply"
+        },
+        "nat44_ei_ha_set_listener": {
+            "reply": "nat44_ei_ha_set_listener_reply"
+        },
+        "nat44_ei_ha_set_failover": {
+            "reply": "nat44_ei_ha_set_failover_reply"
+        },
+        "nat44_ei_ha_get_listener": {
+            "reply": "nat44_ei_ha_get_listener_reply"
+        },
+        "nat44_ei_ha_get_failover": {
+            "reply": "nat44_ei_ha_get_failover_reply"
+        },
+        "nat44_ei_ha_flush": {
+            "reply": "nat44_ei_ha_flush_reply"
+        },
+        "nat44_ei_del_user": {
+            "reply": "nat44_ei_del_user_reply"
+        },
+        "nat44_ei_add_del_address_range": {
+            "reply": "nat44_ei_add_del_address_range_reply"
+        },
+        "nat44_ei_address_dump": {
+            "reply": "nat44_ei_address_details",
+            "stream": true
+        },
+        "nat44_ei_interface_add_del_feature": {
+            "reply": "nat44_ei_interface_add_del_feature_reply"
+        },
+        "nat44_ei_interface_dump": {
+            "reply": "nat44_ei_interface_details",
+            "stream": true
+        },
+        "nat44_ei_interface_add_del_output_feature": {
+            "reply": "nat44_ei_interface_add_del_output_feature_reply"
+        },
+        "nat44_ei_interface_output_feature_dump": {
+            "reply": "nat44_ei_interface_output_feature_details",
+            "stream": true
+        },
+        "nat44_ei_add_del_output_interface": {
+            "reply": "nat44_ei_add_del_output_interface_reply"
+        },
+        "nat44_ei_add_del_static_mapping": {
+            "reply": "nat44_ei_add_del_static_mapping_reply"
+        },
+        "nat44_ei_static_mapping_dump": {
+            "reply": "nat44_ei_static_mapping_details",
+            "stream": true
+        },
+        "nat44_ei_add_del_identity_mapping": {
+            "reply": "nat44_ei_add_del_identity_mapping_reply"
+        },
+        "nat44_ei_identity_mapping_dump": {
+            "reply": "nat44_ei_identity_mapping_details",
+            "stream": true
+        },
+        "nat44_ei_add_del_interface_addr": {
+            "reply": "nat44_ei_add_del_interface_addr_reply"
+        },
+        "nat44_ei_interface_addr_dump": {
+            "reply": "nat44_ei_interface_addr_details",
+            "stream": true
+        },
+        "nat44_ei_user_dump": {
+            "reply": "nat44_ei_user_details",
+            "stream": true
+        },
+        "nat44_ei_user_session_dump": {
+            "reply": "nat44_ei_user_session_details",
+            "stream": true
+        },
+        "nat44_ei_user_session_v2_dump": {
+            "reply": "nat44_ei_user_session_v2_details",
+            "stream": true
+        },
+        "nat44_ei_del_session": {
+            "reply": "nat44_ei_del_session_reply"
+        },
+        "nat44_ei_forwarding_enable_disable": {
+            "reply": "nat44_ei_forwarding_enable_disable_reply"
+        },
+        "nat44_ei_set_fq_options": {
+            "reply": "nat44_ei_set_fq_options_reply"
+        },
+        "nat44_ei_show_fq_options": {
+            "reply": "nat44_ei_show_fq_options_reply"
+        }
+    },
+    "options": {
+        "version": "1.1.1"
+    },
+    "aliases": {
+        "ip4_address": {
+            "type": "u8",
+            "length": 4
+        },
+        "ip6_address": {
+            "type": "u8",
+            "length": 16
+        },
+        "address_with_prefix": {
+            "type": "vl_api_prefix_t"
+        },
+        "ip4_address_with_prefix": {
+            "type": "vl_api_ip4_prefix_t"
+        },
+        "ip6_address_with_prefix": {
+            "type": "vl_api_ip6_prefix_t"
+        },
+        "interface_index": {
+            "type": "u32"
+        }
+    },
+    "vl_api_version": "0x88c1fd79",
+    "imports": [
+        "vnet/ip/ip_types.api",
+        "vnet/interface_types.api",
+        "plugins/nat/lib/nat_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}

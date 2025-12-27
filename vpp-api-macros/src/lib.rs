@@ -2,7 +2,7 @@ extern crate proc_macro;
 use quote::quote;
 use syn;
 use syn::{parse_macro_input, DeriveInput};
-
+use quote::ToTokens;
 use proc_macro2::TokenTree;
 
 #[proc_macro_derive(VppMessage, attributes(message_name_and_crc))]
@@ -103,7 +103,7 @@ pub fn derive_unionident(input: proc_macro::TokenStream) -> proc_macro::TokenStr
                                     match arg.args[1] {
                                         syn::GenericArgument::Type(ref typt) => {
                                             match typt {
-                                                syn::Type::Path(ref typath) => {
+                                                syn::Type::Path(typath) => {
                                                     // eprintln!("{:#?}", typath.path.segments[1].ident);
                                                     ty = &typath.path.segments[1].ident;
                                                 }

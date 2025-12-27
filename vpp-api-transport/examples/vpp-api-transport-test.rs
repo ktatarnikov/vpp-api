@@ -29,8 +29,8 @@ struct Opts {
     repeat_count: u32,
 
     /// A level of verbosity, and can be used multiple times
-    #[clap(short, long, parse(from_occurrences))]
-    verbose: i32,
+    #[clap(short, long, action = clap::ArgAction::Count)]
+    verbose: u8,
 }
 
 use vpp_api_transport::afunix;

@@ -773,8 +773,10 @@ pub struct PuntUnion {
 
 */
 
+/*
 #[derive(Clone, Default, Debug, Serialize, Deserialize)]
 pub struct TunnelFlags {}
 
 #[derive(Clone, Default, Debug, Serialize, Deserialize)]
 pub struct IpFlowHashConfig {}
+*/

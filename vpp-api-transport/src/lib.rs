@@ -41,6 +41,7 @@ struct RawControlPing {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 struct RawControlPingReply {
     context: u32,
     retval: i32,

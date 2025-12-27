@@ -5,6 +5,7 @@ use vpp_api_message::VppApiMessage;
 #[message_name_and_crc(Idiot_76fe)]
 pub struct InterfaceAPIAddress {
     uid: u32,
+    #[allow(dead_code)]
     name: String,
 }
 

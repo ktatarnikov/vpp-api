@@ -1,0 +1,33 @@
+[package]
+name = "vpp_api_client"
+version = "0.1.6"
+edition = "2024"
+description = "fd.io client library"
+license = "MIT OR Apache-2.0"
+homepage = "https://wiki.fd.io/view/VPP"
+
+[features]
+25_10 = [
+    "vpp-api-transport/25_10",
+]
+25_06 = [
+    "vpp-api-transport/25_06"
+]
+
+[lib]
+name = "vpp_api_client"
+path = "src/lib.rs"
+
+[dependencies]
+vpp-api-encoding.workspace = true
+vpp-api-macros.workspace = true
+vpp-api-message.workspace = true
+vpp-api-transport.workspace = true
+serde.workspace = true
+serde_repr.workspace = true
+typenum.workspace = true
+bincode.workspace = true
+cfg-if.workspace = true
+
+[dev-dependencies]
+vpp-api-transport.workspace = true
