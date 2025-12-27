@@ -1,12 +1,16 @@
 name: Basic tests
 
 on:
-  push:
-    branches:
-      - '**'
-    tags:
-      - '**'
-  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - '**'
+  #   tags:
+  #     - '**'
+  # workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_TOOLCHAIN: "1.92"
 
 jobs:
 
@@ -39,6 +43,8 @@ jobs:
           cargo run --features 25_10 --release --example vpp-api-transport-test -- -r 1000
 
   build:
+
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
