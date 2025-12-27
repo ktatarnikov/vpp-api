@@ -732,21 +732,15 @@ impl<'de, T: Debug + Clone + AsEnumFlag + Deserialize<'de>> Deserialize<'de> for
         }
         let size: u32 = T::size_of_enum_flag();
         match size {
-            32 => {
-                deserializer.deserialize_u32(EnumFlagVisitor {
-                    marker: PhantomData,
-                })
-            }
-            16 => {
-                deserializer.deserialize_u16(EnumFlagVisitor {
-                    marker: PhantomData,
-                })
-            }
-            8 => {
-                deserializer.deserialize_u8(EnumFlagVisitor {
-                    marker: PhantomData,
-                })
-            }
+            32 => deserializer.deserialize_u32(EnumFlagVisitor {
+                marker: PhantomData,
+            }),
+            16 => deserializer.deserialize_u16(EnumFlagVisitor {
+                marker: PhantomData,
+            }),
+            8 => deserializer.deserialize_u8(EnumFlagVisitor {
+                marker: PhantomData,
+            }),
             _ => panic!("Deserializing not supported for {} bit set flags", size),
         }
     }

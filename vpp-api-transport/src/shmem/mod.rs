@@ -122,9 +122,7 @@ impl std::io::Write for Transport {
         let wr_len = buf.len();
         let err = unsafe { vac_write(buf.as_ptr(), wr_len as i32) };
         if err < 0 {
-            return Err(std::io::Error::other(
-                format!("vac_write returned {}", err),
-            ));
+            return Err(std::io::Error::other(format!("vac_write returned {}", err)));
         }
         Ok(wr_len)
     }
@@ -148,10 +146,7 @@ impl VppApiTransport for Transport {
         let err =
             unsafe { vac_connect(name_arg, chroot_prefix_arg, Some(shmem_default_cb), rx_qlen) };
         if err < 0 {
-            return Err(std::io::Error::other(
-                format!("vac_connect returned {}", err),
-            )
-            .into());
+            return Err(std::io::Error::other(format!("vac_connect returned {}", err)).into());
         }
         self.connected = true;
         Ok(())
