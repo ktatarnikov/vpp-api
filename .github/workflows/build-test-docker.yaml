@@ -79,6 +79,7 @@ jobs:
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=build-${{ env.PLATFORM_PAIR }}
           cache-to: type=gha,mode=max,scope=build-${{ env.PLATFORM_PAIR }}
+          github-token: ${{ github.token }}
 
       - name: Export Digest
         run: |
