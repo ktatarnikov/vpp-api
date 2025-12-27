@@ -114,7 +114,7 @@ jobs:
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
-          path: /tmp/digests
+          path: ${{ runner.temp }}/digests
           pattern: digests-*
           merge-multiple: true
 
