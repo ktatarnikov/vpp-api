@@ -1,8 +1,6 @@
 extern crate proc_macro;
 use proc_macro2::TokenTree;
-use quote::ToTokens;
 use quote::quote;
-use syn;
 use syn::{DeriveInput, parse_macro_input};
 
 #[proc_macro_derive(VppMessage, attributes(message_name_and_crc))]
@@ -54,7 +52,7 @@ pub fn derive_message(input: proc_macro::TokenStream) -> proc_macro::TokenStream
             #name: self.#name.clone().ok_or(concat!(stringify!(#name), "is not set"))?
         }
     });
-    let builder_ident = syn::Ident::new(&format!("Builder{}", name.to_string()), name.span());
+    let builder_ident = syn::Ident::new(&format!("Builder{}", name), name.span());
     let expanded = quote! {
          pub struct #builder_ident{
              #(#option_fields,)*
@@ -141,12 +139,12 @@ pub fn derive_unionident(input: proc_macro::TokenStream) -> proc_macro::TokenStr
             }
             _ => panic!("Felix! Something went wrong"),
         }
-        let function_name_new = format!("new_{}", ident.to_string());
+        let function_name_new = format!("new_{}", ident);
         let function_name_new_ident = syn::Ident::new(&function_name_new, name.span());
         let _function_name_set_ident =
-            syn::Ident::new(&format!("set_{}", ident.to_string()), name.span());
+            syn::Ident::new(&format!("set_{}", ident), name.span());
         let function_name_get_ident =
-            syn::Ident::new(&format!("get_{}", ident.to_string()), name.span());
+            syn::Ident::new(&format!("get_{}", ident), name.span());
         quote! {
                 pub fn #function_name_new_ident(some: #ident) -> #name{
                     let mut arr: Vec<u8> = vec![0;#maxsize_literal];

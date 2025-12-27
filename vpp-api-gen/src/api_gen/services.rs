@@ -19,16 +19,16 @@ impl Serialize for VppJsApiService {
     {
         let mut len = 1;
         if self.stream.is_some() {
-            len = len + 1;
+            len += 1;
         }
-        if self.events.len() > 0 {
-            len = len + 1;
+        if !self.events.is_empty() {
+            len += 1;
         }
         if self.stream_msg.is_some() {
-            len = len + 1;
+            len += 1;
         }
         let mut map = serializer.serialize_map(Some(len))?;
-        if self.events.len() > 0 {
+        if !self.events.is_empty() {
             map.serialize_entry("events", &self.events)?;
         }
         map.serialize_entry("reply", &self.reply)?;

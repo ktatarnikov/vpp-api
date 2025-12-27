@@ -115,9 +115,9 @@ pub fn is_power_of_two(n: &mut i64) -> bool {
         if *n % 2 != 0 {
             return false;
         }
-        *n = *n / 2;
+        *n /= 2;
     }
-    return true;
+    true
 }
 impl VppJsApiEnum {
     pub fn if_flag(&self) -> bool {
@@ -174,7 +174,7 @@ impl VppJsApiEnum {
         code.push_str("\t fn size_of_enum_flag() -> u32{\n");
         match &self.info.enumtype {
             Some(len) => code.push_str(&format!("\t\t {} as u32\n", len.trim_start_matches("u"))),
-            _ => code.push_str(&format!("\t\t 32 as u32\n")),
+            _ => code.push_str("\t\t 32 as u32\n"),
         }
         code.push_str("\t}\n");
         code.push_str("}\n");
@@ -184,21 +184,17 @@ impl VppJsApiEnum {
         let mut code = String::new();
         if self.if_flag() {
             // This tells if the enum is a flag or not
-            code.push_str(&format!(
-                "#[derive(Debug, Serialize, Deserialize, Clone, Copy, PartialEq)]\n"
-            ));
+            code.push_str("#[derive(Debug, Serialize, Deserialize, Clone, Copy, PartialEq)]\n");
             /* match &self.info.enumtype {
                 Some(len) => code.push_str(&format!("#[repr({})]\n", &len)),
                 _ => code.push_str(&format!("#[repr({})]\n")),
             }*/
         } else {
             // This tells if the enum is a flag or not
-            code.push_str(&format!(
-                "#[derive(Debug, Clone, Serialize_repr, Deserialize_repr)]\n"
-            ));
+            code.push_str("#[derive(Debug, Clone, Serialize_repr, Deserialize_repr)]\n");
             match &self.info.enumtype {
                 Some(len) => code.push_str(&format!("#[repr({})]\n", &len)),
-                _ => code.push_str(&format!("#[repr(u32)]\n")),
+                _ => code.push_str("#[repr(u32)]\n"),
             }
         }
         code.push_str(&format!("pub enum {} {{\n", camelize_ident(&self.name)));
@@ -241,9 +237,9 @@ impl VppJsApiEnum {
             .iter()
             .filter(|x| {
                 for j in 0..api_definition.len() {
-                    if &api_definition[j].0 == &x.name {
+                    if api_definition[j].0 == x.name {
                         for k in 0..import_table.len() {
-                            if &import_table[k].0 == &api_definition[j].1 {
+                            if import_table[k].0 == api_definition[j].1 {
                                 if !import_table[k].1.contains(&x.name) {
                                     // println!("Pushing");
                                     import_table[k].1.push(x.name.clone());
@@ -259,7 +255,7 @@ impl VppJsApiEnum {
                     }
                 }
                 api_definition.push((x.name.clone(), name.to_string().clone()));
-                return true;
+                true
             })
             .fold(String::new(), |mut acc, x| {
                 acc.push_str(&x.generate_code());

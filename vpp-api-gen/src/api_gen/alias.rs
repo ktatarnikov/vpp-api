@@ -18,7 +18,7 @@ impl Serialize for VppJsApiAlias {
     {
         let mut len = 1;
         if self.length.is_some() {
-            len = len + 1;
+            len += 1;
         }
         let mut map = serializer.serialize_map(Some(len))?;
         map.serialize_entry("type", &self.ctype)?;
@@ -31,7 +31,7 @@ impl Serialize for VppJsApiAlias {
 impl VppJsApiAlias {
     pub fn generate_code(&self, name: &str) -> String {
         let mut code = String::new();
-        code.push_str(&format!("pub type {}=", camelize_ident(&get_ident(&name))));
+        code.push_str(&format!("pub type {}=", camelize_ident(&get_ident(name))));
         match self.length {
             Some(len) => {
                 let newtype = get_type(&self.ctype);
@@ -54,8 +54,8 @@ impl VppJsApiAlias {
                 for j in 0..api_definition.len() {
                     if &api_definition[j].0 == *x {
                         for k in 0..import_table.len() {
-                            if &import_table[k].0 == &api_definition[j].1 {
-                                if !import_table[k].1.contains(&x) {
+                            if import_table[k].0 == api_definition[j].1 {
+                                if !import_table[k].1.contains(x) {
                                     // println!("Pushing");
                                     import_table[k].1.push(x.to_string());
                                     return false;
@@ -70,7 +70,7 @@ impl VppJsApiAlias {
                     }
                 }
                 api_definition.push((x.to_string(), name.to_string().clone()));
-                return true;
+                true
             })
             .fold(String::new(), |mut acc, x| {
                 acc.push_str(&aliases[x].generate_code(x));

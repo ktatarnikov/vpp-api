@@ -17,7 +17,7 @@ use api_gen::code_gen::{copy_file_with_fixup, gen_code, gen_code_file, generate_
 use std::fs;
 
 pub fn parse_type_file(opts: &Opts, data: &String) {
-    let desc = VppJsApiFile::from_str(&data).unwrap();
+    let desc = VppJsApiFile::from_str(data).unwrap();
     eprintln!(
         "File: {} version: {} services: {} types: {} messages: {} aliases: {} imports: {} enums: {} unions: {}",
         &opts.in_file,
@@ -49,7 +49,7 @@ pub fn parse_type_file(opts: &Opts, data: &String) {
 pub fn parse_type_tree(opts: &Opts) {
     // it was a directory tree, descend downwards...
     let mut api_files: LinkedHashMap<String, VppJsApiFile> = LinkedHashMap::new();
-    parse_api_tree(&opts, &opts.in_file, &mut api_files);
+    parse_api_tree(opts, &opts.in_file, &mut api_files);
     println!("// Loaded {} API definition files", api_files.len());
     if opts.print_message_names {
         for (name, f) in &api_files {
@@ -113,16 +113,16 @@ pub fn parse_type_tree(opts: &Opts) {
         // println!("{}", opts.package_name);
         let mut api_definition: Vec<(String, String)> = vec![];
         println!("Do whatever you need to hear with creating package");
-        fs::create_dir_all(&format!("{}/{}", &opts.package_path, opts.package_name))
+        fs::create_dir_all(format!("{}/{}", &opts.package_path, opts.package_name))
             .expect("Error creating package dir");
-        fs::create_dir_all(&format!("{}/{}/src", opts.package_path, opts.package_name))
+        fs::create_dir_all(format!("{}/{}/src", opts.package_path, opts.package_name))
             .expect("Error creating package/src dir");
-        fs::create_dir_all(&format!(
+        fs::create_dir_all(format!(
             "{}/{}/tests",
             opts.package_path, opts.package_name
         ))
         .expect("Error creating package/tests dir");
-        fs::create_dir_all(&format!(
+        fs::create_dir_all(format!(
             "{}/{}/examples",
             opts.package_path, opts.package_name
         ))

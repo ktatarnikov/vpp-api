@@ -92,9 +92,7 @@ impl<'de> Deserialize<'de> for VppJsApiMessage {
 impl VppJsApiMessage {
     pub fn generate_code(&self) -> String {
         let mut code = String::new();
-        code.push_str(&format!(
-            "#[derive(Debug, Clone, Serialize, Deserialize, VppMessage)]\n"
-        ));
+        code.push_str("#[derive(Debug, Clone, Serialize, Deserialize, VppMessage)]\n");
         code.push_str(&format!(
             "#[message_name_and_crc({}_{})]\n",
             self.name,
@@ -156,16 +154,14 @@ impl VppJsApiMessage {
     }
     pub fn gen_impl_messages(&self, file: &mut String) {
         file.push_str(&format!("impl {} {{\n", camelize_ident(&self.name)));
-        file.push_str(&format!(
-            "\t pub fn get_message_name_and_crc() -> String {{\n"
-        ));
+        file.push_str("\t pub fn get_message_name_and_crc() -> String {\n");
         file.push_str(&format!(
             "\t \t String::from(\"{}_{}\")\n",
             self.name,
             self.info.crc.trim_start_matches("0x")
         ));
-        file.push_str(&format!("\t }}\n"));
-        file.push_str(&format!("}}\n"));
+        file.push_str("\t }\n");
+        file.push_str("}\n");
     }
     pub fn iter_and_generate_code(messages: &Vec<VppJsApiMessage>) -> String {
         messages.iter().fold(String::new(), |mut acc, x| {

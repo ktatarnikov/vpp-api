@@ -95,12 +95,12 @@ pub fn maxSizeUnion(unions: &VppJsApiType, file: &VppJsApiFile) -> u8 {
     unions
         .fields
         .iter()
-        .map(|x| field_size(&x, &file))
+        .map(|x| field_size(x, file))
         .fold(0, |max, x| if x > max { x } else { max })
 }
 pub fn field_size(fields: &VppJsApiMessageFieldDef, file: &VppJsApiFile) -> u8 {
     if fields.ctype.starts_with("vl_api_") {
-        find_type(&file, &fields.ctype)
+        find_type(file, &fields.ctype)
     } else {
         let typ = basetypes::ctoSizeR(&fields.ctype);
         typ.basetypeSizes()
@@ -112,28 +112,28 @@ pub fn find_type(file: &VppJsApiFile, name: &str) -> u8 {
         .iter()
         .filter(|x| name.trim_start_matches("vl_api_").trim_end_matches("_t") == x.type_name)
         .fold(0, |acc, x| {
-            totalsize = sizeof_struct(&file, &x);
+            totalsize = sizeof_struct(file, x);
             totalsize
         });
     file.enums
         .iter()
         .filter(|x| name.trim_start_matches("vl_api_").trim_end_matches("_t") == x.name)
         .fold(0, |acc, x| {
-            totalsize = sizeof_enum(&x);
+            totalsize = sizeof_enum(x);
             totalsize
         });
     file.aliases
         .keys()
         .filter(|x| name.trim_start_matches("vl_api_").trim_end_matches("_t") == *x)
         .fold(0, |acc, x| {
-            totalsize = sizeof_alias(&file.aliases[x], &file);
+            totalsize = sizeof_alias(&file.aliases[x], file);
             totalsize
         });
     file.unions
         .iter()
         .filter(|x| name.trim_start_matches("vl_api_").trim_end_matches("_t") == x.type_name)
         .fold(0, |acc, x| {
-            totalsize = maxSizeUnion(&x, &file);
+            totalsize = maxSizeUnion(x, file);
             totalsize
         });
     totalsize
@@ -149,20 +149,20 @@ pub fn sizeof_enum(enums: &VppJsApiEnum) -> u8 {
 }
 pub fn sizeof_struct(file: &VppJsApiFile, structs: &VppJsApiType) -> u8 {
     structs.fields.iter().fold(0, |mut totalsize, x| {
-        totalsize = totalsize + field_size(&x, &file);
+        totalsize += field_size(x, file);
         totalsize
     })
 }
 
 pub fn sizeof_alias(alias: &VppJsApiAlias, file: &VppJsApiFile) -> u8 {
     if alias.ctype.starts_with("vl_api_") {
-        find_type(&file, &alias.ctype)
+        find_type(file, &alias.ctype)
     } else {
         match alias.length {
             Some(len) => {
                 let typ = basetypes::ctoSizeR(&alias.ctype);
-                let totalsize = typ.basetypeSizes() * len as u8;
-                totalsize
+                
+                typ.basetypeSizes() * len as u8
             }
             _ => {
                 let typ = basetypes::ctoSizeR(&alias.ctype);

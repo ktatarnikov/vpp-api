@@ -25,24 +25,24 @@ pub fn merge(
     while i < n1 && j < n2 {
         if l[i].file.imports.len() < r[j].file.imports.len() {
             arr[k] = l[i].clone();
-            i = i + 1;
+            i += 1;
         } else {
             arr[k] = r[j].clone();
-            j = j + 1;
+            j += 1;
         }
-        k = k + 1;
+        k += 1;
     }
     while i < n1 {
         arr[k] = l[i].clone();
-        i = i + 1;
-        k = k + 1;
+        i += 1;
+        k += 1;
     }
     /* Copy the remaining elements of R[], if there
     are any */
     while j < n2 {
         arr[k] = r[j].clone();
-        j = j + 1;
-        k = k + 1;
+        j += 1;
+        k += 1;
     }
     arr
 }
