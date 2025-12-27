@@ -3,7 +3,6 @@ use typenum;
 use vpp_api_encoding::typ::*;
 use vpp_api_macros::VppUnionIdent;
 
-
 #[derive(Debug, Clone, VppUnionIdent)]
 #[types(IP4Address:4)]
 pub struct AddressUnion(FixedSizeArray<u8, typenum::U16>);

@@ -23,7 +23,7 @@ pub fn parse_api_tree(opts: &Opts, root: &str, map: &mut LinkedHashMap<String, V
         if metadata.is_file() {
             let res = std::fs::read_to_string(&path);
             if let Ok(data) = res {
-                let desc = VppJsApiFile::from_str(&data);
+                let desc = VppJsApiFile::try_from_str(&data);
                 if let Ok(d) = desc {
                     map.insert(path.to_str().unwrap().to_string(), d);
                 } else {
@@ -34,7 +34,7 @@ pub fn parse_api_tree(opts: &Opts, root: &str, map: &mut LinkedHashMap<String, V
             }
         }
         if metadata.is_dir() && entry.file_name() != "." && entry.file_name() != ".." {
-            parse_api_tree(opts, &path.to_str().unwrap(), map);
+            parse_api_tree(opts, path.to_str().unwrap(), map);
         }
     }
 }
@@ -44,35 +44,33 @@ pub fn get_type(apitype: &str) -> String {
         // String::from(ctype_trimmed)
         camelize_ident(apitype.trim_start_matches("vl_api_").trim_end_matches("_t"))
         // camelize_ident(ctype_trimmed)
+    } else if apitype == "string" {
+        "String".to_string()
     } else {
-        if apitype == "string" {
-            format!("String")
-        } else {
-            format!("{}", apitype)
-        }
+        apitype.to_string()
     }
 }
 pub fn get_ident(api_ident: &str) -> String {
     if api_ident == "type" {
-        return format!("typ");
+        return "typ".to_string();
     }
     if api_ident == "match" {
         // println!("Found match");
-        format!("mach")
+        "mach".to_string()
     } else {
-        format!("{}", api_ident.trim_start_matches("_"))
+        api_ident.trim_start_matches("_").to_string()
     }
 }
 
 pub fn get_rust_type_from_ctype(enum_containers: &HashMap<String, String>, ctype: &str) -> String {
     use convert_case::{Case, Casing};
 
-    let rtype = {
+    {
         let rtype: String = if ctype.starts_with("vl_api_") {
             let ctype_trimmed = ctype.trim_start_matches("vl_api_").trim_end_matches("_t");
             ctype_trimmed.to_case(Case::UpperCamel)
         } else {
-            format!("{}", ctype)
+            ctype.to_string()
         };
         /* if the candidate Rust type is an enum, we need to create
         a parametrized type such that we knew which size to
@@ -83,15 +81,14 @@ pub fn get_rust_type_from_ctype(enum_containers: &HashMap<String, String>, ctype
         } else {
             rtype
         }
-    };
-    rtype
+    }
 }
 
 pub fn get_rust_field_name(name: &str) -> String {
     if name == "type" || name == "match" {
         format!("r#{}", name)
     } else {
-        format!("{}", name)
+        name.to_string()
     }
 }
 
@@ -106,7 +103,7 @@ pub fn get_rust_field_type(
         match size {
             Variable(_max_var) => {
                 if fld.ctype == "string" {
-                    format!("VariableSizeString")
+                    "VariableSizeString".to_string()
                 } else {
                     format!("VariableSizeArray<{}>", rtype)
                 }
@@ -120,10 +117,10 @@ pub fn get_rust_field_type(
             }
         }
     } else {
-        format!("{}", rtype)
+        rtype.to_string()
     };
     if fld.maybe_options.is_none() {
-        format!("{}", full_rtype)
+        full_rtype.to_string()
     } else {
         format!("{} /* {:?} {} */", full_rtype, fld, is_last)
     }
@@ -138,9 +135,9 @@ pub fn camelize_ident(ident: &str) -> String {
         for (i, c) in x.chars().enumerate() {
             if i == 0 {
                 let c_upper: Vec<_> = c.to_uppercase().collect();
-                final_string.push_str(&c_upper[0].to_string());
+                final_string.push(c_upper[0]);
             } else {
-                final_string.push_str(&c.to_string());
+                final_string.push(c);
             }
         }
     }

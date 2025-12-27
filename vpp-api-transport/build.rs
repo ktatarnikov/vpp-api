@@ -6,9 +6,7 @@ fn main() {
     let library_filename = "vppapiclient";
     println!("cargo:info=defined library_filename '{}'", library_filename);
 
-    let flags = format!(
-        "cargo:rustc-flags=-l{}", &library_filename
-    );
+    let flags = format!("cargo:rustc-flags=-l{}", &library_filename);
 
     // Tell cargo to tell rustc to link the VPP client library
     println!("{}", flags);
@@ -26,7 +24,6 @@ fn main() {
         .write_to_file(out_file_name.clone())
         .expect("Couldn't write bindings!");
 }
-
 
 fn git_version() -> String {
     use std::process::Command;

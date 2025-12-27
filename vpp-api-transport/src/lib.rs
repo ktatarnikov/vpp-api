@@ -10,7 +10,6 @@ pub mod error;
 pub mod reqrecv;
 use crate::error::Error;
 use crate::error::Result;
-use bincode;
 use bincode::Options;
 use lazy_static::__Deref;
 use log::debug;
@@ -62,9 +61,7 @@ impl Serialize for VarLen32 {
     where
         S: Serializer,
     {
-        let data = match self {
-            VarLen32::VarLenData(v) => v,
-        };
+        let VarLen32::VarLenData(data) = self;
 
         let len = data.len();
         let mut seq = serializer.serialize_tuple(len + 4)?;
@@ -115,11 +112,11 @@ impl<'de> Deserialize<'de> for VarLen32 {
                     );
                 }
 
-                return Ok(VarLen32::VarLenData(res));
+                Ok(VarLen32::VarLenData(res))
             }
         }
 
-        return Ok(deserializer.deserialize_tuple(1 << 16, VarLen32Visitor)?);
+        deserializer.deserialize_tuple(1 << 16, VarLen32Visitor)
     }
 }
 
@@ -161,7 +158,7 @@ pub trait VppApiTransport: Read + Write {
             context,
         };
         let data = get_encoder().serialize(&msg).unwrap();
-        self.write(&data)?;
+        self.write_all(&data)?;
         Ok(context)
     }
 
@@ -193,7 +190,7 @@ pub trait VppApiTransport: Read + Write {
         };
         let data = get_encoder().serialize(&msg).unwrap();
         // println!("Sending data: {:?}", &data);
-        self.write(&data)?;
+        self.write_all(&data)?;
 
         loop {
             match self.read_one_msg_id_and_msg() {
@@ -205,9 +202,7 @@ pub trait VppApiTransport: Read + Write {
                     if msg_id == cli_inband_reply_id {
                         // println!("Message: {:?}", &data);
                         let r: RawCliInbandReply = get_encoder().deserialize(&data).unwrap();
-                        let v = match r.reply {
-                            VarLen32::VarLenData(d) => d,
-                        };
+                        let VarLen32::VarLenData(v) = r.reply;
                         let s = String::from_utf8_lossy(&v);
                         // println!("Command reply: {}", &s);
                         return Ok(s.to_string());
@@ -300,9 +295,9 @@ where
 
 #[cfg(test)]
 mod tests {
+    use crate::VppApiTransport;
     use crate::afunix;
     use crate::shmem;
-    use crate::VppApiTransport;
 
     #[test]
     fn test_shmem_connect() {

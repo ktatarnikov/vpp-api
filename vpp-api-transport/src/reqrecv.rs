@@ -7,11 +7,11 @@
     unused_imports
 )]
 use super::error::Result;
-use crate::error::Error;
 use crate::VppApiTransport;
+use crate::error::Error;
 use bincode::Options;
 use log::{debug, error, trace};
-use serde::{de::DeserializeOwned, Deserialize, Serialize};
+use serde::{Deserialize, Serialize, de::DeserializeOwned};
 use std::collections::HashMap;
 use std::convert::TryInto;
 use std::io::{Read, Write};
@@ -58,10 +58,7 @@ pub fn send_recv_one<
 
     trace!(
         "About to send msg: {} id: {} reply_id: {} msg:{:x?}",
-        name,
-        &vl_msg_id,
-        &reply_vl_msg_id,
-        &msg,
+        name, &vl_msg_id, &reply_vl_msg_id, &msg,
     );
 
     v.extend_from_slice(&msg);
@@ -92,7 +89,7 @@ pub fn send_recv_one<
             }
             Err(e) => {
                 error!("error from vpp: {:?}", &e);
-                return Err(e.into());
+                return Err(e);
             }
         }
     }
@@ -126,9 +123,9 @@ pub fn send_recv_many<
     c.extend_from_slice(&control_ping_message);
     v.extend_from_slice(&msg);
     let mut out: Vec<u8> = vec![];
-    t.write(&v); // Dump message
-    t.write(&c); // Ping message
-                 // dbg!(control_ping_id_reply);
+    t.write_all(&v)?; // Dump message
+    t.write_all(&c)?; // Ping message
+    // dbg!(control_ping_id_reply);
     let mut out: Vec<TR> = vec![];
     let mut count = 0;
     loop {
@@ -137,11 +134,7 @@ pub fn send_recv_many<
             Ok((msg_id, data)) => {
                 trace!(
                     "msg: {} id: {} ctrl_id: {} reply_id: {} data: {:x?}",
-                    name,
-                    msg_id,
-                    &control_ping_id_reply,
-                    &reply_vl_msg_id,
-                    &data
+                    name, msg_id, &control_ping_id_reply, &reply_vl_msg_id, &data
                 );
                 trace!("data.len: {}", data.len());
                 if msg_id == control_ping_id_reply {
@@ -161,7 +154,7 @@ pub fn send_recv_many<
             }
             Err(e) => {
                 error!("error from vpp: {:?}", &e);
-                return Err(e.into());
+                return Err(e);
             }
         }
     }
@@ -182,10 +175,7 @@ pub fn send_recv_msg<'a, T: Serialize + Deserialize<'a>, TR: Serialize + Deseria
 
     trace!(
         "About to send msg: {} id: {} reply_id: {} msg:{:x?}",
-        name,
-        &vl_msg_id,
-        &reply_vl_msg_id,
-        &msg,
+        name, &vl_msg_id, &reply_vl_msg_id, &msg,
     );
 
     v.extend_from_slice(&msg);
@@ -248,9 +238,9 @@ pub fn send_bulk_msg<
     c.extend_from_slice(&control_ping_message);
     v.extend_from_slice(&msg);
     let mut out: Vec<u8> = vec![];
-    t.write(&v); // Dump message
-    t.write(&c); // Ping message
-                 // dbg!(control_ping_id_reply);
+    t.write_all(&v).unwrap(); // Dump message
+    t.write_all(&c).unwrap(); // Ping message
+    // dbg!(control_ping_id_reply);
     let mut out: Vec<TR> = vec![];
     let mut count = 0;
     loop {
@@ -259,11 +249,7 @@ pub fn send_bulk_msg<
         if let Ok((msg_id, data)) = res {
             trace!(
                 "msg: {} id: {} ctrl_id: {} reply_id: {} data: {:x?}",
-                name,
-                msg_id,
-                &control_ping_id_reply,
-                &reply_vl_msg_id,
-                &data
+                name, msg_id, &control_ping_id_reply, &reply_vl_msg_id, &data
             );
             trace!("data.len: {}", data.len());
             if msg_id == control_ping_id_reply {

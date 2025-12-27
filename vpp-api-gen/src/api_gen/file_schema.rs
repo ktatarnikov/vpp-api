@@ -79,10 +79,9 @@ impl VppJsApiFile {
         }
     }
 
-    pub fn from_str(data: &str) -> std::result::Result<VppJsApiFile, serde_json::Error> {
+    pub fn try_from_str(data: &str) -> std::result::Result<VppJsApiFile, serde_json::Error> {
         // use serde_json::Value;
-        let res = serde_json::from_str::<VppJsApiFile>(&data);
-        res
+        serde_json::from_str::<VppJsApiFile>(data)
     }
 
     pub fn generate_header() -> String {
@@ -121,7 +120,7 @@ impl VppJsApiFile {
             &self.unions,
             api_definition,
             name,
-            &self,
+            self,
             &mut import_table,
         );
         let typenum = VppJsApiEnum::iter_and_generate_code(
@@ -144,10 +143,10 @@ impl VppJsApiFile {
         );
         let typmessage = VppJsApiMessage::iter_and_generate_code(&self.messages);
 
-        for x in 0..import_table.len() {
-            let name = &import_table[x].0;
+        for import_elem in import_table {
+            let name = &import_elem.0;
             let file_name = RE
-                .find(&name)
+                .find(name)
                 .unwrap()
                 .as_str()
                 .trim_end_matches(".api.json")

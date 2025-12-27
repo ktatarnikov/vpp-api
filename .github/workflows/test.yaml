@@ -1,0 +1,83 @@
+name: Basic tests
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_TOOLCHAIN: "1.92"
+
+jobs:
+
+  test:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - version: 25_06
+            vpp_package_version: 25.06-release
+          - version: 25_10
+            vpp_package_version: 25.10-release
+    
+    name: Test API ${{ matrix.config.version }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/ktatarnikov/vpp-api-client-test:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: moonrepo/setup-rust@v1
+        with:
+          cache: false
+          channel: ${{ env.RUST_TOOLCHAIN }}
+
+      # build speedups
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install VPP
+        run: |
+          apt-get install -y \
+            libvppinfra=${{ matrix.config.vpp_package_version }} \
+            vpp=${{ matrix.config.vpp_package_version }} \
+            vpp-plugin-core=${{ matrix.config.vpp_package_version }}
+
+          /usr/bin/vpp -c /etc/vpp/startup.conf &
+
+      - name: unittests
+        run: |
+          cargo test --features ${{ matrix.config.version }} -- --test-threads 1
+
+      - name: benchmark the client over socket
+        run: |
+          cargo run --features ${{ matrix.config.version }} --release --example vpp-api-transport-test -- -r 1000 -s /run/vpp/api.sock
+
+      - name: benchmark the client over shared memory
+        run: |
+          cargo run --features ${{ matrix.config.version }} --release --example vpp-api-transport-test -- -r 1000
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: moonrepo/setup-rust@v1
+        with:
+          cache: false
+          channel: ${{ env.RUST_TOOLCHAIN }}
+
+      # build speedups
+      - uses: Swatinem/rust-cache@v2
+

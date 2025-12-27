@@ -70,9 +70,7 @@ impl VppJsApiType {
     pub fn generate_code(&self) -> String {
         let mut code = String::new();
         code.push_str(&format!("// Implementation for {}\n", &self.type_name));
-        code.push_str(&format!(
-            "#[derive(Debug, Clone, Serialize, Deserialize, Default)]\n"
-        ));
+        code.push_str("#[derive(Debug, Clone, Serialize, Deserialize, Default)]\n");
         code.push_str(&format!(
             "pub struct {} {{\n",
             camelize_ident(&self.type_name)
@@ -86,9 +84,7 @@ impl VppJsApiType {
                         VppJsApiFieldSize::Fixed(len) => {
                             code.push_str(&format!("FixedSizeString<typenum::U{}>,\n", len))
                         }
-                        VppJsApiFieldSize::Variable(None) => {
-                            code.push_str(&format!("VariableSizeString,\n"))
-                        }
+                        VppJsApiFieldSize::Variable(None) => code.push_str("VariableSizeString,\n"),
                         _ => code.push_str(&format!("{},\n", get_ident(&self.fields[x].name))),
                     },
                     _ => code.push_str(&format!("{},\n", get_ident(&self.fields[x].name))),
@@ -117,15 +113,13 @@ impl VppJsApiType {
     }
     pub fn generate_code_union(&self, apifile: &VppJsApiFile) -> String {
         let mut code = String::new();
-        code.push_str(&format!(
-            "#[derive(Debug, Clone, Serialize, Deserialize, Default, VppUnionIdent)]\n"
-        ));
+        code.push_str("#[derive(Debug, Clone, Serialize, Deserialize, Default, VppUnionIdent)]\n");
         for x in 0..self.fields.len() {
-            let size_of_typ = field_size(&self.fields[x], &apifile);
+            let size_of_typ = field_size(&self.fields[x], apifile);
             let ident = get_type(&self.fields[x].ctype);
             code.push_str(&format!("#[types({}:{})]\n", ident, size_of_typ));
         }
-        let unionsize = maxSizeUnion(&self, &apifile);
+        let unionsize = maxSizeUnion(self, apifile);
         code.push_str(&format!(
             "pub struct {}(FixedSizeArray<u8, typenum::U{}>);\n",
             camelize_ident(&self.type_name),
@@ -134,21 +128,21 @@ impl VppJsApiType {
         code
     }
     pub fn iter_and_generate_code(
-        structs: &Vec<VppJsApiType>,
-        api_definition: &mut Vec<(String, String)>,
+        structs: &[VppJsApiType],
+        api_definitions: &mut Vec<(String, String)>,
         name: &str,
         import_table: &mut Vec<(String, Vec<String>)>,
     ) -> String {
         structs
             .iter()
             .filter(|x| {
-                for j in 0..api_definition.len() {
-                    if &api_definition[j].0 == &x.type_name {
-                        for k in 0..import_table.len() {
-                            if &import_table[k].0 == &api_definition[j].1 {
-                                if !import_table[k].1.contains(&x.type_name) {
+                for api_definition in api_definitions.iter_mut() {
+                    if api_definition.0 == x.type_name {
+                        for import_elem in import_table.iter_mut() {
+                            if import_elem.0 == api_definition.1 {
+                                if !import_elem.1.contains(&x.type_name) {
                                     // println!("Pushing");
-                                    import_table[k].1.push(x.type_name.clone());
+                                    import_elem.1.push(x.type_name.clone());
                                     return false;
                                 } else {
                                     // println!("Ignoring");
@@ -158,12 +152,12 @@ impl VppJsApiType {
                         }
                         // println!("Contents of api defintion: {}", api_definition[j].1);
                         // println!("pushing into arr {} {}", api_definition[j].1, x.type_name);
-                        import_table.push((api_definition[j].1.clone(), vec![x.type_name.clone()]));
+                        import_table.push((api_definition.1.clone(), vec![x.type_name.clone()]));
                         return false;
                     }
                 }
-                api_definition.push((x.type_name.clone(), name.to_string().clone()));
-                return true;
+                api_definitions.push((x.type_name.clone(), name.to_string().clone()));
+                true
             })
             .fold(String::new(), |mut acc, x| {
                 acc.push_str(&x.generate_code());
@@ -171,8 +165,8 @@ impl VppJsApiType {
             })
     }
     pub fn iter_and_generate_code_union(
-        unions: &Vec<VppJsApiType>,
-        api_definition: &mut Vec<(String, String)>,
+        unions: &[VppJsApiType],
+        api_definitions: &mut Vec<(String, String)>,
         name: &str,
         file: &VppJsApiFile,
         import_table: &mut Vec<(String, Vec<String>)>,
@@ -180,13 +174,13 @@ impl VppJsApiType {
         unions
             .iter()
             .filter(|x| {
-                for j in 0..api_definition.len() {
-                    if &api_definition[j].0 == &x.type_name {
-                        for k in 0..import_table.len() {
-                            if &import_table[k].0 == &api_definition[j].1 {
-                                if !import_table[k].1.contains(&x.type_name) {
+                for api_definition in api_definitions.iter_mut() {
+                    if api_definition.0 == x.type_name {
+                        for import_elem in import_table.iter_mut() {
+                            if import_elem.0 == api_definition.1 {
+                                if !import_elem.1.contains(&x.type_name) {
                                     // println!("Pushing");
-                                    import_table[k].1.push(x.type_name.clone());
+                                    import_elem.1.push(x.type_name.clone());
                                     return false;
                                 } else {
                                     // println!("Ignoring");
@@ -194,15 +188,15 @@ impl VppJsApiType {
                                 }
                             }
                         }
-                        import_table.push((api_definition[j].1.clone(), vec![x.type_name.clone()]));
+                        import_table.push((api_definition.1.clone(), vec![x.type_name.clone()]));
                         return false;
                     }
                 }
-                api_definition.push((x.type_name.clone(), name.to_string().clone()));
-                return true;
+                api_definitions.push((x.type_name.clone(), name.to_string().clone()));
+                true
             })
             .fold(String::new(), |mut acc, x| {
-                acc.push_str(&x.generate_code_union(&file));
+                acc.push_str(&x.generate_code_union(file));
                 acc
             })
     }
@@ -254,15 +248,14 @@ impl Serialize for VppJsApiMessageFieldDef {
 
         let mut len = 2;
         if self.maybe_options.is_some() {
-            len = len + 1
+            len += 1
         }
-        len = len
-            + match &self.maybe_size {
-                None => 0,
-                Some(Fixed(_n)) => 1,
-                Some(Variable(None)) => 1,
-                Some(Variable(Some(_x))) => 2,
-            };
+        len += match &self.maybe_size {
+            None => 0,
+            Some(Fixed(_n)) => 1,
+            Some(Variable(None)) => 1,
+            Some(Variable(Some(_x))) => 2,
+        };
         let mut seq = serializer.serialize_seq(Some(len))?;
         seq.serialize_element(&self.ctype)?;
         seq.serialize_element(&self.name)?;

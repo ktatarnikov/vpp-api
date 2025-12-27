@@ -33,9 +33,9 @@ struct Opts {
     verbose: u8,
 }
 
+use vpp_api_transport::VppApiTransport;
 use vpp_api_transport::afunix;
 use vpp_api_transport::shmem;
-use vpp_api_transport::VppApiTransport;
 
 fn bench(opts: &Opts, t: &mut dyn VppApiTransport) {
     let now = SystemTime::now();

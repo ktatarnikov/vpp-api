@@ -1,0 +1,120 @@
+name: Rust
+
+on: 
+  push:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_TOOLCHAIN: "1.92"
+
+permissions:
+  actions: read
+  security-events: write
+  contents: read
+
+jobs:
+
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 25_06
+          - 25_10      
+
+    runs-on: ubuntu-latest
+
+    name: Check API Version ${{ matrix.version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: moonrepo/setup-rust@v1
+        with:
+          cache: false
+          channel: ${{ env.RUST_TOOLCHAIN }}
+
+      # build speedups
+      - uses: Swatinem/rust-cache@v2    
+
+      - name: Check project and dependencies
+        run: cargo check --features ${{ matrix.version }}
+
+  fmt:
+    name: Rust Fmt
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: moonrepo/setup-rust@v1
+        with:
+          cache: false
+          components: rustfmt
+          channel: ${{ env.RUST_TOOLCHAIN }}
+
+      # build speedups
+      - uses: Swatinem/rust-cache@v2    
+
+      - name: Check formatting
+        run: cargo fmt -- --check
+
+  clippy:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 25_06
+          - 25_10      
+
+    name: Clippy API Version ${{ matrix.version }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: moonrepo/setup-rust@v1
+        with:
+          cache: false
+          components: clippy
+          channel: ${{ env.RUST_TOOLCHAIN }}
+
+      # build speedups
+      - uses: Swatinem/rust-cache@v2    
+
+      - name: Check code with clippy
+        run: cargo clippy --features ${{ matrix.version }} -- -D warnings --no-deps
+
+  sbom:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: moonrepo/setup-rust@v1
+        with:
+          cache: false
+          channel: ${{ env.RUST_TOOLCHAIN }}
+
+      - name: Install SBOM
+        uses: psastras/sbom-rs/actions/install-cargo-sbom@cargo-sbom-v0.10.0
+
+      # build speedups
+      - uses: Swatinem/rust-cache@v2    
+
+      - name: Run cargo-sbom
+        run: cargo-sbom --output-format=cyclone_dx_json_1_6 > sbom.cdx.json
+
+  osv-scanner:    
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.2.1
+    needs: [sbom]

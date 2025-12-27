@@ -33,7 +33,7 @@ pub fn gen_code_file(
         static ref RE: Regex = Regex::new(r"[a-z_0-9]*.api.json").unwrap();
     }
     let file_name = RE
-        .find(&name)
+        .find(name)
         .unwrap()
         .as_str()
         .trim_end_matches(".api.json");
@@ -54,7 +54,7 @@ pub fn gen_code(
         static ref RE: Regex = Regex::new(r"/[a-z_0-9]*.api.json").unwrap();
     }
     let file_name = RE
-        .find(&name)
+        .find(name)
         .unwrap()
         .as_str()
         .trim_end_matches(".api.json");
@@ -82,7 +82,7 @@ pub fn create_cargo_toml(package_path: &str, package_name: &str, vppapi_opts: &s
 
     code.push_str("[dev-dependencies]\n");
     code.push_str("trybuild = {version = \"1.0\", features = [\"diff\"]}\n\n");
-    code.push_str(&vpp_api_crate("vpp-api-transport", &vppapi_opts));
+    code.push_str(&vpp_api_crate("vpp-api-transport", vppapi_opts));
 
     code.push_str("[dependencies]\n");
     code.push_str("serde = { version = \"1.0\", features = [\"derive\"] }\n");
@@ -98,14 +98,14 @@ pub fn create_cargo_toml(package_path: &str, package_name: &str, vppapi_opts: &s
     code.push_str("typenum = \"*\"\n");
     code.push_str("bincode = \"1.2.1\"\n");
     code.push_str("serde_yaml = \"0.8\"\n");
-    code.push_str(&vpp_api_crate("vpp-api-encoding", &vppapi_opts));
-    code.push_str(&vpp_api_crate("vpp-api-message", &vppapi_opts));
+    code.push_str(&vpp_api_crate("vpp-api-encoding", vppapi_opts));
+    code.push_str(&vpp_api_crate("vpp-api-message", vppapi_opts));
     code.push_str("lazy_static = \"1.4.0\"\n");
     code.push_str("regex = \"1\"\n");
     code.push_str("syn ={ version= \"1.0\", features=[\"extra-traits\",\"full\"]}\n");
     code.push_str("quote = \"1.0\"\n");
     code.push_str("proc-macro2 = \"1.0.26\"\n");
-    code.push_str(&vpp_api_crate("vpp-api-macros", &vppapi_opts));
+    code.push_str(&vpp_api_crate("vpp-api-macros", vppapi_opts));
 
     let mut file = File::create(format!("{}/{}/Cargo.toml", package_path, package_name)).unwrap();
     file.write_all(code.as_bytes()).unwrap();
@@ -128,7 +128,7 @@ pub fn generate_mod_file(
             .unwrap()
             .as_str()
             .trim_end_matches(".api.json");
-        names_vec.push(format!("{}", file_name.trim_start_matches("/")));
+        names_vec.push(file_name.trim_start_matches("/").to_string());
     }
     names_vec.sort();
     for name in names_vec {
@@ -145,7 +145,7 @@ pub fn copy_file_with_fixup(
     target_name: &str,
 ) {
     let data = fs::read_to_string(example_file)
-        .expect(format!("Could not read example_file file {}", example_file).as_str());
+        .unwrap_or_else(|_| panic!("Could not read example_file file {}", example_file));
     let package_code_name = &package_name.replace("-", "_");
     let updated_test = data.replace("vpp_api_gen", "crate");
     let mut file = File::create(format!("{}/{}/{}", package_path, package_name, target_name))

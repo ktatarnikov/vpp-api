@@ -3,8 +3,8 @@ use bincode::Options;
 use serde::{Deserialize, Serialize};
 use std::os::unix::net::UnixStream;
 
-use crate::error::Result;
 use crate::VppApiTransport;
+use crate::error::Result;
 use std::collections::HashMap;
 
 use crate::get_encoder;
@@ -142,7 +142,7 @@ impl VppApiTransport for Transport {
         while name1.len() < name_a.len() {
             name1.push('\0');
         }
-        name_a.copy_from_slice(&name1.as_bytes());
+        name_a.copy_from_slice(name1.as_bytes());
 
         let sockclnt_create = MsgSockClntCreate {
             _vl_msg_id: 15,
@@ -152,7 +152,7 @@ impl VppApiTransport for Transport {
 
         let scs = get_encoder().serialize(&sockclnt_create).unwrap();
 
-        self.write(&scs)?;
+        self.write_all(&scs)?;
         let buf = self.read_one_msg()?;
         let hdr: MsgSockClntCreateReplyHdr = get_encoder().deserialize(&buf[0..20]).unwrap();
         self.client_index = hdr.index as u32;
@@ -168,7 +168,7 @@ impl VppApiTransport for Transport {
             let msg_name_trailing_zero = String::from_utf8_lossy(&msg.name);
             let msg_name = msg_name_trailing_zero.trim_end_matches("\u{0}");
             self.message_name_to_id.insert(msg_name.into(), msg.index);
-            i = i + 1;
+            i += 1;
         }
         Ok(())
     }
