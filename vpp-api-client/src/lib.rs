@@ -4,23 +4,27 @@ cfg_if! {
     if #[cfg(feature = "25_10")] {
 
         #[path = "../gen/25.10/src/mod.rs"]
+        #[rustfmt::skip]
         pub mod client;
 
         pub use client::*;
 
         #[cfg(test)]
         #[path = "../gen/25.10/tests/interface_test.rs"]
+        #[rustfmt::skip]
         pub mod tests;
 
     } else if #[cfg(feature = "25_06")] {
 
         #[path = "../gen/25.06/src/mod.rs"]
+        #[rustfmt::skip]
         pub mod client;
 
         pub use client::*;
 
         #[cfg(test)]
         #[path = "../gen/25.06/tests/interface_test.rs"]
+        #[rustfmt::skip]
         pub mod tests;
 
     } else {
