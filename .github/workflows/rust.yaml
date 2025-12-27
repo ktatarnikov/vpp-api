@@ -16,7 +16,16 @@ permissions:
 jobs:
 
   check:
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 25_06
+          - 25_10      
+
     runs-on: ubuntu-latest
+
+    name: Check API Version ${{ matrix.version }}
 
     steps:
       - name: Checkout repository
@@ -32,9 +41,10 @@ jobs:
       - uses: Swatinem/rust-cache@v2    
 
       - name: Check project and dependencies
-        run: cargo check
+        run: cargo check --features ${{ matrix.version }}
 
   fmt:
+    name: Rust Fmt
     runs-on: ubuntu-latest
 
     steps:
@@ -55,6 +65,15 @@ jobs:
         run: cargo fmt -- --check
 
   clippy:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 25_06
+          - 25_10      
+
+    name: Clippy API Version ${{ matrix.version }}
     runs-on: ubuntu-latest
 
     steps:
@@ -72,7 +91,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2    
 
       - name: Check code with clippy
-        run: cargo clippy -- -D warnings --no-deps
+        run: cargo clippy --features ${{ matrix.version }} -- -D warnings --no-deps
 
   sbom:
     runs-on: ubuntu-latest
