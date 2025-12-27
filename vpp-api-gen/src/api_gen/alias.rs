@@ -44,20 +44,20 @@ impl VppJsApiAlias {
     // Handling Vector of Alias
     pub fn iter_and_generate_code(
         aliases: &LinkedHashMap<String, VppJsApiAlias>,
-        api_definition: &mut Vec<(String, String)>,
+        api_definitions: &mut Vec<(String, String)>,
         name: &str,
         import_table: &mut Vec<(String, Vec<String>)>,
     ) -> String {
         aliases
             .keys()
             .filter(|x| {
-                for j in 0..api_definition.len() {
-                    if &api_definition[j].0 == *x {
-                        for k in 0..import_table.len() {
-                            if import_table[k].0 == api_definition[j].1 {
-                                if !import_table[k].1.contains(x) {
+                for api_definition in api_definitions.iter_mut() {
+                    if &api_definition.0 == *x {
+                        for import_elem in import_table.iter_mut() {
+                            if import_elem.0 == api_definition.1 {
+                                if !import_elem.1.contains(x) {
                                     // println!("Pushing");
-                                    import_table[k].1.push(x.to_string());
+                                    import_elem.1.push(x.to_string());
                                     return false;
                                 } else {
                                     // println!("Ignoring");
@@ -65,11 +65,11 @@ impl VppJsApiAlias {
                                 }
                             }
                         }
-                        import_table.push((api_definition[j].1.clone(), vec![x.to_string()]));
+                        import_table.push((api_definition.1.clone(), vec![x.to_string()]));
                         return false;
                     }
                 }
-                api_definition.push((x.to_string(), name.to_string().clone()));
+                api_definitions.push((x.to_string(), name.to_string().clone()));
                 true
             })
             .fold(String::new(), |mut acc, x| {

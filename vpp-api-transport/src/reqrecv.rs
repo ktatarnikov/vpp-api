@@ -89,7 +89,7 @@ pub fn send_recv_one<
             }
             Err(e) => {
                 error!("error from vpp: {:?}", &e);
-                return Err(e.into());
+                return Err(e);
             }
         }
     }
@@ -123,8 +123,8 @@ pub fn send_recv_many<
     c.extend_from_slice(&control_ping_message);
     v.extend_from_slice(&msg);
     let mut out: Vec<u8> = vec![];
-    t.write(&v); // Dump message
-    t.write(&c); // Ping message
+    t.write_all(&v)?; // Dump message
+    t.write_all(&c)?; // Ping message
     // dbg!(control_ping_id_reply);
     let mut out: Vec<TR> = vec![];
     let mut count = 0;
@@ -154,7 +154,7 @@ pub fn send_recv_many<
             }
             Err(e) => {
                 error!("error from vpp: {:?}", &e);
-                return Err(e.into());
+                return Err(e);
             }
         }
     }
@@ -238,8 +238,8 @@ pub fn send_bulk_msg<
     c.extend_from_slice(&control_ping_message);
     v.extend_from_slice(&msg);
     let mut out: Vec<u8> = vec![];
-    t.write(&v); // Dump message
-    t.write(&c); // Ping message
+    t.write_all(&v).unwrap(); // Dump message
+    t.write_all(&c).unwrap(); // Ping message
     // dbg!(control_ping_id_reply);
     let mut out: Vec<TR> = vec![];
     let mut count = 0;

@@ -19,7 +19,6 @@ use vpp_api_gen::parse_type_tree;
 extern crate strum;
 #[macro_use]
 extern crate strum_macros;
-use env_logger;
 use linked_hash_map::LinkedHashMap;
 
 use crate::file_schema::VppJsApiFile;
@@ -105,7 +104,7 @@ mod tests {
             if metadata.is_file() {
                 let res = std::fs::read_to_string(&path);
                 if let Ok(data) = res {
-                    let desc = VppJsApiFile::from_str(&data);
+                    let desc = VppJsApiFile::try_from_str(&data);
                     if let Ok(d) = desc {
                         VppJsApiFile::verify_data(&data, &d);
                         map.insert(path.to_str().unwrap().to_string(), d);

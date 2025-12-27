@@ -163,7 +163,7 @@ impl VppJsApiMessage {
         file.push_str("\t }\n");
         file.push_str("}\n");
     }
-    pub fn iter_and_generate_code(messages: &Vec<VppJsApiMessage>) -> String {
+    pub fn iter_and_generate_code(messages: &[VppJsApiMessage]) -> String {
         messages.iter().fold(String::new(), |mut acc, x| {
             acc.push_str(&x.generate_code());
             acc

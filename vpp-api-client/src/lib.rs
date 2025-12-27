@@ -5,6 +5,7 @@ cfg_if! {
 
         #[path = "../gen/25.10/src/mod.rs"]
         #[rustfmt::skip]
+        #[allow(clippy::all)]
         pub mod client;
 
         pub use client::*;
@@ -12,12 +13,14 @@ cfg_if! {
         #[cfg(test)]
         #[path = "../gen/25.10/tests/interface_test.rs"]
         #[rustfmt::skip]
+        #[allow(clippy::all)]
         pub mod tests;
 
     } else if #[cfg(feature = "25_06")] {
 
         #[path = "../gen/25.06/src/mod.rs"]
         #[rustfmt::skip]
+        #[allow(clippy::all)]
         pub mod client;
 
         pub use client::*;
@@ -25,6 +28,7 @@ cfg_if! {
         #[cfg(test)]
         #[path = "../gen/25.06/tests/interface_test.rs"]
         #[rustfmt::skip]
+        #[allow(clippy::all)]
         pub mod tests;
 
     } else {

@@ -13,7 +13,6 @@ pub enum OptParseType {
 /// Ingest the VPP API JSON definition file and output the Rust code
 #[derive(Parser, Debug, Clone, Serialize, Deserialize)]
 #[clap(version = "1.0", author = "Andrew Yourtchenko <ayourtch@gmail.com>")]
-
 pub struct Opts {
     /// Input file name
     #[clap(short, long)]

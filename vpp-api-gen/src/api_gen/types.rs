@@ -128,21 +128,21 @@ impl VppJsApiType {
         code
     }
     pub fn iter_and_generate_code(
-        structs: &Vec<VppJsApiType>,
-        api_definition: &mut Vec<(String, String)>,
+        structs: &[VppJsApiType],
+        api_definitions: &mut Vec<(String, String)>,
         name: &str,
         import_table: &mut Vec<(String, Vec<String>)>,
     ) -> String {
         structs
             .iter()
             .filter(|x| {
-                for j in 0..api_definition.len() {
-                    if api_definition[j].0 == x.type_name {
-                        for k in 0..import_table.len() {
-                            if import_table[k].0 == api_definition[j].1 {
-                                if !import_table[k].1.contains(&x.type_name) {
+                for api_definition in api_definitions.iter_mut() {
+                    if api_definition.0 == x.type_name {
+                        for import_elem in import_table.iter_mut() {
+                            if import_elem.0 == api_definition.1 {
+                                if !import_elem.1.contains(&x.type_name) {
                                     // println!("Pushing");
-                                    import_table[k].1.push(x.type_name.clone());
+                                    import_elem.1.push(x.type_name.clone());
                                     return false;
                                 } else {
                                     // println!("Ignoring");
@@ -152,11 +152,11 @@ impl VppJsApiType {
                         }
                         // println!("Contents of api defintion: {}", api_definition[j].1);
                         // println!("pushing into arr {} {}", api_definition[j].1, x.type_name);
-                        import_table.push((api_definition[j].1.clone(), vec![x.type_name.clone()]));
+                        import_table.push((api_definition.1.clone(), vec![x.type_name.clone()]));
                         return false;
                     }
                 }
-                api_definition.push((x.type_name.clone(), name.to_string().clone()));
+                api_definitions.push((x.type_name.clone(), name.to_string().clone()));
                 true
             })
             .fold(String::new(), |mut acc, x| {
@@ -165,8 +165,8 @@ impl VppJsApiType {
             })
     }
     pub fn iter_and_generate_code_union(
-        unions: &Vec<VppJsApiType>,
-        api_definition: &mut Vec<(String, String)>,
+        unions: &[VppJsApiType],
+        api_definitions: &mut Vec<(String, String)>,
         name: &str,
         file: &VppJsApiFile,
         import_table: &mut Vec<(String, Vec<String>)>,
@@ -174,13 +174,13 @@ impl VppJsApiType {
         unions
             .iter()
             .filter(|x| {
-                for j in 0..api_definition.len() {
-                    if api_definition[j].0 == x.type_name {
-                        for k in 0..import_table.len() {
-                            if import_table[k].0 == api_definition[j].1 {
-                                if !import_table[k].1.contains(&x.type_name) {
+                for api_definition in api_definitions.iter_mut() {
+                    if api_definition.0 == x.type_name {
+                        for import_elem in import_table.iter_mut() {
+                            if import_elem.0 == api_definition.1 {
+                                if !import_elem.1.contains(&x.type_name) {
                                     // println!("Pushing");
-                                    import_table[k].1.push(x.type_name.clone());
+                                    import_elem.1.push(x.type_name.clone());
                                     return false;
                                 } else {
                                     // println!("Ignoring");
@@ -188,11 +188,11 @@ impl VppJsApiType {
                                 }
                             }
                         }
-                        import_table.push((api_definition[j].1.clone(), vec![x.type_name.clone()]));
+                        import_table.push((api_definition.1.clone(), vec![x.type_name.clone()]));
                         return false;
                     }
                 }
-                api_definition.push((x.type_name.clone(), name.to_string().clone()));
+                api_definitions.push((x.type_name.clone(), name.to_string().clone()));
                 true
             })
             .fold(String::new(), |mut acc, x| {

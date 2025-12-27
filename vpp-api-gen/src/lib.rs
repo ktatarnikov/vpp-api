@@ -16,8 +16,8 @@ use crate::parser_helper::*;
 use api_gen::code_gen::{copy_file_with_fixup, gen_code, gen_code_file, generate_mod_file};
 use std::fs;
 
-pub fn parse_type_file(opts: &Opts, data: &String) {
-    let desc = VppJsApiFile::from_str(data).unwrap();
+pub fn parse_type_file(opts: &Opts, data: &str) {
+    let desc = VppJsApiFile::try_from_str(data).unwrap();
     eprintln!(
         "File: {} version: {} services: {} types: {} messages: {} aliases: {} imports: {} enums: {} unions: {}",
         &opts.in_file,

@@ -133,12 +133,12 @@ impl<'de, N: ArrayLength> Deserialize<'de> for FixedSizeString<N> {
             }
         }
 
-        return deserializer.deserialize_tuple(
+        deserializer.deserialize_tuple(
             N::to_u32() as usize,
             FixedSizeStringVisitor {
                 marker: PhantomData,
             },
-        );
+        )
     }
 }
 
@@ -219,7 +219,7 @@ impl<'de> Deserialize<'de> for VariableSizeString {
             }
         }
 
-        return deserializer.deserialize_tuple(1 << 31, VariableSizeStringVisitor);
+        deserializer.deserialize_tuple(1 << 31, VariableSizeStringVisitor)
     }
 }
 
@@ -273,7 +273,7 @@ impl<'de> Deserialize<'de> for F64 {
             }
         }
 
-        return deserializer.deserialize_f64(F64Visitor);
+        deserializer.deserialize_f64(F64Visitor)
     }
 }
 
@@ -565,8 +565,7 @@ impl<'de, T: Deserialize<'de> + Debug> Deserialize<'de> for VariableSizeArray<T>
                         break;
                     }
                     let nxt = nxt?;
-                    if nxt.is_some() {
-                        let nxt: T = nxt.unwrap();
+                    if let Some(nxt) = nxt {
                         res.push(nxt);
                     }
                 }
@@ -583,12 +582,12 @@ impl<'de, T: Deserialize<'de> + Debug> Deserialize<'de> for VariableSizeArray<T>
             }
         }
 
-        return deserializer.deserialize_tuple(
+        deserializer.deserialize_tuple(
             1 << 31,
             VariableSizeArrayVisitor {
                 marker: PhantomData,
             },
-        );
+        )
     }
 }
 
@@ -613,10 +612,10 @@ where
 impl<T: Clone + Debug + AsEnumFlag> TryFrom<Vec<T>> for EnumFlag<T> {
     type Error = String;
 
-    fn try_from(value: Vec<T>) -> Result<Self, Self::Error> {
+    fn try_from(values: Vec<T>) -> Result<Self, Self::Error> {
         let mut out = vec![];
-        for i in 0..value.len() {
-            out.push(value[i].clone());
+        for value in values {
+            out.push(value);
         }
         Ok(EnumFlag(out))
     }
@@ -734,19 +733,19 @@ impl<'de, T: Debug + Clone + AsEnumFlag + Deserialize<'de>> Deserialize<'de> for
         let size: u32 = T::size_of_enum_flag();
         match size {
             32 => {
-                return deserializer.deserialize_u32(EnumFlagVisitor {
+                deserializer.deserialize_u32(EnumFlagVisitor {
                     marker: PhantomData,
-                });
+                })
             }
             16 => {
-                return deserializer.deserialize_u16(EnumFlagVisitor {
+                deserializer.deserialize_u16(EnumFlagVisitor {
                     marker: PhantomData,
-                });
+                })
             }
             8 => {
-                return deserializer.deserialize_u8(EnumFlagVisitor {
+                deserializer.deserialize_u8(EnumFlagVisitor {
                     marker: PhantomData,
-                });
+                })
             }
             _ => panic!("Deserializing not supported for {} bit set flags", size),
         }

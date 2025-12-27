@@ -228,21 +228,21 @@ impl VppJsApiEnum {
         code
     }
     pub fn iter_and_generate_code(
-        enums: &Vec<VppJsApiEnum>,
-        api_definition: &mut Vec<(String, String)>,
+        enums: &[VppJsApiEnum],
+        api_definitions: &mut Vec<(String, String)>,
         name: &str,
         import_table: &mut Vec<(String, Vec<String>)>,
     ) -> String {
         enums
             .iter()
             .filter(|x| {
-                for j in 0..api_definition.len() {
-                    if api_definition[j].0 == x.name {
-                        for k in 0..import_table.len() {
-                            if import_table[k].0 == api_definition[j].1 {
-                                if !import_table[k].1.contains(&x.name) {
+                for api_definition in api_definitions.iter_mut() {
+                    if api_definition.0 == x.name {
+                        for import_elem in import_table.iter_mut() {
+                            if import_elem.0 == api_definition.1 {
+                                if !import_elem.1.contains(&x.name) {
                                     // println!("Pushing");
-                                    import_table[k].1.push(x.name.clone());
+                                    import_elem.1.push(x.name.clone());
                                     return false;
                                 } else {
                                     // println!("Ignoring");
@@ -250,11 +250,11 @@ impl VppJsApiEnum {
                                 }
                             }
                         }
-                        import_table.push((api_definition[j].1.clone(), vec![x.name.clone()]));
+                        import_table.push((api_definition.1.clone(), vec![x.name.clone()]));
                         return false;
                     }
                 }
-                api_definition.push((x.name.clone(), name.to_string().clone()));
+                api_definitions.push((x.name.clone(), name.to_string().clone()));
                 true
             })
             .fold(String::new(), |mut acc, x| {

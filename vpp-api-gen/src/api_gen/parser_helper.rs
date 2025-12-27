@@ -23,7 +23,7 @@ pub fn parse_api_tree(opts: &Opts, root: &str, map: &mut LinkedHashMap<String, V
         if metadata.is_file() {
             let res = std::fs::read_to_string(&path);
             if let Ok(data) = res {
-                let desc = VppJsApiFile::from_str(&data);
+                let desc = VppJsApiFile::try_from_str(&data);
                 if let Ok(d) = desc {
                     map.insert(path.to_str().unwrap().to_string(), d);
                 } else {

@@ -40,7 +40,7 @@ fn get_encoder() -> impl bincode::config::Options {
         .with_fixint_encoding()
 }
 
-#[unsafe(no_mangle)]
+#[allow(clippy::missing_safety_doc)]
 pub unsafe extern "C" fn shmem_default_cb(raw_data: *const u8, len: i32) {
     let data_slice = unsafe { std::slice::from_raw_parts(raw_data, len as usize) };
     let mut gs = GLOBAL.lock().unwrap();
@@ -59,14 +59,19 @@ pub unsafe extern "C" fn shmem_default_cb(raw_data: *const u8, len: i32) {
     }
 }
 
-#[unsafe(no_mangle)]
-pub unsafe extern "C" fn vac_error_handler(_arg: *const u8, _msg: *const u8, _msg_len: i32) {
+pub extern "C" fn vac_error_handler(_arg: *const u8, _msg: *const u8, _msg_len: i32) {
     println!("Error: {} bytes of message", _msg_len);
 }
 
 pub struct Transport {
     connected: bool,
     nonblocking: bool,
+}
+
+impl Default for Transport {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl Transport {
@@ -94,9 +99,9 @@ impl Transport {
                 "nonblocking socket would block",
             ));
         }
-        while count < buf.len() && gs.receive_buffer.len() > 0 {
+        while count < buf.len() && !gs.receive_buffer.is_empty() {
             buf[count] = gs.receive_buffer.pop_front().unwrap();
-            count = count + 1
+            count += 1
         }
         Ok(count)
     }
@@ -108,7 +113,7 @@ impl std::io::Read for Transport {
         while count < buf.len() {
             count = count + self.read_simple(&mut buf[count..])?;
         }
-        return Ok(count);
+        Ok(count)
     }
 }
 
@@ -117,8 +122,7 @@ impl std::io::Write for Transport {
         let wr_len = buf.len();
         let err = unsafe { vac_write(buf.as_ptr(), wr_len as i32) };
         if err < 0 {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
+            return Err(std::io::Error::other(
                 format!("vac_write returned {}", err),
             ));
         }
@@ -144,8 +148,7 @@ impl VppApiTransport for Transport {
         let err =
             unsafe { vac_connect(name_arg, chroot_prefix_arg, Some(shmem_default_cb), rx_qlen) };
         if err < 0 {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
+            return Err(std::io::Error::other(
                 format!("vac_connect returned {}", err),
             )
             .into());
