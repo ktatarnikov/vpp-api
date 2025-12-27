@@ -1,0 +1,55 @@
+name: Basic tests
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: moonrepo/setup-rust@v1
+        with:
+          cache: false
+          channel: ${{ env.RUST_TOOLCHAIN }}
+
+      # build speedups
+      - uses: Swatinem/rust-cache@v2
+
+      - name: unittests
+        run: |
+          cargo test --features 25_10 -- --test-threads 1
+
+      - name: benchmark the client over socket
+        run: |
+          cargo run --features 25_10 --release --example vpp-api-transport-test -- -r 1000 -s /run/vpp/api.sock
+      - name: benchmark the client over shared memory
+        run: |
+          cargo run --features 25_10 --release --example vpp-api-transport-test -- -r 1000
+
+  build:
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: moonrepo/setup-rust@v1
+        with:
+          cache: false
+          channel: ${{ env.RUST_TOOLCHAIN }}
+
+      # build speedups
+      - uses: Swatinem/rust-cache@v2
+
