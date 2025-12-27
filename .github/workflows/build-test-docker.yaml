@@ -27,13 +27,16 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./docker
+        working-directory: docker
 
     permissions:
       contents: write
       packages: write
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Prepare
         run: |
           platform=${{ matrix.platform }}
@@ -66,6 +69,8 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
+          context: ./docker
+          file: ./docker/Dockerfile
           push: true
           provenance: true
           platforms: ${{ matrix.platform }}
@@ -74,6 +79,7 @@ jobs:
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=build-${{ env.PLATFORM_PAIR }}
           cache-to: type=gha,mode=max,scope=build-${{ env.PLATFORM_PAIR }}
+          github-token: ${{ github.token }}
 
       - name: Export Digest
         run: |
@@ -108,7 +114,7 @@ jobs:
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
-          path: /tmp/digests
+          path: ${{ runner.temp }}/digests
           pattern: digests-*
           merge-multiple: true
 
@@ -126,7 +132,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY_IMAGE }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
