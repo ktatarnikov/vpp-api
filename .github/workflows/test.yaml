@@ -25,7 +25,7 @@ jobs:
           - version: 25_10
             vpp_package_version: 25.10-release
     
-    name: Test API ${{ matrix.version }}
+    name: Test API ${{ matrix.config.version }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/ktatarnikov/vpp-api-client-test:latest
@@ -46,23 +46,23 @@ jobs:
       - name: Install VPP
         run: |
           apt-get install -y \
-            libvppinfra=${{ matrix.vpp_package_version }} \
-            vpp=${{ matrix.vpp_package_version }} \
-            vpp-plugin-core=${{ matrix.vpp_package_version }}
+            libvppinfra=${{ matrix.config.vpp_package_version }} \
+            vpp=${{ matrix.config.vpp_package_version }} \
+            vpp-plugin-core=${{ matrix.config.vpp_package_version }}
 
           /usr/bin/vpp -c /etc/vpp/startup.conf &
 
       - name: unittests
         run: |
-          cargo test --features ${{ matrix.version }} -- --test-threads 1
+          cargo test --features ${{ matrix.config.version }} -- --test-threads 1
 
       - name: benchmark the client over socket
         run: |
-          cargo run --features ${{ matrix.version }} --release --example vpp-api-transport-test -- -r 1000 -s /run/vpp/api.sock
+          cargo run --features ${{ matrix.config.version }} --release --example vpp-api-transport-test -- -r 1000 -s /run/vpp/api.sock
 
       - name: benchmark the client over shared memory
         run: |
-          cargo run --features ${{ matrix.version }} --release --example vpp-api-transport-test -- -r 1000
+          cargo run --features ${{ matrix.config.version }} --release --example vpp-api-transport-test -- -r 1000
 
   build:
 
