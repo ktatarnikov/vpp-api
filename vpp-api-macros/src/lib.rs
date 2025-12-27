@@ -1,9 +1,9 @@
 extern crate proc_macro;
+use proc_macro2::TokenTree;
+use quote::ToTokens;
 use quote::quote;
 use syn;
-use syn::{parse_macro_input, DeriveInput};
-use quote::ToTokens;
-use proc_macro2::TokenTree;
+use syn::{DeriveInput, parse_macro_input};
 
 #[proc_macro_derive(VppMessage, attributes(message_name_and_crc))]
 pub fn derive_message(input: proc_macro::TokenStream) -> proc_macro::TokenStream {

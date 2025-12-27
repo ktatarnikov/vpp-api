@@ -15,7 +15,7 @@ use std::convert::TryFrom;
 use std::convert::TryInto;
 use std::fmt;
 use std::str::Utf8Error;
-use typenum::{U10, U256, U32, U64};
+use typenum::{U10, U32, U64, U256};
 
 #[derive(Clone, Default)]
 pub struct FixedSizeString<N: ArrayLength>(GenericArray<u8, N>);

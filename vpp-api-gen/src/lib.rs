@@ -9,13 +9,11 @@ use linked_hash_map::LinkedHashMap;
 use std::string::ToString;
 
 use crate::api_gen::opts::Opts;
-use crate::api_gen::util::merge_sort;
 use crate::api_gen::util::ImportsFiles;
+use crate::api_gen::util::merge_sort;
 use crate::file_schema::VppJsApiFile;
 use crate::parser_helper::*;
-use api_gen::code_gen::{
-    copy_file_with_fixup, gen_code, gen_code_file, generate_mod_file,
-};
+use api_gen::code_gen::{copy_file_with_fixup, gen_code, gen_code_file, generate_mod_file};
 use std::fs;
 
 pub fn parse_type_file(opts: &Opts, data: &String) {

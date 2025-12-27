@@ -27,4 +27,3 @@ cfg_if! {
         compile_error!("You must enable exactly one version feature: e.g. `25_10` or `25_06`");
     }
 }
-

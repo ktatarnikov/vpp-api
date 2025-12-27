@@ -300,9 +300,9 @@ where
 
 #[cfg(test)]
 mod tests {
+    use crate::VppApiTransport;
     use crate::afunix;
     use crate::shmem;
-    use crate::VppApiTransport;
 
     #[test]
     fn test_shmem_connect() {

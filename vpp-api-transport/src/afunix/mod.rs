@@ -3,8 +3,8 @@ use bincode::Options;
 use serde::{Deserialize, Serialize};
 use std::os::unix::net::UnixStream;
 
-use crate::error::Result;
 use crate::VppApiTransport;
+use crate::error::Result;
 use std::collections::HashMap;
 
 use crate::get_encoder;
