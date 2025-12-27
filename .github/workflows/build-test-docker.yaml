@@ -27,7 +27,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./docker
+        working-directory: docker
 
     permissions:
       contents: write
