@@ -2,6 +2,8 @@ name: Build Test Docker Image
 
 on:
   workflow_dispatch:
+    branches:
+      - '**'    
 
 env:
   REGISTRY: ghcr.io
