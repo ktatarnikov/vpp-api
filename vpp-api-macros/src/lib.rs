@@ -1,19 +1,35 @@
 extern crate proc_macro;
 use proc_macro2::TokenTree;
 use quote::quote;
+use quote::ToTokens;
 use syn::{DeriveInput, parse_macro_input};
 
 #[proc_macro_derive(VppMessage, attributes(message_name_and_crc))]
 pub fn derive_message(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    let attribute_tokens = input.attrs[0].tokens.clone();
+    let attribute_tokens = input.attrs[0].clone().to_token_stream();
     let mut token_iter = attribute_tokens.into_iter();
-    let first = token_iter.next().unwrap();
-    let ident = match first {
+    let hashtag = token_iter.next().expect("Expected token '#'");
+    if !matches!(&hashtag, TokenTree::Punct(p) if p.as_char() == '#') {
+        panic!("Expected token '#'")
+    }
+    let message_name_and_crc = token_iter.next().unwrap();
+    let ident = match message_name_and_crc {
         TokenTree::Group(ref g) => {
             let stream = g.stream().clone();
             let mut stream_iter = stream.into_iter();
-            stream_iter.next().unwrap().to_string()
+            let message_name_and_crc = stream_iter.next().expect("Expected token 'message_name_and_crc'");
+            if !matches!(&message_name_and_crc, TokenTree::Ident(ident) if ident.to_string() == "message_name_and_crc") {
+                panic!("Expected token 'message_name_and_crc'")
+            }
+            let TokenTree::Group(attribute_group) = stream_iter.next().expect("Expected message name and crc value group") else {
+                panic!("Expected message name and crc value group")
+            };
+            let stream = attribute_group.stream().clone();
+            let mut stream_iter = stream.into_iter();            
+            let ident = stream_iter.next().expect("Expected message name and crc value token");
+            
+            ident.to_string()
         }
         _ => panic!("Wrong format for message name and crc"),
     };
@@ -126,16 +142,32 @@ pub fn derive_unionident(input: proc_macro::TokenStream) -> proc_macro::TokenStr
     let maxsize_literal = syn::LitInt::new(&maxsize, ty.span());
     let name = input.ident;
     let helperfunctions = input.attrs.iter().map(|f| {
-        let mut group_stream = f.tokens.clone().into_iter();
-        let stream_group = group_stream.next().unwrap();
-        let ident;
+        let mut group_stream = f.clone().to_token_stream().into_iter();
+        let hashtag = group_stream.next().expect("Expected token '#'");
+        if !matches!(&hashtag, TokenTree::Punct(p) if p.as_char() == '#') {
+            panic!("Expected token '#'")
+        }
+        let stream_group = group_stream.next().expect("Group of field name, field type expected");
+
+        let mut ident;
         let liter;
         match stream_group {
             TokenTree::Group(ref g) => {
                 let mut iterterator = g.stream().into_iter();
                 ident = iterterator.next().unwrap();
-                let _punt = iterterator.next().unwrap();
-                liter = iterterator.next().unwrap();
+                if !matches!(&ident, TokenTree::Ident(_)) {
+                    panic!("Expected 'types', got {:?}", ident)
+                }
+                let types_group_token_tree = iterterator.next().expect("Types group expected");
+                let TokenTree::Group(types_group) = types_group_token_tree else {
+                    panic!("Expected types group, got {:?}", types_group_token_tree)
+                };
+                let mut types_group_iter = types_group.stream().into_iter();
+                
+                ident = types_group_iter.next().expect("Expected types group: field name");
+                let _punt = types_group_iter.next().unwrap();
+                liter = types_group_iter.next().expect("Expected types group: field size");
+
             }
             _ => panic!("Felix! Something went wrong"),
         }
