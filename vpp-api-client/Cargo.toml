@@ -1,5 +1,5 @@
 [package]
-name = "vpp_api_client"
+name = "vpp-api-client"
 version = "0.1.6"
 edition = "2024"
 description = "fd.io client library"

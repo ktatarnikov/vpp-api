@@ -17,6 +17,7 @@ vpp-api-encoding = { path = "vpp-api-encoding" }
 vpp-api-macros = { path = "vpp-api-macros" }
 vpp-api-message = { path = "vpp-api-message" }
 vpp-api-transport = { path = "vpp-api-transport" }
+vpp-api-client = { path = "vpp-api-client" }
 
 trybuild = { version = "1.0.114", features = ["diff"] }
 typenum = "1.19.0"

@@ -746,6 +746,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c4daab4b8a8c3c1408ea5e60a5d380790ff15d0cfe0333c14ce98210c1339fd8"
 
 [[package]]
+name = "vpp-api-client"
+version = "0.1.6"
+dependencies = [
+ "bincode-next",
+ "cfg-if",
+ "serde",
+ "serde_repr",
+ "typenum",
+ "vpp-api-encoding",
+ "vpp-api-macros",
+ "vpp-api-message",
+ "vpp-api-transport",
+]
+
+[[package]]
 name = "vpp-api-encoding"
 version = "0.1.6"
 dependencies = [
@@ -814,21 +829,6 @@ name = "vpp-native-client-lib-sys"
 version = "0.1.6"
 dependencies = [
  "toml",
-]
-
-[[package]]
-name = "vpp_api_client"
-version = "0.1.6"
-dependencies = [
- "bincode-next",
- "cfg-if",
- "serde",
- "serde_repr",
- "typenum",
- "vpp-api-encoding",
- "vpp-api-macros",
- "vpp-api-message",
- "vpp-api-transport",
 ]
 
 [[package]]
