@@ -10,7 +10,6 @@ pub mod error;
 pub mod reqrecv;
 use crate::error::Error;
 use crate::error::Result;
-use bincode::Options;
 use lazy_static::__Deref;
 use log::debug;
 use log::warn;
@@ -26,10 +25,10 @@ struct SockMsgHeader {
     gc_mark: u32,
 }
 
-fn get_encoder() -> impl bincode::config::Options {
-    bincode::DefaultOptions::new()
+fn get_encoder() -> impl bincode_next::config::Config {
+    bincode_next::config::legacy()
         .with_big_endian()
-        .with_fixint_encoding()
+        .with_fixed_int_encoding()
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -157,7 +156,9 @@ pub trait VppApiTransport: Read + Write {
             client_index: self.get_client_index(),
             context,
         };
-        let data = get_encoder().serialize(&msg).unwrap();
+
+        let data = bincode_next::serde::encode_to_vec(&msg, get_encoder()).unwrap();
+
         self.write_all(&data)?;
         Ok(context)
     }
@@ -188,7 +189,8 @@ pub trait VppApiTransport: Read + Write {
             context,
             cmd: VarLen32::VarLenData(cmd.as_bytes().to_vec()),
         };
-        let data = get_encoder().serialize(&msg).unwrap();
+        let data = bincode_next::serde::encode_to_vec(&msg, get_encoder()).unwrap();
+
         // println!("Sending data: {:?}", &data);
         self.write_all(&data)?;
 
@@ -201,7 +203,10 @@ pub trait VppApiTransport: Read + Write {
                 Ok((msg_id, data)) => {
                     if msg_id == cli_inband_reply_id {
                         // println!("Message: {:?}", &data);
-                        let r: RawCliInbandReply = get_encoder().deserialize(&data).unwrap();
+
+                        let (r, _): (RawCliInbandReply, usize) =
+                            bincode_next::serde::decode_from_slice(&data, get_encoder()).unwrap();
+
                         let VarLen32::VarLenData(v) = r.reply;
                         let s = String::from_utf8_lossy(&v);
                         // println!("Command reply: {}", &s);
@@ -222,7 +227,9 @@ pub trait VppApiTransport: Read + Write {
             return Err(Error::InvalidHeader);
         }
 
-        let hdr: SockMsgHeader = get_encoder().deserialize(&header_buf[..])?;
+        let (hdr, _): (SockMsgHeader, usize) =
+            bincode_next::serde::decode_from_slice(&header_buf[..], get_encoder())?;
+
         debug!("Got header: {:?}", hdr);
 
         match hdr.msglen.try_into() {

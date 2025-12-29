@@ -1,7 +1,8 @@
 mod shmem_bindgen;
 use crate::error::Result;
-use bincode;
-use bincode::Options;
+use bincode_next;
+use bincode_next::config::BigEndian;
+use bincode_next::config::Fixint;
 use serde::{Deserialize, Serialize};
 use shmem_bindgen::*;
 use std::ffi::CString;
@@ -34,10 +35,10 @@ struct SockMsgHeader {
     gc_mark: u32,
 }
 
-fn get_encoder() -> impl bincode::config::Options {
-    bincode::DefaultOptions::new()
+fn get_encoder() -> bincode_next::config::Configuration<BigEndian, Fixint> {
+    bincode_next::config::legacy()
         .with_big_endian()
-        .with_fixint_encoding()
+        .with_fixed_int_encoding()
 }
 
 #[allow(clippy::missing_safety_doc)]
@@ -50,7 +51,8 @@ pub unsafe extern "C" fn shmem_default_cb(raw_data: *const u8, len: i32) {
         msglen: data_slice.len() as u32,
         gc_mark: 0,
     };
-    let hs = get_encoder().serialize(&hdr).unwrap();
+    let hs = bincode_next::serde::encode_to_vec(&hdr, get_encoder()).unwrap();
+
     for d in hs {
         gs.receive_buffer.push_back(d);
     }

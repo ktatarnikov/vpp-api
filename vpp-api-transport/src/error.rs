@@ -7,7 +7,8 @@ pub enum Error {
     InvalidHeader,
     InvalidMessage,
     IoError(std::io::Error),
-    BinCodeError(Box<bincode::ErrorKind>),
+    BinCodeDecodeError(Box<bincode_next::error::DecodeError>),
+    BinCodeEncodeError(Box<bincode_next::error::EncodeError>),
 }
 
 impl error::Error for Error {}
@@ -17,11 +18,30 @@ impl fmt::Display for Error {
         write!(f, "Error: {:?}", self)
     }
 }
-impl From<Box<bincode::ErrorKind>> for Error {
-    fn from(e: Box<bincode::ErrorKind>) -> Self {
-        Self::BinCodeError(e)
+impl From<Box<bincode_next::error::DecodeError>> for Error {
+    fn from(e: Box<bincode_next::error::DecodeError>) -> Self {
+        Self::BinCodeDecodeError(e)
     }
 }
+
+impl From<bincode_next::error::DecodeError> for Error {
+    fn from(e: bincode_next::error::DecodeError) -> Self {
+        Self::BinCodeDecodeError(e.into())
+    }
+}
+
+impl From<bincode_next::error::EncodeError> for Error {
+    fn from(e: bincode_next::error::EncodeError) -> Self {
+        Self::BinCodeEncodeError(e.into())
+    }
+}
+
+impl From<Box<bincode_next::error::EncodeError>> for Error {
+    fn from(e: Box<bincode_next::error::EncodeError>) -> Self {
+        Self::BinCodeEncodeError(e)
+    }
+}
+
 impl From<&str> for Error {
     fn from(s: &str) -> Self {
         Self::Error(s.to_string())

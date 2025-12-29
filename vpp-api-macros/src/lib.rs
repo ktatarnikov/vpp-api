@@ -191,7 +191,9 @@ pub fn derive_unionident(input: proc_macro::TokenStream) -> proc_macro::TokenStr
         quote! {
                 pub fn #function_name_new_ident(some: #ident) -> #name{
                     let mut arr: Vec<u8> = vec![0;#maxsize_literal];
-                    let some_arr: Vec<u8> = bincode::serialize(&some).unwrap();
+                    let encoder = bincode_next::config::legacy();
+                    let some_arr: Vec<u8> =
+                        bincode_next::serde::encode_to_vec(&some, encoder).unwrap();
                     for x in 0..#liter{
                         arr[x] = some_arr[x];
                     }
@@ -205,7 +207,8 @@ pub fn derive_unionident(input: proc_macro::TokenStream) -> proc_macro::TokenStr
                     let some = self.0.0.clone();
                     let mut someIdent: Vec<u8> = vec![0;#liter];
                     someIdent.clone_from_slice(&some[0..#liter]);
-                    let decoded: #ident = bincode::deserialize(&someIdent).unwrap();
+                    let encoder = bincode_next::config::legacy();
+                    let (decoded, _): (#ident, usize) = bincode_next::serde::decode_from_slice(&someIdent, encoder).unwrap();
                     decoded
                 }
         }
