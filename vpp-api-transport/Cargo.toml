@@ -32,7 +32,7 @@ log.workspace = true
 
 [dev-dependencies]
 serde_json.workspace = true
-serde_yaml.workspace = true
+serde_yaml_bw.workspace = true
 clap.workspace = true
 
 [build-dependencies]

@@ -95,7 +95,7 @@ fn main() {
             if res.is_ok() {
                 res.unwrap()
             } else {
-                serde_yaml::from_str(&data).unwrap()
+                serde_yaml_bw::from_str(&data).unwrap()
             }
         } else {
             opts
@@ -108,7 +108,7 @@ fn main() {
         let data = serde_json::to_string_pretty(&opts).unwrap();
         println!("{}", data);
         println!("===========");
-        let data = serde_yaml::to_string(&opts).unwrap();
+        let data = serde_yaml_bw::to_string(&opts).unwrap();
         println!("{}", data);
     }
 
