@@ -152,7 +152,8 @@ impl VppApiTransport for Transport {
 
         self.write_all(&scs)?;
         let buf = self.read_one_msg()?;
-        let (hdr, _): (MsgSockClntCreateReplyHdr, usize) = bincode_next::serde::decode_from_slice(&buf[0..20], get_encoder()).unwrap();
+        let (hdr, _): (MsgSockClntCreateReplyHdr, usize) =
+            bincode_next::serde::decode_from_slice(&buf[0..20], get_encoder()).unwrap();
         self.client_index = hdr.index;
         let mut i = 0;
         self.message_max_index = hdr.count;
@@ -161,7 +162,8 @@ impl VppApiTransport for Transport {
             let ofs1 = 20 + i * 66;
             let ofs2 = ofs1 + sz;
 
-            let (msg, _): (MsgSockClntCreateReplyEntry, usize) = bincode_next::serde::decode_from_slice(&buf[ofs1..ofs2], get_encoder()).unwrap();
+            let (msg, _): (MsgSockClntCreateReplyEntry, usize) =
+                bincode_next::serde::decode_from_slice(&buf[ofs1..ofs2], get_encoder()).unwrap();
 
             let msg_name_trailing_zero = String::from_utf8_lossy(&msg.name);
             let msg_name = msg_name_trailing_zero.trim_end_matches("\u{0}");

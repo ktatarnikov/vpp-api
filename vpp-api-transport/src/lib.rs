@@ -204,7 +204,7 @@ pub trait VppApiTransport: Read + Write {
                     if msg_id == cli_inband_reply_id {
                         // println!("Message: {:?}", &data);
 
-                        let (r, _): (RawCliInbandReply, usize) = 
+                        let (r, _): (RawCliInbandReply, usize) =
                             bincode_next::serde::decode_from_slice(&data, get_encoder()).unwrap();
 
                         let VarLen32::VarLenData(v) = r.reply;
@@ -227,7 +227,7 @@ pub trait VppApiTransport: Read + Write {
             return Err(Error::InvalidHeader);
         }
 
-        let (hdr, _): (SockMsgHeader, usize) = 
+        let (hdr, _): (SockMsgHeader, usize) =
             bincode_next::serde::decode_from_slice(&header_buf[..], get_encoder())?;
 
         debug!("Got header: {:?}", hdr);

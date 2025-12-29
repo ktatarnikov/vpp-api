@@ -1,8 +1,8 @@
 mod shmem_bindgen;
 use crate::error::Result;
 use bincode_next;
-use bincode_next::config::Fixint;
 use bincode_next::config::BigEndian;
+use bincode_next::config::Fixint;
 use serde::{Deserialize, Serialize};
 use shmem_bindgen::*;
 use std::ffi::CString;

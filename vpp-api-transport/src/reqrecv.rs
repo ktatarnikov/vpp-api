@@ -8,11 +8,11 @@
 )]
 use super::error::Result;
 use crate::VppApiTransport;
+use bincode_next::config::BigEndian;
+use bincode_next::config::Fixint;
 use log::{debug, error, trace};
 use serde::{Deserialize, Serialize, de::DeserializeOwned};
 use std::collections::HashMap;
-use bincode_next::config::BigEndian;
-use bincode_next::config::Fixint;
 use std::convert::TryInto;
 use std::io::{Read, Write};
 use std::ops::Add;
@@ -52,8 +52,8 @@ pub fn send_recv_one<
     let vl_msg_id = t.get_msg_index(name).unwrap();
     let reply_vl_msg_id = t.get_msg_index(reply_name).unwrap();
 
-    let mut v = bincode_next::serde::encode_to_vec(vl_msg_id, get_encoder()).unwrap(); 
-    let msg: Vec<u8> = bincode_next::serde::encode_to_vec(m, get_encoder())?; 
+    let mut v = bincode_next::serde::encode_to_vec(vl_msg_id, get_encoder()).unwrap();
+    let msg: Vec<u8> = bincode_next::serde::encode_to_vec(m, get_encoder())?;
 
     trace!(
         "About to send msg: {} id: {} reply_id: {} msg:{:x?}",
@@ -192,7 +192,8 @@ pub fn send_recv_msg<'a, T: Serialize + Deserialize<'a>, TR: Serialize + Deseria
         if let Ok((msg_id, data)) = res {
             trace!("msg: {} id: {} data: {:x?}", name, msg_id, &data);
             if msg_id == reply_vl_msg_id {
-                let (res, _) = bincode_next::serde::decode_from_slice(&data, get_encoder()).unwrap();
+                let (res, _) =
+                    bincode_next::serde::decode_from_slice(&data, get_encoder()).unwrap();
                 return res;
             }
         } else {
@@ -224,7 +225,8 @@ pub fn send_bulk_msg<
     };
 
     let mut c = bincode_next::serde::encode_to_vec(control_ping_id, get_encoder()).unwrap();
-    let mut control_ping_message = bincode_next::serde::encode_to_vec(control_ping, get_encoder()).unwrap();
+    let mut control_ping_message =
+        bincode_next::serde::encode_to_vec(control_ping, get_encoder()).unwrap();
 
     c.extend_from_slice(&control_ping_message);
     v.extend_from_slice(&msg);
@@ -248,8 +250,9 @@ pub fn send_bulk_msg<
                 return out;
             }
             if msg_id == reply_vl_msg_id {
-                trace!("Received the intended message; attempt to deserialize");                
-                let (res, _) = bincode_next::serde::decode_from_slice(&data, get_encoder()).unwrap();
+                trace!("Received the intended message; attempt to deserialize");
+                let (res, _) =
+                    bincode_next::serde::decode_from_slice(&data, get_encoder()).unwrap();
 
                 trace!("Next thing will be the reply");
                 out.extend_from_slice(&[res]);
