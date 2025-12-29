@@ -8,21 +8,21 @@
 )]
 use super::error::Result;
 use crate::VppApiTransport;
-use crate::error::Error;
-use bincode::Options;
 use log::{debug, error, trace};
 use serde::{Deserialize, Serialize, de::DeserializeOwned};
 use std::collections::HashMap;
+use bincode_next::config::BigEndian;
+use bincode_next::config::Fixint;
 use std::convert::TryInto;
 use std::io::{Read, Write};
 use std::ops::Add;
 use std::time::{Duration, SystemTime};
 use vpp_api_message::VppApiMessage;
 
-fn get_encoder() -> impl bincode::config::Options {
-    bincode::DefaultOptions::new()
+fn get_encoder() -> bincode_next::config::Configuration<BigEndian, Fixint> {
+    bincode_next::config::legacy()
         .with_big_endian()
-        .with_fixint_encoding()
+        .with_fixed_int_encoding()
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -51,10 +51,9 @@ pub fn send_recv_one<
     let reply_name = &TR::get_message_name_and_crc();
     let vl_msg_id = t.get_msg_index(name).unwrap();
     let reply_vl_msg_id = t.get_msg_index(reply_name).unwrap();
-    let enc = get_encoder();
-    let mut v = enc.serialize(&vl_msg_id)?;
-    let enc = get_encoder();
-    let msg = enc.serialize(&m)?;
+
+    let mut v = bincode_next::serde::encode_to_vec(&vl_msg_id, get_encoder()).unwrap(); 
+    let msg: Vec<u8> = bincode_next::serde::encode_to_vec(&m, get_encoder())?; 
 
     trace!(
         "About to send msg: {} id: {} reply_id: {} msg:{:x?}",
@@ -81,9 +80,7 @@ pub fn send_recv_one<
             Ok((msg_id, data)) => {
                 trace!("msg: {} id: {} data: {:x?}", name, msg_id, &data);
                 if msg_id == reply_vl_msg_id {
-                    let res = get_encoder()
-                        .allow_trailing_bytes()
-                        .deserialize::<TR>(&data)?;
+                    let (res, _) = bincode_next::serde::decode_from_slice(&data, get_encoder())?;
                     return Ok(res);
                 }
             }
@@ -108,18 +105,18 @@ pub fn send_recv_many<
     let control_ping_id_reply = t.get_msg_index("control_ping_reply_f6b0b8ca").unwrap();
     let vl_msg_id = t.get_msg_index(name).unwrap();
     let reply_vl_msg_id = t.get_msg_index(reply_name).unwrap();
-    let enc = get_encoder();
-    let mut v = enc.serialize(&vl_msg_id)?;
-    let enc = get_encoder();
-    let msg = enc.serialize(&m)?;
+
+    let mut v = bincode_next::serde::encode_to_vec(&vl_msg_id, get_encoder())?;
+    let msg = bincode_next::serde::encode_to_vec(&m, get_encoder())?;
+
     let control_ping = ControlPing {
         client_index: t.get_client_index(),
         context: 0,
     };
-    let enc = get_encoder();
-    let mut c = enc.serialize(&control_ping_id)?;
-    let enc = get_encoder();
-    let control_ping_message = enc.serialize(&control_ping)?;
+
+    let mut c = bincode_next::serde::encode_to_vec(&control_ping_id, get_encoder())?;
+    let control_ping_message = bincode_next::serde::encode_to_vec(&control_ping, get_encoder())?;
+
     c.extend_from_slice(&control_ping_message);
     v.extend_from_slice(&msg);
     let mut out: Vec<u8> = vec![];
@@ -143,9 +140,7 @@ pub fn send_recv_many<
                 }
                 if msg_id == reply_vl_msg_id {
                     trace!("Received the intended message; attempt to deserialize");
-                    let res = get_encoder()
-                        .allow_trailing_bytes()
-                        .deserialize::<TR>(&data)?;
+                    let (res, _) = bincode_next::serde::decode_from_slice(&data, get_encoder())?;
                     trace!("Next thing will be the reply");
                     out.extend_from_slice(&[res]);
                 } else {
@@ -168,10 +163,9 @@ pub fn send_recv_msg<'a, T: Serialize + Deserialize<'a>, TR: Serialize + Deseria
 ) -> TR {
     let vl_msg_id = t.get_msg_index(name).unwrap();
     let reply_vl_msg_id = t.get_msg_index(reply_name).unwrap();
-    let enc = get_encoder();
-    let mut v = enc.serialize(&vl_msg_id).unwrap();
-    let enc = get_encoder();
-    let msg = enc.serialize(&m).unwrap();
+
+    let mut v = bincode_next::serde::encode_to_vec(&vl_msg_id, get_encoder()).unwrap();
+    let msg = bincode_next::serde::encode_to_vec(&m, get_encoder()).unwrap();
 
     trace!(
         "About to send msg: {} id: {} reply_id: {} msg:{:x?}",
@@ -198,10 +192,7 @@ pub fn send_recv_msg<'a, T: Serialize + Deserialize<'a>, TR: Serialize + Deseria
         if let Ok((msg_id, data)) = res {
             trace!("msg: {} id: {} data: {:x?}", name, msg_id, &data);
             if msg_id == reply_vl_msg_id {
-                let res = get_encoder()
-                    .allow_trailing_bytes()
-                    .deserialize::<TR>(&data)
-                    .unwrap();
+                let (res, _) = bincode_next::serde::decode_from_slice(&data, get_encoder()).unwrap();
                 return res;
             }
         } else {
@@ -223,18 +214,18 @@ pub fn send_bulk_msg<
     let control_ping_id_reply = t.get_msg_index("control_ping_reply_f6b0b8ca").unwrap();
     let vl_msg_id = t.get_msg_index(name).unwrap();
     let reply_vl_msg_id = t.get_msg_index(reply_name).unwrap();
-    let enc = get_encoder();
-    let mut v = enc.serialize(&vl_msg_id).unwrap();
-    let enc = get_encoder();
-    let msg = enc.serialize(&m).unwrap(); /////
+
+    let mut v = bincode_next::serde::encode_to_vec(&vl_msg_id, get_encoder()).unwrap();
+    let msg = bincode_next::serde::encode_to_vec(&m, get_encoder()).unwrap();
+
     let control_ping = ControlPing {
         client_index: t.get_client_index(),
         context: 0,
     };
-    let enc = get_encoder();
-    let mut c = enc.serialize(&control_ping_id).unwrap();
-    let enc = get_encoder();
-    let control_ping_message = enc.serialize(&control_ping).unwrap();
+
+    let mut c = bincode_next::serde::encode_to_vec(&control_ping_id, get_encoder()).unwrap();
+    let mut control_ping_message = bincode_next::serde::encode_to_vec(&control_ping, get_encoder()).unwrap();
+
     c.extend_from_slice(&control_ping_message);
     v.extend_from_slice(&msg);
     let mut out: Vec<u8> = vec![];
@@ -257,11 +248,9 @@ pub fn send_bulk_msg<
                 return out;
             }
             if msg_id == reply_vl_msg_id {
-                trace!("Received the intended message; attempt to deserialize");
-                let res = get_encoder()
-                    .allow_trailing_bytes()
-                    .deserialize::<TR>(&data)
-                    .unwrap();
+                trace!("Received the intended message; attempt to deserialize");                
+                let (res, _) = bincode_next::serde::decode_from_slice(&data, get_encoder()).unwrap();
+
                 trace!("Next thing will be the reply");
                 out.extend_from_slice(&[res]);
             } else {

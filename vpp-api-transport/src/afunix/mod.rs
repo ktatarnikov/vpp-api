@@ -1,5 +1,3 @@
-use bincode;
-use bincode::Options;
 use serde::{Deserialize, Serialize};
 use std::os::unix::net::UnixStream;
 
@@ -89,7 +87,7 @@ impl std::io::Write for Transport {
             msglen: buf.len() as u32,
             gc_mark: 0,
         };
-        let hdre = get_encoder().serialize(&hdr).unwrap();
+        let hdre = bincode_next::serde::encode_to_vec(&hdr, get_encoder()).unwrap();
 
         self.sock.as_ref().unwrap().write(&hdre)?;
         self.sock.as_ref().unwrap().write(buf)?;
@@ -150,11 +148,11 @@ impl VppApiTransport for Transport {
             name: name_a,
         };
 
-        let scs = get_encoder().serialize(&sockclnt_create).unwrap();
+        let scs = bincode_next::serde::encode_to_vec(&sockclnt_create, get_encoder()).unwrap();
 
         self.write_all(&scs)?;
         let buf = self.read_one_msg()?;
-        let hdr: MsgSockClntCreateReplyHdr = get_encoder().deserialize(&buf[0..20]).unwrap();
+        let (hdr, _): (MsgSockClntCreateReplyHdr, usize) = bincode_next::serde::decode_from_slice(&buf[0..20], get_encoder()).unwrap();
         self.client_index = hdr.index as u32;
         let mut i = 0;
         self.message_max_index = hdr.count;
@@ -163,8 +161,8 @@ impl VppApiTransport for Transport {
             let ofs1 = 20 + i * 66;
             let ofs2 = ofs1 + sz;
 
-            let msg: MsgSockClntCreateReplyEntry =
-                get_encoder().deserialize(&buf[ofs1..ofs2]).unwrap();
+            let (msg, _): (MsgSockClntCreateReplyEntry, usize) = bincode_next::serde::decode_from_slice(&buf[ofs1..ofs2], get_encoder()).unwrap();
+
             let msg_name_trailing_zero = String::from_utf8_lossy(&msg.name);
             let msg_name = msg_name_trailing_zero.trim_end_matches("\u{0}");
             self.message_name_to_id.insert(msg_name.into(), msg.index);

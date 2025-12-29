@@ -15,7 +15,7 @@ vpp-api-encoding.workspace = true
 vpp-api-message.workspace = true
 trybuild.workspace = true
 typenum.workspace = true
-bincode.workspace = true
+bincode-next.workspace = true
 
 
 [dependencies]

@@ -5,7 +5,6 @@
     unused_must_use,
     non_camel_case_types
 )]
-use bincode::Options;
 use std::convert::TryInto;
 use vpp_api_gen::interface::*;
 use vpp_api_gen::interface_types::*;
@@ -14,12 +13,6 @@ use vpp_api_gen::ip_types::*;
 use vpp_api_transport::afunix;
 use vpp_api_transport::reqrecv::*;
 use vpp_api_transport::VppApiTransport;
-
-fn get_encoder() -> impl bincode::config::Options {
-    bincode::DefaultOptions::new()
-        .with_big_endian()
-        .with_fixint_encoding()
-}
 
 #[test]
 fn test_vpp_functions() {
