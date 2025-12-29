@@ -153,7 +153,7 @@ impl VppApiTransport for Transport {
         self.write_all(&scs)?;
         let buf = self.read_one_msg()?;
         let (hdr, _): (MsgSockClntCreateReplyHdr, usize) = bincode_next::serde::decode_from_slice(&buf[0..20], get_encoder()).unwrap();
-        self.client_index = hdr.index as u32;
+        self.client_index = hdr.index;
         let mut i = 0;
         self.message_max_index = hdr.count;
         while i < hdr.count as usize {

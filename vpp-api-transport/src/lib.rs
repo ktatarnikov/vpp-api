@@ -10,7 +10,6 @@ pub mod error;
 pub mod reqrecv;
 use crate::error::Error;
 use crate::error::Result;
-use bincode_next;
 use lazy_static::__Deref;
 use log::debug;
 use log::warn;
@@ -160,7 +159,7 @@ pub trait VppApiTransport: Read + Write {
 
         let data = bincode_next::serde::encode_to_vec(&msg, get_encoder()).unwrap();
 
-        self.write(&data)?;
+        self.write_all(&data)?;
         Ok(context)
     }
 
@@ -208,9 +207,7 @@ pub trait VppApiTransport: Read + Write {
                         let (r, _): (RawCliInbandReply, usize) = 
                             bincode_next::serde::decode_from_slice(&data, get_encoder()).unwrap();
 
-                        let v = match r.reply {
-                            VarLen32::VarLenData(d) => d,
-                        };
+                        let VarLen32::VarLenData(v) = r.reply;
                         let s = String::from_utf8_lossy(&v);
                         // println!("Command reply: {}", &s);
                         return Ok(s.to_string());

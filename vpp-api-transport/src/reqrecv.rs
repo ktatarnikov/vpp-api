@@ -52,8 +52,8 @@ pub fn send_recv_one<
     let vl_msg_id = t.get_msg_index(name).unwrap();
     let reply_vl_msg_id = t.get_msg_index(reply_name).unwrap();
 
-    let mut v = bincode_next::serde::encode_to_vec(&vl_msg_id, get_encoder()).unwrap(); 
-    let msg: Vec<u8> = bincode_next::serde::encode_to_vec(&m, get_encoder())?; 
+    let mut v = bincode_next::serde::encode_to_vec(vl_msg_id, get_encoder()).unwrap(); 
+    let msg: Vec<u8> = bincode_next::serde::encode_to_vec(m, get_encoder())?; 
 
     trace!(
         "About to send msg: {} id: {} reply_id: {} msg:{:x?}",
@@ -106,16 +106,16 @@ pub fn send_recv_many<
     let vl_msg_id = t.get_msg_index(name).unwrap();
     let reply_vl_msg_id = t.get_msg_index(reply_name).unwrap();
 
-    let mut v = bincode_next::serde::encode_to_vec(&vl_msg_id, get_encoder())?;
-    let msg = bincode_next::serde::encode_to_vec(&m, get_encoder())?;
+    let mut v = bincode_next::serde::encode_to_vec(vl_msg_id, get_encoder())?;
+    let msg = bincode_next::serde::encode_to_vec(m, get_encoder())?;
 
     let control_ping = ControlPing {
         client_index: t.get_client_index(),
         context: 0,
     };
 
-    let mut c = bincode_next::serde::encode_to_vec(&control_ping_id, get_encoder())?;
-    let control_ping_message = bincode_next::serde::encode_to_vec(&control_ping, get_encoder())?;
+    let mut c = bincode_next::serde::encode_to_vec(control_ping_id, get_encoder())?;
+    let control_ping_message = bincode_next::serde::encode_to_vec(control_ping, get_encoder())?;
 
     c.extend_from_slice(&control_ping_message);
     v.extend_from_slice(&msg);
@@ -164,8 +164,8 @@ pub fn send_recv_msg<'a, T: Serialize + Deserialize<'a>, TR: Serialize + Deseria
     let vl_msg_id = t.get_msg_index(name).unwrap();
     let reply_vl_msg_id = t.get_msg_index(reply_name).unwrap();
 
-    let mut v = bincode_next::serde::encode_to_vec(&vl_msg_id, get_encoder()).unwrap();
-    let msg = bincode_next::serde::encode_to_vec(&m, get_encoder()).unwrap();
+    let mut v = bincode_next::serde::encode_to_vec(vl_msg_id, get_encoder()).unwrap();
+    let msg = bincode_next::serde::encode_to_vec(m, get_encoder()).unwrap();
 
     trace!(
         "About to send msg: {} id: {} reply_id: {} msg:{:x?}",
@@ -215,16 +215,16 @@ pub fn send_bulk_msg<
     let vl_msg_id = t.get_msg_index(name).unwrap();
     let reply_vl_msg_id = t.get_msg_index(reply_name).unwrap();
 
-    let mut v = bincode_next::serde::encode_to_vec(&vl_msg_id, get_encoder()).unwrap();
-    let msg = bincode_next::serde::encode_to_vec(&m, get_encoder()).unwrap();
+    let mut v = bincode_next::serde::encode_to_vec(vl_msg_id, get_encoder()).unwrap();
+    let msg = bincode_next::serde::encode_to_vec(m, get_encoder()).unwrap();
 
     let control_ping = ControlPing {
         client_index: t.get_client_index(),
         context: 0,
     };
 
-    let mut c = bincode_next::serde::encode_to_vec(&control_ping_id, get_encoder()).unwrap();
-    let mut control_ping_message = bincode_next::serde::encode_to_vec(&control_ping, get_encoder()).unwrap();
+    let mut c = bincode_next::serde::encode_to_vec(control_ping_id, get_encoder()).unwrap();
+    let mut control_ping_message = bincode_next::serde::encode_to_vec(control_ping, get_encoder()).unwrap();
 
     c.extend_from_slice(&control_ping_message);
     v.extend_from_slice(&msg);
