@@ -1,4 +1,5 @@
 extern crate proc_macro;
+use proc_macro2::TokenStream;
 use proc_macro2::TokenTree;
 use quote::ToTokens;
 use quote::quote;
@@ -76,6 +77,25 @@ pub fn derive_message(input: proc_macro::TokenStream) -> proc_macro::TokenStream
             #name: self.#name.clone().ok_or(concat!(stringify!(#name), "is not set"))?
         }
     });
+    let context_setter: Vec<TokenStream> = fields
+        .iter()
+        .filter(|f| f.ident.clone().map(|i| i.to_string()).unwrap_or("".into()) == "context")
+        .map(|_| {
+            quote! {
+                self.context = context;
+            }
+        })
+        .collect();
+    let client_index_setter: Vec<TokenStream> = fields
+        .iter()
+        .filter(|f| f.ident.clone().map(|i| i.to_string()).unwrap_or("".into()) == "client_index")
+        .map(|_| {
+            quote! {
+                self.client_index = client_index;
+            }
+        })
+        .collect();
+
     let builder_ident = syn::Ident::new(&format!("Builder{}", name), name.span());
     let expanded = quote! {
          pub struct #builder_ident{
@@ -92,6 +112,12 @@ pub fn derive_message(input: proc_macro::TokenStream) -> proc_macro::TokenStream
          impl VppApiMessage for #name {
             fn get_message_name_and_crc() -> String {
                  String::from(#ident)
+            }
+            fn set_context(&mut self, context: u32) {
+                #(#context_setter)*
+            }
+            fn set_client_index(&mut self, client_index: u32) {
+                #(#client_index_setter)*
             }
          }
          impl #name {
@@ -214,7 +240,6 @@ pub fn derive_unionident(input: proc_macro::TokenStream) -> proc_macro::TokenStr
         }
     });
     let expanded = quote! {
-        // use bincode;
         impl #name{
             fn new() -> #name {
                 let mut out: FixedSizeArray<u8, typenum::#ty> = Default::default();

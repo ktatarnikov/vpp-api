@@ -25,10 +25,19 @@ name = "vpp-api-transport-test"
 [dependencies]
 vpp-native-client-lib-sys.workspace = true
 vpp-api-message.workspace = true
+vpp-api-encoding.workspace = true
 lazy_static.workspace = true
 serde.workspace = true
 bincode-next.workspace = true
 log.workspace = true
+tokio.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
+typenum.workspace = true
+futures.workspace = true
+futures-util.workspace = true
+tokio-stream.workspace = true
+tokio-util.workspace = true
 
 [dev-dependencies]
 serde_json.workspace = true

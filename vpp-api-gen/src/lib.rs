@@ -130,9 +130,30 @@ pub fn parse_type_tree(opts: &Opts) {
         eprintln!("package path: {}", &crate_dir);
         copy_file_with_fixup(
             &opts.package_path,
-            &format!("{}/code-templates/tests/interface-test.rs", crate_dir),
+            &format!(
+                "{}/code-templates/tests/afunix-interface-test.rs",
+                crate_dir
+            ),
             &opts.package_name,
-            "tests/interface_test.rs",
+            "tests/afunix_interface_test.rs",
+        );
+        copy_file_with_fixup(
+            &opts.package_path,
+            &format!(
+                "{}/code-templates/tests/blocking-interface-test.rs",
+                crate_dir
+            ),
+            &opts.package_name,
+            "tests/blocking_interface_test.rs",
+        );
+        copy_file_with_fixup(
+            &opts.package_path,
+            &format!(
+                "{}/code-templates/tests/nonblocking-interface-test.rs",
+                crate_dir
+            ),
+            &opts.package_name,
+            "tests/nonblocking_interface_test.rs",
         );
         copy_file_with_fixup(
             &opts.package_path,

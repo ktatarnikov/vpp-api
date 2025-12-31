@@ -31,3 +31,4 @@ cfg-if.workspace = true
 
 [dev-dependencies]
 vpp-api-transport.workspace = true
+tokio.workspace = true

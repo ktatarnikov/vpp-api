@@ -31,6 +31,17 @@ impl<N: ArrayLength> fmt::Debug for FixedSizeString<N> {
     }
 }
 
+impl<N: ArrayLength> std::fmt::Display for FixedSizeString<N> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let v = &self.0;
+        let val_str = match std::str::from_utf8(v) {
+            Ok(s) => s.trim_end_matches("\u{0}").into(),
+            Err(_) => format!("{:?}", &v),
+        };
+        f.write_str(&val_str)
+    }
+}
+
 impl<N: ArrayLength> TryFrom<&str> for FixedSizeString<N> {
     type Error = String;
 
@@ -153,6 +164,17 @@ impl fmt::Debug for VariableSizeString {
             Err(_) => format!("{:?}", &v),
         };
         write!(f, "VariableSizeString: {}", &val_str)
+    }
+}
+
+impl std::fmt::Display for VariableSizeString {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let v = &self.0;
+        let val_str = match std::str::from_utf8(v) {
+            Ok(s) => s.into(),
+            Err(_) => format!("{:?}", &v),
+        };
+        f.write_str(&val_str)
     }
 }
 
