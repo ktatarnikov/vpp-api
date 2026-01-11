@@ -166,7 +166,7 @@ impl Client {
     /// This is a diagnostic method to verify connectivity with the VPP daemon.
     ///
     /// # Returns
-    /// 
+    ///
     /// A `Result` containing the return value from the control ping response or an error if the operation fails.
     /// Generates and returns the next unique context ID for a message.
     ///
@@ -216,7 +216,7 @@ impl Client {
     /// # Returns
     ///
     /// A `Result` containing the message ID or an error if the message name cannot be resolved.
-    /// 
+    ///
     pub fn get_message_index(&self, name: &String) -> Result<u16> {
         self.resolver.as_ref()(name.to_owned())
     }
