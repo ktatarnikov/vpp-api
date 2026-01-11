@@ -37,7 +37,7 @@ struct Opts {
     verbose: u8,
 }
 
-async fn bench_non_blocking(opts: &Opts, t: &mut crate::shmem::non_blocking::Client) {
+async fn bench_blocking(opts: &Opts, t: &mut crate::shmem::blocking::Client) {
     let now = SystemTime::now();
     let mut last_show = now;
 
@@ -175,8 +175,8 @@ fn main() {
         result.unwrap()
     } else {
         let result: Result<(), anyhow::Error> = runtime.block_on(async {
-            let mut client = shmem::non_blocking::Client::connect("api-test", None, 256).await?;
-            bench_non_blocking(&opts, &mut client).await;
+            let mut client = shmem::blocking::Client::connect("api-test", None, 256, 1).await?;
+            bench_blocking(&opts, &mut client).await;
             Ok(())
         });
         result.unwrap()
