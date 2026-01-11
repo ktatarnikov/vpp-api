@@ -3,7 +3,7 @@ set -euo pipefail
 
 if [ "$#" -ne 4 ]; then
   echo "Usage: $0 <vpp_version> <dest_folder> <distro> <distro_version>"
-  echo "Example: $0 25.10-release /opt/vpp-sdk debian bookworm"
+  echo "Example: $0 25.10-release ./25.10 debian bookworm"
   exit 1
 fi
 
