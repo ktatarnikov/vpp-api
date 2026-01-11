@@ -1,6 +1,10 @@
+use anyhow::Result;
 use clap::Parser as ClapParser;
 use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
+use tokio::runtime::Builder;
+use vpp_api_transport::afunix;
+use vpp_api_transport::shmem;
 
 /// This program is a minimum test of vpp-api-transport crate
 /// To make it somewhat useful, it can also bench the cli_inband API
@@ -33,11 +37,7 @@ struct Opts {
     verbose: u8,
 }
 
-use vpp_api_transport::VppApiTransport;
-use vpp_api_transport::afunix;
-use vpp_api_transport::shmem;
-
-fn bench(opts: &Opts, t: &mut dyn VppApiTransport) {
+async fn bench_blocking(opts: &Opts, t: &mut crate::shmem::blocking::Client) {
     let now = SystemTime::now();
     let mut last_show = now;
 
@@ -46,7 +46,55 @@ fn bench(opts: &Opts, t: &mut dyn VppApiTransport) {
     println!("Starting {} requests of '{}'", count, &command);
 
     for i in 0..count {
-        let s = t.run_cli_inband(&command);
+        let result = t.run_cli_inband(&command).await;
+        if opts.verbose > 2 {
+            if let Ok(str) = result {
+                println!("Result:\n{}", &str);
+            } else {
+                println!("Error Result: {:?}", &result);
+            }
+        }
+        if let Ok(ela) = last_show.elapsed() {
+            if ela.as_secs_f64() > 5.0 {
+                let elapsed = now.elapsed().unwrap();
+                println!(
+                    "Still running... {} iterations in {:?}: {} per second",
+                    i,
+                    elapsed,
+                    (i as f64) / elapsed.as_secs_f64()
+                );
+                last_show = SystemTime::now();
+            }
+        }
+    }
+
+    match now.elapsed() {
+        Ok(elapsed) => {
+            // it prints '2'
+            println!(
+                "Ran {} operations in {:?} : {} per second",
+                count,
+                elapsed,
+                (count as f64) / elapsed.as_secs_f64()
+            );
+        }
+        Err(e) => {
+            // an error occurred!
+            println!("Error: {:?}", e);
+        }
+    }
+}
+
+async fn bench(opts: &Opts, client: &mut crate::afunix::client::Client) -> Result<()> {
+    let now = SystemTime::now();
+    let mut last_show = now;
+
+    let count = opts.repeat_count;
+    let command = opts.command.clone().unwrap_or("show version".to_string());
+    println!("Starting {} requests of '{}'", count, &command);
+
+    for i in 0..count {
+        let s = client.run_cli_inband(&command).await;
         if opts.verbose > 2 {
             if let Ok(str) = s {
                 println!("Result:\n{}", &str);
@@ -83,6 +131,7 @@ fn bench(opts: &Opts, t: &mut dyn VppApiTransport) {
             println!("Error: {:?}", e);
         }
     }
+    Ok(())
 }
 
 fn main() {
@@ -111,15 +160,25 @@ fn main() {
         let data = serde_yaml_bw::to_string(&opts).unwrap();
         println!("{}", data);
     }
+    let runtime = Builder::new_multi_thread()
+        .enable_all()
+        .build()
+        .expect("tokio runtime");
 
-    let mut t: Box<dyn VppApiTransport> = if let Some(afunix_path) = &opts.socket_path {
-        Box::new(afunix::Transport::new(&afunix_path))
+    if let Some(afunix_path) = &opts.socket_path {
+        let result: Result<(), anyhow::Error> = runtime.block_on(async {
+            let mut client = afunix::client::Client::connect(&afunix_path, "api-test").await?;
+            bench(&opts, &mut client).await?;
+            client.disconnect();
+            Ok(())
+        });
+        result.unwrap()
     } else {
-        Box::new(shmem::Transport::new())
+        let result: Result<(), anyhow::Error> = runtime.block_on(async {
+            let mut client = shmem::blocking::Client::connect("api-test", None, 256, 1).await?;
+            bench_blocking(&opts, &mut client).await;
+            Ok(())
+        });
+        result.unwrap()
     };
-
-    t.connect("api-test", None, 256).unwrap();
-    t.set_nonblocking(opts.nonblocking).unwrap();
-    bench(&opts, &mut *t);
-    t.disconnect();
 }

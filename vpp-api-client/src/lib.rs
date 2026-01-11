@@ -11,10 +11,22 @@ cfg_if! {
         pub use client::*;
 
         #[cfg(test)]
-        #[path = "../gen/25.10/tests/interface_test.rs"]
+        #[path = "../gen/25.10/tests/afunix_interface_test.rs"]
         #[rustfmt::skip]
         #[allow(clippy::all)]
-        pub mod tests;
+        pub mod tests_afunix;
+
+        #[cfg(test)]
+        #[path = "../gen/25.10/tests/blocking_interface_test.rs"]
+        #[rustfmt::skip]
+        #[allow(clippy::all)]
+        pub mod tests_blocking;
+
+        #[cfg(test)]
+        #[path = "../gen/25.10/tests/nonblocking_interface_test.rs"]
+        #[rustfmt::skip]
+        #[allow(clippy::all)]
+        pub mod tests_nonblocking;
 
     } else if #[cfg(feature = "25_06")] {
 
@@ -26,11 +38,22 @@ cfg_if! {
         pub use client::*;
 
         #[cfg(test)]
-        #[path = "../gen/25.06/tests/interface_test.rs"]
+        #[path = "../gen/25.06/tests/afunix_interface_test.rs"]
         #[rustfmt::skip]
         #[allow(clippy::all)]
-        pub mod tests;
+        pub mod tests_afunix;
 
+        #[cfg(test)]
+        #[path = "../gen/25.06/tests/blocking_interface_test.rs"]
+        #[rustfmt::skip]
+        #[allow(clippy::all)]
+        pub mod tests_blocking;
+
+        #[cfg(test)]
+        #[path = "../gen/25.06/tests/nonblocking_interface_test.rs"]
+        #[rustfmt::skip]
+        #[allow(clippy::all)]
+        pub mod tests_nonblocking;
     } else {
         compile_error!("You must enable exactly one version feature: e.g. `25_10` or `25_06`");
     }
