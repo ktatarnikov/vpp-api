@@ -166,11 +166,15 @@ impl Client {
     /// This is a diagnostic method to verify connectivity with the VPP daemon.
     ///
     /// # Returns
-
+    /// 
+    /// A `Result` containing the return value from the control ping response or an error if the operation fails.
+    /// Generates and returns the next unique context ID for a message.
+    ///
     pub async fn control_ping(&mut self) -> Result<i32> {
         let reply: RawControlPingReply = self.send_rcv(RawControlPing::default()).await?;
         Ok(reply.retval)
     }
+
     /// Executes a VPP CLI command and retrieves the output.
     ///
     /// Sends an in-band CLI command to VPP and waits for the response containing the command output.
@@ -183,10 +187,6 @@ impl Client {
     ///
     /// A `Result` containing the command output as a string or an error if the operation fails.
     ///
-    /// A `Result` containing the return value from the control ping response or an error if the operation fails.
-    /// Generates and returns the next unique context ID for a message.
-    ///
-
     pub async fn run_cli_inband(&mut self, cmd: &str) -> Result<String> {
         let in_msg = RawCliInband::new(cmd)?;
         let out_msg: RawCliInbandReply = self.send_rcv(in_msg).await?;
@@ -199,7 +199,7 @@ impl Client {
     /// # Returns
     ///
     /// The next available context ID.
-
+    ///
     fn get_next_context(&mut self) -> u32 {
         self.context_id
             .fetch_add(1, std::sync::atomic::Ordering::AcqRel)
@@ -216,6 +216,7 @@ impl Client {
     /// # Returns
     ///
     /// A `Result` containing the message ID or an error if the message name cannot be resolved.
+    /// 
     pub fn get_message_index(&self, name: &String) -> Result<u16> {
         self.resolver.as_ref()(name.to_owned())
     }
