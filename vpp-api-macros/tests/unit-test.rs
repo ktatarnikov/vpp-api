@@ -1,4 +1,4 @@
-#[allow(non_snake_case)]
+#![allow(non_snake_case)]
 use std::convert::TryInto;
 use typenum;
 use vpp_api_encoding::typ::*;
