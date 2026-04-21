@@ -1,0 +1,1114 @@
+{
+    "types": [
+        [
+            "sse2_qos_action",
+            [
+                "vl_api_sse2_qos_action_type_t",
+                "type"
+            ],
+            [
+                "u8",
+                "dscp"
+            ]
+        ],
+        [
+            "policer_config",
+            [
+                "u32",
+                "cir"
+            ],
+            [
+                "u32",
+                "eir"
+            ],
+            [
+                "u64",
+                "cb"
+            ],
+            [
+                "u64",
+                "eb"
+            ],
+            [
+                "vl_api_sse2_qos_rate_type_t",
+                "rate_type"
+            ],
+            [
+                "vl_api_sse2_qos_round_type_t",
+                "round_type"
+            ],
+            [
+                "vl_api_sse2_qos_policer_type_t",
+                "type"
+            ],
+            [
+                "bool",
+                "color_aware"
+            ],
+            [
+                "vl_api_sse2_qos_action_t",
+                "conform_action"
+            ],
+            [
+                "vl_api_sse2_qos_action_t",
+                "exceed_action"
+            ],
+            [
+                "vl_api_sse2_qos_action_t",
+                "violate_action"
+            ]
+        ]
+    ],
+    "messages": [
+        [
+            "policer_bind",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "string",
+                "name",
+                64
+            ],
+            [
+                "u32",
+                "worker_index"
+            ],
+            [
+                "bool",
+                "bind_enable"
+            ],
+            {
+                "crc": "0xdcf516f9",
+                "options": {},
+                "comment": "/** \\brief policer bind: Associate/disassociate a policer with a worker thread.\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param name - policer name to bind\n    @param worker_index - the worker thread to bind to\n    @param bind_enable - Associate/disassociate\n*/"
+            }
+        ],
+        [
+            "policer_bind_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_bind_v2",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "policer_index"
+            ],
+            [
+                "u32",
+                "worker_index"
+            ],
+            [
+                "bool",
+                "bind_enable"
+            ],
+            {
+                "crc": "0xf87bd3c0",
+                "options": {}
+            }
+        ],
+        [
+            "policer_bind_v2_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_input",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "string",
+                "name",
+                64
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "bool",
+                "apply"
+            ],
+            {
+                "crc": "0x233f0ef5",
+                "options": {},
+                "comment": "/** \\brief policer input: Apply policer as an input feature.\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param name - policer name\n    @param sw_if_index - interface to apply the policer\n    @param apply - Apply/remove\n*/"
+            }
+        ],
+        [
+            "policer_input_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_input_v2",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "policer_index"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "bool",
+                "apply"
+            ],
+            {
+                "crc": "0x8388eb84",
+                "options": {}
+            }
+        ],
+        [
+            "policer_input_v2_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_output",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "string",
+                "name",
+                64
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "bool",
+                "apply"
+            ],
+            {
+                "crc": "0x233f0ef5",
+                "options": {},
+                "comment": "/** \\brief policer output: Apply policer as an output feature.\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param name - policer name\n    @param sw_if_index - interface to apply the policer\n    @param apply - Apply/remove\n*/"
+            }
+        ],
+        [
+            "policer_output_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_output_v2",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "policer_index"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "bool",
+                "apply"
+            ],
+            {
+                "crc": "0x8388eb84",
+                "options": {}
+            }
+        ],
+        [
+            "policer_output_v2_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_add_del",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "string",
+                "name",
+                64
+            ],
+            [
+                "u32",
+                "cir"
+            ],
+            [
+                "u32",
+                "eir"
+            ],
+            [
+                "u64",
+                "cb"
+            ],
+            [
+                "u64",
+                "eb"
+            ],
+            [
+                "vl_api_sse2_qos_rate_type_t",
+                "rate_type"
+            ],
+            [
+                "vl_api_sse2_qos_round_type_t",
+                "round_type"
+            ],
+            [
+                "vl_api_sse2_qos_policer_type_t",
+                "type"
+            ],
+            [
+                "bool",
+                "color_aware"
+            ],
+            [
+                "vl_api_sse2_qos_action_t",
+                "conform_action"
+            ],
+            [
+                "vl_api_sse2_qos_action_t",
+                "exceed_action"
+            ],
+            [
+                "vl_api_sse2_qos_action_t",
+                "violate_action"
+            ],
+            {
+                "crc": "0x2b31dd38",
+                "options": {},
+                "comment": "/** \\brief Add/del policer\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add policer if non-zero, else delete\n    @param name - policer name\n    @param cir - CIR\n    @param eir - EIR\n    @param cb - Committed Burst\n    @param eb - Excess or Peak Burst\n    @param rate_type - rate type\n    @param round_type - rounding type\n    @param type - policer algorithm\n    @param color_aware - 0=color-blind, 1=color-aware\n    @param conform_action - conform action\n    @param exceed_action - exceed action type\n    @param violate_action - violate action type\n*/"
+            }
+        ],
+        [
+            "policer_add",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "string",
+                "name",
+                64
+            ],
+            [
+                "vl_api_policer_config_t",
+                "infos"
+            ],
+            {
+                "crc": "0x4d949e35",
+                "options": {}
+            }
+        ],
+        [
+            "policer_del",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "policer_index"
+            ],
+            {
+                "crc": "0x7ff7912e",
+                "options": {}
+            }
+        ],
+        [
+            "policer_del_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_update",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "policer_index"
+            ],
+            [
+                "vl_api_policer_config_t",
+                "infos"
+            ],
+            {
+                "crc": "0xfd039ef0",
+                "options": {}
+            }
+        ],
+        [
+            "policer_update_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_reset",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "policer_index"
+            ],
+            {
+                "crc": "0x7ff7912e",
+                "options": {}
+            }
+        ],
+        [
+            "policer_reset_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_add_del_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "policer_index"
+            ],
+            {
+                "crc": "0xa177cef2",
+                "options": {},
+                "comment": "/** \\brief Add/del policer response\n    @param context - sender context, to match reply w/ request\n    @param retval - return value for request\n    @param policer_index - for add, returned index of the new policer\n*/"
+            }
+        ],
+        [
+            "policer_add_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "policer_index"
+            ],
+            {
+                "crc": "0xa177cef2",
+                "options": {}
+            }
+        ],
+        [
+            "policer_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "match_name_valid"
+            ],
+            [
+                "string",
+                "match_name",
+                64
+            ],
+            {
+                "crc": "0x35f1ae0f",
+                "options": {},
+                "comment": "/** \\brief Get list of policers\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param match_name_valid - if 0 request all policers otherwise use match_name\n    @param match_name - policer name\n*/"
+            }
+        ],
+        [
+            "policer_dump_v2",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "policer_index"
+            ],
+            {
+                "crc": "0x7ff7912e",
+                "options": {},
+                "comment": "/** \\brief Get list of policers\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param policer_index - index of policer in the pool, ~0 to request all\n*/"
+            }
+        ],
+        [
+            "policer_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "string",
+                "name",
+                64
+            ],
+            [
+                "u32",
+                "cir"
+            ],
+            [
+                "u32",
+                "eir"
+            ],
+            [
+                "u64",
+                "cb"
+            ],
+            [
+                "u64",
+                "eb"
+            ],
+            [
+                "vl_api_sse2_qos_rate_type_t",
+                "rate_type"
+            ],
+            [
+                "vl_api_sse2_qos_round_type_t",
+                "round_type"
+            ],
+            [
+                "vl_api_sse2_qos_policer_type_t",
+                "type"
+            ],
+            [
+                "vl_api_sse2_qos_action_t",
+                "conform_action"
+            ],
+            [
+                "vl_api_sse2_qos_action_t",
+                "exceed_action"
+            ],
+            [
+                "vl_api_sse2_qos_action_t",
+                "violate_action"
+            ],
+            [
+                "bool",
+                "single_rate"
+            ],
+            [
+                "bool",
+                "color_aware"
+            ],
+            [
+                "u32",
+                "scale"
+            ],
+            [
+                "u32",
+                "cir_tokens_per_period"
+            ],
+            [
+                "u32",
+                "pir_tokens_per_period"
+            ],
+            [
+                "u32",
+                "current_limit"
+            ],
+            [
+                "u32",
+                "current_bucket"
+            ],
+            [
+                "u32",
+                "extended_limit"
+            ],
+            [
+                "u32",
+                "extended_bucket"
+            ],
+            [
+                "u64",
+                "last_update_time"
+            ],
+            {
+                "crc": "0x72d0e248",
+                "options": {},
+                "comment": "/** \\brief Policer operational state response.\n    @param context - sender context, to match reply w/ request\n    @param name - policer name\n    @param cir - CIR\n    @param eir - EIR\n    @param cb - Committed Burst\n    @param eb - Excess or Peak Burst\n    @param rate_type - rate type\n    @param round_type - rounding type\n    @param type - policer algorithm\n    @param conform_action - conform action\n    @param exceed_action - exceed action\n    @param violate_action - violate action\n    @param single_rate - 1 = single rate policer, 0 = two rate policer\n    @param color_aware - for hierarchical policing\n    @param scale - power-of-2 shift amount for lower rates\n    @param cir_tokens_per_period - number of tokens for each period\n    @param pir_tokens_per_period - number of tokens for each period for 2-rate policer\n    @param current_limit - current limit\n    @param current_bucket - current bucket\n    @param extended_limit - extended limit\n    @param extended_bucket - extended bucket\n    @param last_update_time - last update time\n*/"
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "sse2_qos_rate_type",
+            [
+                "SSE2_QOS_RATE_API_KBPS",
+                0
+            ],
+            [
+                "SSE2_QOS_RATE_API_PPS",
+                1
+            ],
+            [
+                "SSE2_QOS_RATE_API_INVALID",
+                2
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "sse2_qos_round_type",
+            [
+                "SSE2_QOS_ROUND_API_TO_CLOSEST",
+                0
+            ],
+            [
+                "SSE2_QOS_ROUND_API_TO_UP",
+                1
+            ],
+            [
+                "SSE2_QOS_ROUND_API_TO_DOWN",
+                2
+            ],
+            [
+                "SSE2_QOS_ROUND_API_INVALID",
+                3
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "sse2_qos_policer_type",
+            [
+                "SSE2_QOS_POLICER_TYPE_API_1R2C",
+                0
+            ],
+            [
+                "SSE2_QOS_POLICER_TYPE_API_1R3C_RFC_2697",
+                1
+            ],
+            [
+                "SSE2_QOS_POLICER_TYPE_API_2R3C_RFC_2698",
+                2
+            ],
+            [
+                "SSE2_QOS_POLICER_TYPE_API_2R3C_RFC_4115",
+                3
+            ],
+            [
+                "SSE2_QOS_POLICER_TYPE_API_2R3C_RFC_MEF5CF1",
+                4
+            ],
+            [
+                "SSE2_QOS_POLICER_TYPE_API_MAX",
+                5
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "sse2_qos_action_type",
+            [
+                "SSE2_QOS_ACTION_API_DROP",
+                0
+            ],
+            [
+                "SSE2_QOS_ACTION_API_TRANSMIT",
+                1
+            ],
+            [
+                "SSE2_QOS_ACTION_API_MARK_AND_TRANSMIT",
+                2
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "policer_dump_v2": {
+            "reply": "policer_details",
+            "stream": true
+        },
+        "policer_bind": {
+            "reply": "policer_bind_reply"
+        },
+        "policer_bind_v2": {
+            "reply": "policer_bind_v2_reply"
+        },
+        "policer_input": {
+            "reply": "policer_input_reply"
+        },
+        "policer_input_v2": {
+            "reply": "policer_input_v2_reply"
+        },
+        "policer_output": {
+            "reply": "policer_output_reply"
+        },
+        "policer_output_v2": {
+            "reply": "policer_output_v2_reply"
+        },
+        "policer_add_del": {
+            "reply": "policer_add_del_reply"
+        },
+        "policer_add": {
+            "reply": "policer_add_reply"
+        },
+        "policer_del": {
+            "reply": "policer_del_reply"
+        },
+        "policer_update": {
+            "reply": "policer_update_reply"
+        },
+        "policer_reset": {
+            "reply": "policer_reset_reply"
+        },
+        "policer_dump": {
+            "reply": "policer_details",
+            "stream": true
+        }
+    },
+    "options": {
+        "version": "3.0.0"
+    },
+    "aliases": {
+        "interface_index": {
+            "type": "u32"
+        }
+    },
+    "vl_api_version": "0x341163a6",
+    "imports": [
+        "vnet/interface_types.api",
+        "vnet/policer/policer_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}

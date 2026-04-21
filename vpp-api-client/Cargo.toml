@@ -7,6 +7,9 @@ license = "MIT OR Apache-2.0"
 homepage = "https://wiki.fd.io/view/VPP"
 
 [features]
+26_02 = [
+    "vpp-api-transport/26_02",
+]
 25_10 = [
     "vpp-api-transport/25_10",
 ]

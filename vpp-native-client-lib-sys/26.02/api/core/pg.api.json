@@ -1,0 +1,632 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "pg_create_interface",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "interface_id"
+            ],
+            [
+                "bool",
+                "gso_enabled"
+            ],
+            [
+                "u32",
+                "gso_size"
+            ],
+            {
+                "crc": "0xb7c893d7",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief PacketGenerator create interface request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param interface_id - interface index\n    @param gso_enabled - enable gso on this interface\n    @param gso_size - gso size on this interface\n*/"
+            }
+        ],
+        [
+            "pg_create_interface_v2",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "interface_id"
+            ],
+            [
+                "bool",
+                "gso_enabled"
+            ],
+            [
+                "u32",
+                "gso_size"
+            ],
+            [
+                "vl_api_pg_interface_mode_t",
+                "mode"
+            ],
+            {
+                "crc": "0x8657466a",
+                "options": {
+                    "deprecated": null
+                }
+            }
+        ],
+        [
+            "pg_create_interface_v3",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "interface_id"
+            ],
+            [
+                "vl_api_pg_interface_flags_t",
+                "pg_flags"
+            ],
+            [
+                "u32",
+                "gso_size"
+            ],
+            [
+                "vl_api_pg_interface_mode_t",
+                "mode"
+            ],
+            {
+                "crc": "0xb2aac653",
+                "options": {}
+            }
+        ],
+        [
+            "pg_create_interface_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x5383d31f",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief PacketGenerator create interface response\n    @param context - sender context, to match reply w/ request\n    @param retval - return value for request\n*/"
+            }
+        ],
+        [
+            "pg_create_interface_v2_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x5383d31f",
+                "options": {
+                    "deprecated": null
+                }
+            }
+        ],
+        [
+            "pg_create_interface_v3_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x5383d31f",
+                "options": {}
+            }
+        ],
+        [
+            "pg_delete_interface",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0xf9e6675e",
+                "options": {},
+                "comment": "/** \\brief PacketGenerator delete interface request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - interface index\n*/"
+            }
+        ],
+        [
+            "pg_delete_interface_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "pg_interface_enable_disable_coalesce",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "bool",
+                "coalesce_enabled"
+            ],
+            {
+                "crc": "0xa2ef99e7",
+                "options": {
+                    "status": "in_progress"
+                },
+                "comment": "/** \\brief PacketGenerator interface enable/disable packet coalesce\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param interface_id - interface index\n    @param coalesce_enabled - enable/disable packet coalesce on this interface\n*/"
+            }
+        ],
+        [
+            "pg_interface_enable_disable_coalesce_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "status": "in_progress"
+                }
+            }
+        ],
+        [
+            "pg_capture",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "interface_id"
+            ],
+            [
+                "bool",
+                "is_enabled",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "string",
+                "pcap_file_name",
+                0
+            ],
+            {
+                "crc": "0x3712fb6c",
+                "options": {},
+                "comment": "/** \\brief PacketGenerator capture packets on given interface request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param interface_id - pg interface index\n    @param is_enabled - 1 if enabling streams, 0 if disabling\n    @param count - number of packets to be captured\n    @param pcap_file_name - pacp file name to store captured packets\n*/"
+            }
+        ],
+        [
+            "pg_capture_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "pg_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_enabled",
+                {
+                    "default": "true"
+                }
+            ],
+            [
+                "string",
+                "stream_name",
+                0
+            ],
+            {
+                "crc": "0x01f94f3a",
+                "options": {},
+                "comment": "/** \\brief Enable / disable packet generator request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_enabled - 1 if enabling streams, 0 if disabling\n    @param stream_name - stream name to be enable/disabled, if not specified handle all streams\n*/"
+            }
+        ],
+        [
+            "pg_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "pg_interface_mode",
+            [
+                "PG_API_MODE_ETHERNET",
+                0
+            ],
+            [
+                "PG_API_MODE_IP4",
+                1
+            ],
+            [
+                "PG_API_MODE_IP6",
+                2
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "pg_interface_flags",
+            [
+                "PG_API_FLAG_NONE",
+                0
+            ],
+            [
+                "PG_API_FLAG_CSUM_OFFLOAD",
+                1
+            ],
+            [
+                "PG_API_FLAG_GSO",
+                2
+            ],
+            [
+                "PG_API_FLAG_GRO_COALESCE",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "pg_create_interface": {
+            "reply": "pg_create_interface_reply"
+        },
+        "pg_create_interface_v2": {
+            "reply": "pg_create_interface_v2_reply"
+        },
+        "pg_create_interface_v3": {
+            "reply": "pg_create_interface_v3_reply"
+        },
+        "pg_delete_interface": {
+            "reply": "pg_delete_interface_reply"
+        },
+        "pg_interface_enable_disable_coalesce": {
+            "reply": "pg_interface_enable_disable_coalesce_reply"
+        },
+        "pg_capture": {
+            "reply": "pg_capture_reply"
+        },
+        "pg_enable_disable": {
+            "reply": "pg_enable_disable_reply"
+        }
+    },
+    "options": {
+        "version": "2.1.0"
+    },
+    "aliases": {
+        "interface_index": {
+            "type": "u32"
+        }
+    },
+    "vl_api_version": "0xeae14b90",
+    "imports": [
+        "vnet/interface_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}

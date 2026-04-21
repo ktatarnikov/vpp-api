@@ -1,0 +1,1718 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "classify_add_del_table",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "bool",
+                "del_chain"
+            ],
+            [
+                "u32",
+                "table_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "u32",
+                "nbuckets",
+                {
+                    "default": 2
+                }
+            ],
+            [
+                "u32",
+                "memory_size",
+                {
+                    "default": 2097152
+                }
+            ],
+            [
+                "u32",
+                "skip_n_vectors",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "u32",
+                "match_n_vectors",
+                {
+                    "default": 1
+                }
+            ],
+            [
+                "u32",
+                "next_table_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "u32",
+                "miss_next_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "u8",
+                "current_data_flag",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "i16",
+                "current_data_offset",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "u32",
+                "mask_len"
+            ],
+            [
+                "u8",
+                "mask",
+                0,
+                "mask_len"
+            ],
+            {
+                "crc": "0x6849e39e",
+                "options": {},
+                "comment": "/** \\brief Add/Delete classification table request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add- if non-zero add the table, else delete it\n    @param del_chain - if non-zero delete the whole chain of tables\n    @param table_index - if add, returns index of the created table, else specifies the table to delete\n    @param nbuckets - number of buckets when adding a table\n    @param memory_size - memory size when adding a table\n    @param match_n_vectors - number of match vectors\n    @param next_table_index - index of next table\n    @param miss_next_index - index of miss table\n    @param current_data_flag - option to use current node's packet payload\n            as the starting point from where packets are classified,\n            This option is only valid for L2/L3 input ACL for now.\n            0: by default, classify data from the buffer's start location\n            1: classify packets from VPP node\u2019s current data pointer\n    @param current_data_offset - a signed value to shift the start location of\n            the packet to be classified\n            For example, if input IP ACL node is used, L2 header\u2019s first byte\n            can be accessible by configuring current_data_offset to -14\n            if there is no vlan tag.\n            This is valid only if current_data_flag is set to 1.\n    @param mask_len - length of match mask, should be equal to match_n_vectors * sizeof (u32x4)\n    @param mask - match mask\n*/"
+            }
+        ],
+        [
+            "classify_add_del_table_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "new_table_index"
+            ],
+            [
+                "u32",
+                "skip_n_vectors"
+            ],
+            [
+                "u32",
+                "match_n_vectors"
+            ],
+            {
+                "crc": "0x05486349",
+                "options": {},
+                "comment": "/** \\brief Add/Delete classification table response\n    @param context - sender context, to match reply w/ request\n    @param retval - return code for the table add/del request\n    @param new_table_index - for add, returned index of the new table\n    @param skip_n_vectors - for add, returned value of skip_n_vectors in table\n    @param match_n_vectors -for add, returned value of match_n_vectors in table\n*/"
+            }
+        ],
+        [
+            "classify_add_del_session",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "u32",
+                "table_index"
+            ],
+            [
+                "u32",
+                "hit_next_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "u32",
+                "opaque_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "i32",
+                "advance",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "vl_api_classify_action_t",
+                "action",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "u32",
+                "metadata",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "u32",
+                "match_len"
+            ],
+            [
+                "u8",
+                "match",
+                0,
+                "match_len"
+            ],
+            {
+                "crc": "0xf20879f0",
+                "options": {},
+                "comment": "/** \\brief Classify add / del session request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - add session if non-zero, else delete\n    @param table_index - index of the table to add/del the session, required\n    @param hit_next_index - for add, hit_next_index of new session, required\n    @param opaque_index - for add, opaque_index of new session\n    @param advance -for add, advance value for session\n    @param action -\n           0: no action (by default)\n              metadata is not used.\n           1: Classified IP packets will be looked up from the\n              specified ipv4 fib table (configured by metadata as VRF id).\n              Only valid for L3 input ACL node\n           2: Classified IP packets will be looked up from the\n              specified ipv6 fib table (configured by metadata as VRF id).\n              Only valid for L3 input ACL node\n           3: Classified packet will be steered to source routing policy\n              of given index (in metadata).\n              This is only valid for IPv6 packets redirected to a source\n              routing node.\n    @param metadata - valid only if action != 0\n           VRF id if action is 1 or 2.\n           sr policy index if action is 3.\n    @param match_len - length of match, should be equal to skip_n_vectors plus match_n_vectors\n                       of target table times sizeof (u32x4)\n    @param match - for add, match value for session, required,\n                   needs to include bytes in front\n                   with length of skip_n_vectors of target table times sizeof (u32x4)\n                   (values of those bytes will be ignored)\n*/"
+            }
+        ],
+        [
+            "classify_add_del_session_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_classify_set_interface",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "ip4_table_index"
+            ],
+            [
+                "u32",
+                "ip6_table_index"
+            ],
+            [
+                "u32",
+                "l2_table_index"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            {
+                "crc": "0xde7ad708",
+                "options": {},
+                "comment": "/** \\brief Set/unset policer classify interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - interface to set/unset policer classify\n    @param ip4_table_index - ip4 classify table index (~0 for skip)\n    @param ip6_table_index - ip6 classify table index (~0 for skip)\n    @param l2_table_index  -  l2 classify table index (~0 for skip)\n    @param is_add - Set if non-zero, else unset\n    Note: User is recommended to use just one valid table_index per call.\n          (ip4_table_index, ip6_table_index, or l2_table_index)\n*/"
+            }
+        ],
+        [
+            "policer_classify_set_interface_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "policer_classify_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_policer_classify_table_t",
+                "type"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x56cbb5fb",
+                "options": {},
+                "comment": "/** \\brief Get list of policer classify interfaces and tables\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param type - classify table type\n    @param sw_if_index - filter on sw_if_index\n*/"
+            }
+        ],
+        [
+            "policer_classify_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "table_index"
+            ],
+            {
+                "crc": "0xdfd08765",
+                "options": {},
+                "comment": "/** \\brief Policer classify operational state response.\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - software interface index\n    @param table_index - classify table index\n*/"
+            }
+        ],
+        [
+            "classify_table_ids",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Classify get table IDs request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "classify_table_ids_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "u32",
+                "ids",
+                0,
+                "count"
+            ],
+            {
+                "crc": "0xd1d20e1d",
+                "options": {},
+                "comment": "/** \\brief Reply for classify get table IDs request\n    @param context - sender context which was passed in the request\n    @param count - number of ids returned in response\n    @param ids - array of classify table ids\n*/"
+            }
+        ],
+        [
+            "classify_table_by_interface",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0xf9e6675e",
+                "options": {},
+                "comment": "/** \\brief Classify table ids by interface index request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - index of the interface\n*/"
+            }
+        ],
+        [
+            "classify_table_by_interface_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "l2_table_id"
+            ],
+            [
+                "u32",
+                "ip4_table_id"
+            ],
+            [
+                "u32",
+                "ip6_table_id"
+            ],
+            {
+                "crc": "0xed4197db",
+                "options": {},
+                "comment": "/** \\brief Reply for classify table id by interface index request\n    @param context - sender context which was passed in the request\n    @param count - number of ids returned in response\n    @param sw_if_index - index of the interface\n    @param l2_table_id - l2 classify table index\n    @param ip4_table_id - ip4 classify table index\n    @param ip6_table_id - ip6 classify table index\n*/"
+            }
+        ],
+        [
+            "classify_table_info",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "table_id"
+            ],
+            {
+                "crc": "0x0cca2cd9",
+                "options": {},
+                "comment": "/** \\brief Classify table info\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param table_id - classify table index\n*/"
+            }
+        ],
+        [
+            "classify_table_info_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "table_id"
+            ],
+            [
+                "u32",
+                "nbuckets"
+            ],
+            [
+                "u32",
+                "match_n_vectors"
+            ],
+            [
+                "u32",
+                "skip_n_vectors"
+            ],
+            [
+                "u32",
+                "active_sessions"
+            ],
+            [
+                "u32",
+                "next_table_index"
+            ],
+            [
+                "u32",
+                "miss_next_index"
+            ],
+            [
+                "u32",
+                "mask_length"
+            ],
+            [
+                "u8",
+                "mask",
+                0,
+                "mask_length"
+            ],
+            {
+                "crc": "0x4a573c0e",
+                "options": {},
+                "comment": "/** \\brief Reply for classify table info request\n    @param context - sender context which was passed in the request\n    @param count - number of ids returned in response\n    @param table_id - classify table index\n    @param nbuckets - number of buckets when adding a table\n    @param match_n_vectors - number of match vectors\n    @param skip_n_vectors - number of skip_n_vectors\n    @param active_sessions - number of sessions (active entries)\n    @param next_table_index - index of next table\n    @param miss_next_index - index of miss table\n    @param mask[] - match mask\n*/"
+            }
+        ],
+        [
+            "classify_session_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "table_id"
+            ],
+            {
+                "crc": "0x0cca2cd9",
+                "options": {},
+                "comment": "/** \\brief Classify sessions dump request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param table_id - classify table index\n*/"
+            }
+        ],
+        [
+            "classify_session_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "table_id"
+            ],
+            [
+                "u32",
+                "hit_next_index"
+            ],
+            [
+                "i32",
+                "advance"
+            ],
+            [
+                "u32",
+                "opaque_index"
+            ],
+            [
+                "u32",
+                "match_length"
+            ],
+            [
+                "u8",
+                "match",
+                0,
+                "match_length"
+            ],
+            {
+                "crc": "0x60e3ef94",
+                "options": {},
+                "comment": "/** \\brief Reply for classify table session dump request\n    @param context - sender context which was passed in the request\n    @param count - number of ids returned in response\n    @param table_id - classify table index\n    @param hit_next_index - hit_next_index of session\n    @param opaque_index - for add, opaque_index of session\n    @param advance - advance value of session\n    @param match[] - match value for session\n*/"
+            }
+        ],
+        [
+            "flow_classify_set_interface",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "ip4_table_index"
+            ],
+            [
+                "u32",
+                "ip6_table_index"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            {
+                "crc": "0xb6192f1c",
+                "options": {},
+                "comment": "/** \\brief Set/unset flow classify interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - interface to set/unset flow classify\n    @param ip4_table_index - ip4 classify table index (~0 for skip)\n    @param ip6_table_index - ip6 classify table index (~0 for skip)\n    @param l2_table_index  -  l2 classify table index (~0 for skip)\n    @param is_add - Set if non-zero, else unset\n    Note: User is recommended to use just one valid table_index per call.\n          (ip4_table_index, ip6_table_index, or l2_table_index)\n*/"
+            }
+        ],
+        [
+            "flow_classify_set_interface_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "flow_classify_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_flow_classify_table_t",
+                "type"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x25dd3e4c",
+                "options": {},
+                "comment": "/** \\brief Get list of flow classify interfaces and tables\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param type - flow classify table type\n    @param sw_if_index - filter on sw_if_index\n*/"
+            }
+        ],
+        [
+            "flow_classify_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "table_index"
+            ],
+            {
+                "crc": "0xdfd08765",
+                "options": {},
+                "comment": "/** \\brief Flow classify operational state response.\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - software interface index\n    @param table_index - classify table index\n*/"
+            }
+        ],
+        [
+            "classify_set_interface_ip_table",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_ipv6"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "table_index"
+            ],
+            {
+                "crc": "0xe0b097c7",
+                "options": {},
+                "comment": "/** \\brief Set/unset the classification table for an interface request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_ipv6 - ipv6 if non-zero, else ipv4\n    @param sw_if_index - interface to associate with the table\n    @param table_index - index of the table, if ~0 unset the table\n*/"
+            }
+        ],
+        [
+            "classify_set_interface_ip_table_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "classify_set_interface_l2_tables",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "ip4_table_index"
+            ],
+            [
+                "u32",
+                "ip6_table_index"
+            ],
+            [
+                "u32",
+                "other_table_index"
+            ],
+            [
+                "bool",
+                "is_input"
+            ],
+            {
+                "crc": "0x5a6ddf65",
+                "options": {},
+                "comment": "/** \\brief Set/unset l2 classification tables for an interface request\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - interface to set/unset tables for\n    @param ip4_table_index - ip4 index, use ~0 for all 3 indexes to unset\n    @param ip6_table_index - ip6 index\n    @param other_table_index - other index\n*/"
+            }
+        ],
+        [
+            "classify_set_interface_l2_tables_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "input_acl_set_interface",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "ip4_table_index"
+            ],
+            [
+                "u32",
+                "ip6_table_index"
+            ],
+            [
+                "u32",
+                "l2_table_index"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            {
+                "crc": "0xde7ad708",
+                "options": {},
+                "comment": "/** \\brief Set/unset input ACL interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - interface to set/unset input ACL\n    @param ip4_table_index - ip4 classify table index (~0 for skip)\n    @param ip6_table_index - ip6 classify table index (~0 for skip)\n    @param l2_table_index  -  l2 classify table index (~0 for skip)\n    @param is_add - Set input ACL if non-zero, else unset\n    Note: User is recommended to use just one valid table_index per call.\n          (ip4_table_index, ip6_table_index, or l2_table_index)\n*/"
+            }
+        ],
+        [
+            "input_acl_set_interface_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "punt_acl_add_del",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "ip4_table_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "u32",
+                "ip6_table_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "bool",
+                "is_add",
+                {
+                    "default": "true"
+                }
+            ],
+            {
+                "crc": "0xa93bf3a0",
+                "options": {},
+                "comment": "/** \\brief Add/del punt ACL\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param ip4_table_index - ip4 punt classify table index (~0 for skip)\n    @param ip6_table_index - ip6 punt classify table index (~0 for skip)\n    @param is_add - add punt ACL if non-zero, else delete\n*/"
+            }
+        ],
+        [
+            "punt_acl_add_del_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "punt_acl_get",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Get classify table ids configured for punt ACL\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "punt_acl_get_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "ip4_table_index"
+            ],
+            [
+                "u32",
+                "ip6_table_index"
+            ],
+            {
+                "crc": "0x8409b9dd",
+                "options": {},
+                "comment": "/** \\brief Reply for punt_acl_get\n    @param context - sender context which was passed in the request\n    @param retval - return value (0 for success)\n    @param ip4_table_index - ip4 punt classify table index (~0 for none)\n    @param ip6_table_index - ip6 punt classify table index (~0 for none)\n*/"
+            }
+        ],
+        [
+            "output_acl_set_interface",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "ip4_table_index"
+            ],
+            [
+                "u32",
+                "ip6_table_index"
+            ],
+            [
+                "u32",
+                "l2_table_index"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            {
+                "crc": "0xde7ad708",
+                "options": {},
+                "comment": "/** \\brief Set/unset output ACL interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - interface to set/unset output ACL\n    @param ip4_table_index - ip4 classify table index (~0 for skip)\n    @param ip6_table_index - ip6 classify table index (~0 for skip)\n    @param l2_table_index  -  l2 classify table index (~0 for skip)\n    @param is_add - Set output ACL if non-zero, else unset\n    Note: User is recommended to use just one valid table_index per call.\n          (ip4_table_index, ip6_table_index, or l2_table_index)\n*/"
+            }
+        ],
+        [
+            "output_acl_set_interface_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "classify_pcap_lookup_table",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "u32",
+                "skip_n_vectors",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "u32",
+                "match_n_vectors",
+                {
+                    "default": 1
+                }
+            ],
+            [
+                "u32",
+                "mask_len"
+            ],
+            [
+                "u8",
+                "mask",
+                0,
+                "mask_len"
+            ],
+            {
+                "crc": "0xe1b4cc6b",
+                "options": {},
+                "comment": "/** \\brief Find a compatible Classify table in a PCAP chain\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - interface whose chain will be searched, 0==system-wide\n    @param skip_n_vectors - number of u32x4 skip vectors\n    @param match_n_vectors - number of u32x4 vectors, 1..5\n    @param mask_len - length of mask, match_n_vectors * sizeof(u32x4)\n    @param mask - match mask\n*/"
+            }
+        ],
+        [
+            "classify_pcap_lookup_table_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "table_index"
+            ],
+            {
+                "crc": "0x9c6c6773",
+                "options": {},
+                "comment": "/** \\brief Classify pcap table lookup response\n    @param context - sender context, to match reply w/ request\n    @param retval - return code for the table lookup request\n    @param table_index - returned index of the found table, or ~0\n */"
+            }
+        ],
+        [
+            "classify_pcap_set_table",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "u32",
+                "table_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "bool",
+                "sort_masks",
+                {
+                    "default": 0
+                }
+            ],
+            {
+                "crc": "0x006051b3",
+                "options": {},
+                "comment": "/** \\brief Add a Classify table into a PCAP chain on an interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - interface whose chain will be searched, 0==system-wide\n    @param table_index - Classify table to be added\n    @param sort_masks - 1=sort masks into most-to-least specific order\n */"
+            }
+        ],
+        [
+            "classify_pcap_set_table_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "table_index"
+            ],
+            {
+                "crc": "0x9c6c6773",
+                "options": {},
+                "comment": "/** \\brief Classify pcap table lookup response\n    @param context - sender context which was passed in the request\n    @param retval - return code for the table lookup request\n    @param table_index - returned index of the sorted table chain\n */"
+            }
+        ],
+        [
+            "classify_pcap_get_tables",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0xf9e6675e",
+                "options": {},
+                "comment": "/** \\brief Classify get the PCAP table indices for an interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n */"
+            }
+        ],
+        [
+            "classify_pcap_get_tables_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "u32",
+                "indices",
+                0,
+                "count"
+            ],
+            {
+                "crc": "0x5f5bc9e6",
+                "options": {},
+                "comment": "/** \\brief Classify get a PCAP tables response\n    @param context - sender context which was passed in the request\n    @param retval - return code for the request\n    @param count - number of ids returned in response\n    @param indices - array of classify table indices\n */"
+            }
+        ],
+        [
+            "classify_trace_lookup_table",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "skip_n_vectors",
+                {
+                    "default": 0
+                }
+            ],
+            [
+                "u32",
+                "match_n_vectors",
+                {
+                    "default": 1
+                }
+            ],
+            [
+                "u32",
+                "mask_len"
+            ],
+            [
+                "u8",
+                "mask",
+                0,
+                "mask_len"
+            ],
+            {
+                "crc": "0x3f7b72e4",
+                "options": {},
+                "comment": "/** \\brief Find a mask-compatible Classify table in the Trace chain\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param skip_n_vectors - number of u32x4 skip vectors\n    @param match_n_vectors - number of u32x4 vectors, 1..5\n    @param mask_len - length of mask, match_n_vectors * sizeof(u32x4)\n    @param mask - match mask\n*/"
+            }
+        ],
+        [
+            "classify_trace_lookup_table_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "table_index"
+            ],
+            {
+                "crc": "0x9c6c6773",
+                "options": {},
+                "comment": "/** \\brief Classify trace table lookup response\n    @param context - sender context which was passed in the request\n    @param retval - return code for the table lookup request\n    @param table_index - returned index of the found table, or ~0\n */"
+            }
+        ],
+        [
+            "classify_trace_set_table",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "table_index",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "bool",
+                "sort_masks",
+                {
+                    "default": 0
+                }
+            ],
+            {
+                "crc": "0x3909b55a",
+                "options": {},
+                "comment": "/** \\brief Add a Classify table into the Trace chain\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param table_index - Classify table to be added\n    @param sort_masks - 1=sort masks into most-to-least specific order\n */"
+            }
+        ],
+        [
+            "classify_trace_set_table_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "table_index"
+            ],
+            {
+                "crc": "0x9c6c6773",
+                "options": {},
+                "comment": "/** \\brief Classify Trace table lookup response\n    @param context - sender context which was passed in the request\n    @param retval - return code for the table lookup request\n    @param table_index - returned index of the sorted table chain\n */"
+            }
+        ],
+        [
+            "classify_trace_get_tables",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Classify get the Trace table indices\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n */"
+            }
+        ],
+        [
+            "classify_trace_get_tables_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "count"
+            ],
+            [
+                "u32",
+                "indices",
+                0,
+                "count"
+            ],
+            {
+                "crc": "0x5f5bc9e6",
+                "options": {},
+                "comment": "/** \\brief Classify get the Trace tables response\n    @param context - sender context which was passed in the request\n    @param retval - return code for the request\n    @param count - number of ids returned in response\n    @param indices - array of classify table indices\n */"
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "classify_action",
+            [
+                "CLASSIFY_API_ACTION_NONE",
+                0
+            ],
+            [
+                "CLASSIFY_API_ACTION_SET_IP4_FIB_INDEX",
+                1
+            ],
+            [
+                "CLASSIFY_API_ACTION_SET_IP6_FIB_INDEX",
+                2
+            ],
+            [
+                "CLASSIFY_API_ACTION_SET_METADATA",
+                3
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "policer_classify_table",
+            [
+                "POLICER_CLASSIFY_API_TABLE_IP4",
+                0
+            ],
+            [
+                "POLICER_CLASSIFY_API_TABLE_IP6",
+                1
+            ],
+            [
+                "POLICER_CLASSIFY_API_TABLE_L2",
+                2
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "flow_classify_table",
+            [
+                "FLOW_CLASSIFY_API_TABLE_IP4",
+                0
+            ],
+            [
+                "FLOW_CLASSIFY_API_TABLE_IP6",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "classify_add_del_table": {
+            "reply": "classify_add_del_table_reply"
+        },
+        "classify_add_del_session": {
+            "reply": "classify_add_del_session_reply"
+        },
+        "policer_classify_set_interface": {
+            "reply": "policer_classify_set_interface_reply"
+        },
+        "policer_classify_dump": {
+            "reply": "policer_classify_details",
+            "stream": true
+        },
+        "classify_table_ids": {
+            "reply": "classify_table_ids_reply"
+        },
+        "classify_table_by_interface": {
+            "reply": "classify_table_by_interface_reply"
+        },
+        "classify_table_info": {
+            "reply": "classify_table_info_reply"
+        },
+        "classify_session_dump": {
+            "reply": "classify_session_details",
+            "stream": true
+        },
+        "flow_classify_set_interface": {
+            "reply": "flow_classify_set_interface_reply"
+        },
+        "flow_classify_dump": {
+            "reply": "flow_classify_details",
+            "stream": true
+        },
+        "classify_set_interface_ip_table": {
+            "reply": "classify_set_interface_ip_table_reply"
+        },
+        "classify_set_interface_l2_tables": {
+            "reply": "classify_set_interface_l2_tables_reply"
+        },
+        "input_acl_set_interface": {
+            "reply": "input_acl_set_interface_reply"
+        },
+        "punt_acl_add_del": {
+            "reply": "punt_acl_add_del_reply"
+        },
+        "punt_acl_get": {
+            "reply": "punt_acl_get_reply"
+        },
+        "output_acl_set_interface": {
+            "reply": "output_acl_set_interface_reply"
+        },
+        "classify_pcap_lookup_table": {
+            "reply": "classify_pcap_lookup_table_reply"
+        },
+        "classify_pcap_set_table": {
+            "reply": "classify_pcap_set_table_reply"
+        },
+        "classify_pcap_get_tables": {
+            "reply": "classify_pcap_get_tables_reply"
+        },
+        "classify_trace_lookup_table": {
+            "reply": "classify_trace_lookup_table_reply"
+        },
+        "classify_trace_set_table": {
+            "reply": "classify_trace_set_table_reply"
+        },
+        "classify_trace_get_tables": {
+            "reply": "classify_trace_get_tables_reply"
+        }
+    },
+    "options": {
+        "version": "3.1.0"
+    },
+    "aliases": {
+        "interface_index": {
+            "type": "u32"
+        }
+    },
+    "vl_api_version": "0x92a4f2c8",
+    "imports": [
+        "vnet/interface_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}

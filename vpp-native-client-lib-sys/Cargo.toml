@@ -8,6 +8,7 @@ edition = "2024"
 links = "vppapiclient"
 
 [features]
+26_02 = []
 25_10 = []
 25_06 = []
 

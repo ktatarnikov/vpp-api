@@ -8,6 +8,9 @@ license = "MIT OR Apache-2.0"
 homepage = "https://wiki.fd.io/view/VPP"
 
 [features]
+26_02 = [
+    "vpp-native-client-lib-sys/26_02",
+]
 25_10 = [
     "vpp-native-client-lib-sys/25_10",
 ]

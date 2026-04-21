@@ -1,0 +1,93 @@
+{
+    "types": [],
+    "messages": [],
+    "unions": [],
+    "enums": [],
+    "enumflags": [],
+    "services": {},
+    "options": {},
+    "aliases": {},
+    "vl_api_version": "0x0",
+    "imports": [],
+    "counters": [
+        {
+            "name": "sasc_lookup",
+            "elements": [
+                {
+                    "name": "miss",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "flow miss"
+                },
+                {
+                    "name": "remote",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "remote flow"
+                },
+                {
+                    "name": "con_drop",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "handoff drop"
+                },
+                {
+                    "name": "no_key",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "not able to create 6-tuple key"
+                }
+            ]
+        },
+        {
+            "name": "sasc_create",
+            "elements": [
+                {
+                    "name": "full_table",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "session table is full"
+                },
+                {
+                    "name": "no_key",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "not able to create 6-tuple key"
+                },
+                {
+                    "name": "icmp_error",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "ICMP error"
+                }
+            ]
+        },
+        {
+            "name": "sasc_handoff",
+            "elements": [
+                {
+                    "name": "noerror",
+                    "severity": "info",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "no error"
+                },
+                {
+                    "name": "no_session",
+                    "severity": "error",
+                    "type": "counter64",
+                    "units": "packets",
+                    "description": "no session"
+                }
+            ]
+        }
+    ],
+    "paths": []
+}

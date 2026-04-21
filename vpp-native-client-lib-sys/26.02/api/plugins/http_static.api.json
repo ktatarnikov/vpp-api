@@ -1,0 +1,207 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "http_static_enable_v4",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "fifo_size"
+            ],
+            [
+                "u32",
+                "cache_size_limit"
+            ],
+            [
+                "u32",
+                "max_age",
+                {
+                    "default": 600
+                }
+            ],
+            [
+                "u32",
+                "keepalive_timeout",
+                {
+                    "default": 60
+                }
+            ],
+            [
+                "u64",
+                "max_body_size",
+                {
+                    "default": 8000
+                }
+            ],
+            [
+                "u32",
+                "prealloc_fifos"
+            ],
+            [
+                "u32",
+                "private_segment_size"
+            ],
+            [
+                "string",
+                "www_root",
+                256
+            ],
+            [
+                "string",
+                "uri",
+                256
+            ],
+            {
+                "crc": "0x37540bfc",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Configure and enable the static http server\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param fifo_size - size (in bytes) of the session FIFOs\n    @param cache_size_limit - size (in bytes) of the in-memory file data cache\n    @param max_age - how long a response is considered fresh (in seconds)\n    @param max_body_size - maximum size of a request body (in bytes)\n    @param keepalive_timeout - timeout during which client connection will stay open (in seconds)\n    @param prealloc_fifos - number of preallocated fifos (usually 0)\n    @param private_segment_size - fifo segment size (usually 0)\n    @param www_root - html root path\n    @param uri - bind URI, defaults to \"tcp://0.0.0.0/80\"\n*/"
+            }
+        ],
+        [
+            "http_static_enable_v4_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "deprecated": null
+                }
+            }
+        ],
+        [
+            "http_static_enable_v5",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "fifo_size"
+            ],
+            [
+                "u32",
+                "cache_size_limit"
+            ],
+            [
+                "u32",
+                "max_age",
+                {
+                    "default": 600
+                }
+            ],
+            [
+                "u32",
+                "keepalive_timeout",
+                {
+                    "default": 60
+                }
+            ],
+            [
+                "u64",
+                "max_body_size",
+                {
+                    "default": 8192
+                }
+            ],
+            [
+                "u32",
+                "rx_buff_thresh",
+                {
+                    "default": 1048576
+                }
+            ],
+            [
+                "u32",
+                "prealloc_fifos"
+            ],
+            [
+                "u32",
+                "private_segment_size"
+            ],
+            [
+                "string",
+                "www_root",
+                256
+            ],
+            [
+                "string",
+                "uri",
+                256
+            ],
+            {
+                "crc": "0x8bf84069",
+                "options": {},
+                "comment": "/** \\brief Configure and enable the static http server\n\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param fifo_size - size (in bytes) of the session FIFOs\n    @param cache_size_limit - size (in bytes) of the in-memory file data cache\n    @param max_age - how long a response is considered fresh (in seconds)\n    @param max_body_size - maximum size of a request body (in bytes)\n    @param rx_buff_thresh - maximum size of a large memory allocation (in bytes)\n    @param keepalive_timeout - timeout during which client connection will stay open (in seconds)\n    @param prealloc_fifos - number of preallocated fifos (usually 0)\n    @param private_segment_size - fifo segment size (usually 0)\n    @param www_root - html root path\n    @param uri - bind URI, defaults to \"tcp://0.0.0.0/80\"\n*/"
+            }
+        ],
+        [
+            "http_static_enable_v5_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [],
+    "enumflags": [],
+    "services": {
+        "http_static_enable_v4": {
+            "reply": "http_static_enable_v4_reply"
+        },
+        "http_static_enable_v5": {
+            "reply": "http_static_enable_v5_reply"
+        }
+    },
+    "options": {
+        "version": "2.5.0"
+    },
+    "aliases": {},
+    "vl_api_version": "0xa4be530f",
+    "imports": [],
+    "counters": [],
+    "paths": []
+}

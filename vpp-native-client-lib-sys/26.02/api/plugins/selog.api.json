@@ -1,0 +1,253 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "selog_get_shm",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "selog_get_shm_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "selog_get_string_table",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "selog_get_string_table_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "string",
+                "s",
+                0
+            ],
+            {
+                "crc": "0x17fc26aa",
+                "options": {}
+            }
+        ],
+        [
+            "selog_track_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "selog_track_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "index"
+            ],
+            [
+                "string",
+                "name",
+                0
+            ],
+            {
+                "crc": "0x33dce766",
+                "options": {}
+            }
+        ],
+        [
+            "selog_event_type_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {}
+            }
+        ],
+        [
+            "selog_event_type_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "index"
+            ],
+            [
+                "string",
+                "fmt_args",
+                32
+            ],
+            [
+                "string",
+                "fmt",
+                0
+            ],
+            {
+                "crc": "0x745bca80",
+                "options": {}
+            }
+        ],
+        [
+            "selog_event_type_string_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "event_type_index"
+            ],
+            {
+                "crc": "0x6a7f2680",
+                "options": {}
+            }
+        ],
+        [
+            "selog_event_type_string_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "index"
+            ],
+            [
+                "string",
+                "s",
+                0
+            ],
+            {
+                "crc": "0x3718921d",
+                "options": {}
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [],
+    "enumflags": [],
+    "services": {
+        "selog_get_shm": {
+            "reply": "selog_get_shm_reply"
+        },
+        "selog_get_string_table": {
+            "reply": "selog_get_string_table_reply"
+        },
+        "selog_track_dump": {
+            "reply": "selog_track_details",
+            "stream": true
+        },
+        "selog_event_type_dump": {
+            "reply": "selog_event_type_details",
+            "stream": true
+        },
+        "selog_event_type_string_dump": {
+            "reply": "selog_event_type_string_details",
+            "stream": true
+        }
+    },
+    "options": {},
+    "aliases": {},
+    "vl_api_version": "0x58ce3561",
+    "imports": [],
+    "counters": [],
+    "paths": []
+}

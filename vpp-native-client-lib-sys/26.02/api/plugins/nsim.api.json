@@ -1,0 +1,429 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "nsim_cross_connect_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "enable_disable"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index0"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index1"
+            ],
+            {
+                "crc": "0x9c3ead86",
+                "options": {
+                    "vat_help": "[<intfc0> | sw_if_index <swif0>] [<intfc1> | sw_if_index <swif1>] [disable]"
+                },
+                "comment": "/** \\brief enable / disable the network delay simulation cross-connect\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param enable_disable - enable or disable the feature\n    @param sw_if_index0 - one interface to cross-connect\n    @param sw_if_index1 - the other interface to cross-connect\n*/"
+            }
+        ],
+        [
+            "nsim_cross_connect_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "vat_help": "[<intfc0> | sw_if_index <swif0>] [<intfc1> | sw_if_index <swif1>] [disable]"
+                }
+            }
+        ],
+        [
+            "nsim_output_feature_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "enable_disable"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x3865946c",
+                "options": {
+                    "vat_help": "[<intfc> | sw_if_index <nnn> [disable]"
+                },
+                "comment": "/** \\brief enable / disable the network delay simulation output feature\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param enable_disable - enable or disable the feature\n    @param sw_if_index0 - interface \n*/"
+            }
+        ],
+        [
+            "nsim_output_feature_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "vat_help": "[<intfc> | sw_if_index <nnn> [disable]"
+                }
+            }
+        ],
+        [
+            "nsim_configure",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "delay_in_usec"
+            ],
+            [
+                "u32",
+                "average_packet_size"
+            ],
+            [
+                "u64",
+                "bandwidth_in_bits_per_second"
+            ],
+            [
+                "u32",
+                "packets_per_drop"
+            ],
+            {
+                "crc": "0x16ed400f",
+                "options": {
+                    "deprecated": null,
+                    "vat_help": "delay <time> bandwidth <bw> [packet-size <nn>] [packets-per-drop <nnnn>]"
+                },
+                "comment": "/** \\brief configure the network delay simulation cross-connect\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param delay_in_usec - microseconds of link delay to simulate\n    @param average_packet_size - average packet size for wheel sizing\n    @param bandwidth_in_bits_per_second - bps for wheel sizing\n*/"
+            }
+        ],
+        [
+            "nsim_configure_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "deprecated": null,
+                    "vat_help": "delay <time> bandwidth <bw> [packet-size <nn>] [packets-per-drop <nnnn>]"
+                }
+            }
+        ],
+        [
+            "nsim_configure2",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "delay_in_usec"
+            ],
+            [
+                "u32",
+                "average_packet_size"
+            ],
+            [
+                "u64",
+                "bandwidth_in_bits_per_second"
+            ],
+            [
+                "u32",
+                "packets_per_drop"
+            ],
+            [
+                "u32",
+                "packets_per_reorder"
+            ],
+            {
+                "crc": "0x64de8ed3",
+                "options": {
+                    "vat_help": "delay <time> bandwidth <bw> [packet-size <nn>] [packets-per-drop <nnnn>]"
+                },
+                "comment": "/** \\brief configure the network delay simulation cross-connect\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param delay_in_usec - microseconds of link delay to simulate\n    @param average_packet_size - average packet size for wheel sizing\n    @param bandwidth_in_bits_per_second - bps for wheel sizing\n*/"
+            }
+        ],
+        [
+            "nsim_configure2_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "vat_help": "delay <time> bandwidth <bw> [packet-size <nn>] [packets-per-drop <nnnn>]"
+                }
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "nsim_cross_connect_enable_disable": {
+            "reply": "nsim_cross_connect_enable_disable_reply"
+        },
+        "nsim_output_feature_enable_disable": {
+            "reply": "nsim_output_feature_enable_disable_reply"
+        },
+        "nsim_configure": {
+            "reply": "nsim_configure_reply"
+        },
+        "nsim_configure2": {
+            "reply": "nsim_configure2_reply"
+        }
+    },
+    "options": {
+        "version": "2.2.1"
+    },
+    "aliases": {
+        "interface_index": {
+            "type": "u32"
+        }
+    },
+    "vl_api_version": "0x3b179b8f",
+    "imports": [
+        "vnet/interface_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}

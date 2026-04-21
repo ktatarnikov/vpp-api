@@ -1,0 +1,68 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "crypto_sw_scheduler_set_worker",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "worker_index"
+            ],
+            [
+                "bool",
+                "crypto_enable"
+            ],
+            {
+                "crc": "0xb4274502",
+                "options": {},
+                "comment": "/** \\brief crypto sw scheduler: Enable or disable workers\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param worker_index - Worker index to enable / disable\n    @param crypto_enable - On/Off\n*/"
+            }
+        ],
+        [
+            "crypto_sw_scheduler_set_worker_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [],
+    "enumflags": [],
+    "services": {
+        "crypto_sw_scheduler_set_worker": {
+            "reply": "crypto_sw_scheduler_set_worker_reply"
+        }
+    },
+    "options": {
+        "version": "1.1.0"
+    },
+    "aliases": {},
+    "vl_api_version": "0xf4b02951",
+    "imports": [],
+    "counters": [],
+    "paths": []
+}

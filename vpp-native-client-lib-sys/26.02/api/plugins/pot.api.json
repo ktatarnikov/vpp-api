@@ -1,0 +1,275 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "pot_profile_add",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "id"
+            ],
+            [
+                "u8",
+                "validator"
+            ],
+            [
+                "u64",
+                "secret_key"
+            ],
+            [
+                "u64",
+                "secret_share"
+            ],
+            [
+                "u64",
+                "prime"
+            ],
+            [
+                "u8",
+                "max_bits"
+            ],
+            [
+                "u64",
+                "lpc"
+            ],
+            [
+                "u64",
+                "polynomial_public"
+            ],
+            [
+                "string",
+                "list_name",
+                0
+            ],
+            {
+                "crc": "0xad5da3a3",
+                "options": {},
+                "comment": "/** \\brief Proof of Transit(POT): Set POT profile\n    @param id - id of the profile \n    @param validator - True/False to indicate if this is verifier\n    @param secret_key - Verification key\n    @param secret_share - Share of the 1st polynomial\n    @param prime - Prime number used for modulo operation\n    @param max_bits - Max bits to be used for Random number generation\n    @param lpc - Lagrange basis polynomial\n    @param polynomial_public - pre-evaluated public polynomial \n    @param list_name - name of this profile list\n*/"
+            }
+        ],
+        [
+            "pot_profile_add_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "pot_profile_activate",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "id"
+            ],
+            [
+                "string",
+                "list_name",
+                0
+            ],
+            {
+                "crc": "0x0770af98",
+                "options": {},
+                "comment": "/** \\brief Proof of Transit(POT): Activate POT profile in the list\n    @param id - id of the profile \n    @param list_name - name of this profile list\n*/"
+            }
+        ],
+        [
+            "pot_profile_activate_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "pot_profile_del",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "string",
+                "list_name",
+                0
+            ],
+            {
+                "crc": "0xcd63f53b",
+                "options": {},
+                "comment": "/** \\brief Delete POT Profile \n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param list_name - name of profile list to delete\n*/"
+            }
+        ],
+        [
+            "pot_profile_del_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {}
+            }
+        ],
+        [
+            "pot_profile_show_config_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "id"
+            ],
+            {
+                "crc": "0x005b7d59",
+                "options": {},
+                "comment": "/** \\brief Show POT Profiles\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param id - id of the profile\n*/"
+            }
+        ],
+        [
+            "pot_profile_show_config_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u8",
+                "id"
+            ],
+            [
+                "u8",
+                "validator"
+            ],
+            [
+                "u64",
+                "secret_key"
+            ],
+            [
+                "u64",
+                "secret_share"
+            ],
+            [
+                "u64",
+                "prime"
+            ],
+            [
+                "u64",
+                "bit_mask"
+            ],
+            [
+                "u64",
+                "lpc"
+            ],
+            [
+                "u64",
+                "polynomial_public"
+            ],
+            {
+                "crc": "0xb7ce0618",
+                "options": {},
+                "comment": "/** \\brief Show POT profile reply\n    @param id - id of the profile\n    @param validator - True/False to indicate if this is verifier\n    @param secret_key - Verification key\n    @param secret_share - Share of the 1st polynomial\n    @param prime - Prime number used for modulo operation\n    @param max_bits - Max bits to be used for Random number generation\n    @param lpc - Lagrange basis polynomial\n    @param polynomial_public - pre-evaluated public polynomial\n    @param list_name_len - length of the name of this profile list\n    @param list_name - name of this profile list\n*/"
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [],
+    "enumflags": [],
+    "services": {
+        "pot_profile_add": {
+            "reply": "pot_profile_add_reply"
+        },
+        "pot_profile_activate": {
+            "reply": "pot_profile_activate_reply"
+        },
+        "pot_profile_del": {
+            "reply": "pot_profile_del_reply"
+        },
+        "pot_profile_show_config_dump": {
+            "reply": "pot_profile_show_config_details",
+            "stream": true
+        }
+    },
+    "options": {
+        "version": "1.0.0"
+    },
+    "aliases": {},
+    "vl_api_version": "0xa9d8e55c",
+    "imports": [],
+    "counters": [],
+    "paths": []
+}

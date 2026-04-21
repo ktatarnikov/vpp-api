@@ -1,0 +1,729 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "memif_socket_filename_add_del",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "u32",
+                "socket_id"
+            ],
+            [
+                "string",
+                "socket_filename",
+                108
+            ],
+            {
+                "crc": "0xa2ce1a10",
+                "options": {
+                    "deprecated": null,
+                    "vat_help": "[add|del] id <id> filename <file>"
+                },
+                "comment": "/** \\brief Create or remove named socket file for memif interfaces\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - 0 = remove, 1 = add association\n    @param socket_id - non-0 32-bit integer used to identify a socket file\n    @param socket_filename - filename of the socket to be used for connection\n           establishment; id 0 always maps to default \"/var/vpp/memif.sock\";\n\t   no socket filename needed when is_add == 0.\n*/"
+            }
+        ],
+        [
+            "memif_socket_filename_add_del_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "deprecated": null,
+                    "vat_help": "[add|del] id <id> filename <file>"
+                }
+            }
+        ],
+        [
+            "memif_socket_filename_add_del_v2",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "bool",
+                "is_add"
+            ],
+            [
+                "u32",
+                "socket_id",
+                {
+                    "default": 4294967295
+                }
+            ],
+            [
+                "string",
+                "socket_filename",
+                0
+            ],
+            {
+                "crc": "0x34223bdf",
+                "options": {
+                    "vat_help": "[add|del] id <id> filename <file>"
+                },
+                "comment": "/** \\brief Create or remove named socket file for memif interfaces\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_add - 0 = remove, 1 = add association\n    @param socket_id - non-0 32-bit integer used to identify a socket file\n          ~0 means autogenerate\n    @param socket_filename - filename of the socket to be used for connection\n           establishment; id 0 always maps to default \"/var/vpp/memif.sock\";\n\t   no socket filename needed when is_add == 0.\n\t   socket_filename starting with '@' will create an abstract socket\n\t   in the given namespace\n*/"
+            }
+        ],
+        [
+            "memif_socket_filename_add_del_v2_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u32",
+                "socket_id"
+            ],
+            {
+                "crc": "0x9f29bdb9",
+                "options": {},
+                "comment": "/** \\brief Create memory interface socket file response\n    @param context - sender context, to match reply w/ request\n    @param retval - return value for request\n    @param socket_id - non-0 32-bit integer used to identify a socket file\n*/"
+            }
+        ],
+        [
+            "memif_create",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_memif_role_t",
+                "role"
+            ],
+            [
+                "vl_api_memif_mode_t",
+                "mode"
+            ],
+            [
+                "u8",
+                "rx_queues"
+            ],
+            [
+                "u8",
+                "tx_queues"
+            ],
+            [
+                "u32",
+                "id"
+            ],
+            [
+                "u32",
+                "socket_id"
+            ],
+            [
+                "u32",
+                "ring_size"
+            ],
+            [
+                "u16",
+                "buffer_size"
+            ],
+            [
+                "bool",
+                "no_zero_copy"
+            ],
+            [
+                "vl_api_mac_address_t",
+                "hw_addr"
+            ],
+            [
+                "string",
+                "secret",
+                24
+            ],
+            {
+                "crc": "0xb1b25061",
+                "options": {
+                    "deprecated": null,
+                    "vat_help": "[id <id>] [socket-id <id>] [ring_size <size>] [buffer_size <size>] [hw_addr <mac_address>] [secret <string>] [mode ip] <master|slave>"
+                },
+                "comment": "/** \\brief Create memory interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param role - role of the interface in the connection (master/slave)\n    @param mode - interface mode\n    @param rx_queues - number of rx queues (only valid for slave)\n    @param tx_queues - number of tx queues (only valid for slave)\n    @param id - 32bit integer used to authenticate and match opposite sides\n           of the connection\n    @param socket_id - socket filename id to be used for connection\n           establishment\n    @param ring_size - the number of entries of RX/TX rings\n    @param buffer_size - size of the buffer allocated for each ring entry\n    @param no_zero_copy - if true, disable zero copy\n    @param hw_addr - interface MAC address\n    @param secret - optional, default is \"\", max length 24\n*/"
+            }
+        ],
+        [
+            "memif_create_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x5383d31f",
+                "options": {
+                    "deprecated": null
+                },
+                "comment": "/** \\brief Create memory interface response\n    @param context - sender context, to match reply w/ request\n    @param retval - return value for request\n    @param sw_if_index - software index of the newly created interface\n*/"
+            }
+        ],
+        [
+            "memif_create_v2",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_memif_role_t",
+                "role"
+            ],
+            [
+                "vl_api_memif_mode_t",
+                "mode"
+            ],
+            [
+                "u8",
+                "rx_queues"
+            ],
+            [
+                "u8",
+                "tx_queues"
+            ],
+            [
+                "u32",
+                "id"
+            ],
+            [
+                "u32",
+                "socket_id"
+            ],
+            [
+                "u32",
+                "ring_size"
+            ],
+            [
+                "u16",
+                "buffer_size"
+            ],
+            [
+                "bool",
+                "no_zero_copy"
+            ],
+            [
+                "bool",
+                "use_dma"
+            ],
+            [
+                "vl_api_mac_address_t",
+                "hw_addr"
+            ],
+            [
+                "string",
+                "secret",
+                24
+            ],
+            {
+                "crc": "0x8c7de5f7",
+                "options": {
+                    "vat_help": "[id <id>] [socket-id <id>] [ring_size <size>] [buffer_size <size>] [hw_addr <mac_address>] [secret <string>] [mode ip] <master|slave>"
+                },
+                "comment": "/** \\brief Create memory interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param role - role of the interface in the connection (master/slave)\n    @param mode - interface mode\n    @param rx_queues - number of rx queues (only valid for slave)\n    @param tx_queues - number of tx queues (only valid for slave)\n    @param id - 32bit integer used to authenticate and match opposite sides\n           of the connection\n    @param socket_id - socket filename id to be used for connection\n           establishment\n    @param ring_size - the number of entries of RX/TX rings\n    @param buffer_size - size of the buffer allocated for each ring entry\n    @param no_zero_copy - if true, disable zero copy\n    @param use_dma - if true, use dma accelerate memory copy\n    @param hw_addr - interface MAC address\n    @param secret - optional, default is \"\", max length 24\n*/"
+            }
+        ],
+        [
+            "memif_create_v2_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0x5383d31f",
+                "options": {},
+                "comment": "/** \\brief Create memory interface response\n    @param context - sender context, to match reply w/ request\n    @param retval - return value for request\n    @param sw_if_index - software index of the newly created interface\n*/"
+            }
+        ],
+        [
+            "memif_delete",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            {
+                "crc": "0xf9e6675e",
+                "options": {
+                    "vat_help": "<sw_if_index>"
+                },
+                "comment": "/** \\brief Delete memory interface\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param sw_if_index - software index of the interface to delete\n*/"
+            }
+        ],
+        [
+            "memif_delete_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "vat_help": "<sw_if_index>"
+                }
+            }
+        ],
+        [
+            "memif_socket_filename_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u32",
+                "socket_id"
+            ],
+            [
+                "string",
+                "socket_filename",
+                108
+            ],
+            {
+                "crc": "0x7ff326f7",
+                "options": {},
+                "comment": "/** \\brief Memory interface details structure\n    @param context - sender context, to match reply w/ request\n    @param socket_id - u32 used to identify the given socket filename\n    @param socket_filename - corresponding NUL terminated socket filename\n*/"
+            }
+        ],
+        [
+            "memif_socket_filename_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Dump the table of socket ids and corresponding filenames\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ],
+        [
+            "memif_details",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "vl_api_interface_index_t",
+                "sw_if_index"
+            ],
+            [
+                "vl_api_mac_address_t",
+                "hw_addr"
+            ],
+            [
+                "u32",
+                "id"
+            ],
+            [
+                "vl_api_memif_role_t",
+                "role"
+            ],
+            [
+                "vl_api_memif_mode_t",
+                "mode"
+            ],
+            [
+                "bool",
+                "zero_copy"
+            ],
+            [
+                "u32",
+                "socket_id"
+            ],
+            [
+                "u32",
+                "ring_size"
+            ],
+            [
+                "u16",
+                "buffer_size"
+            ],
+            [
+                "vl_api_if_status_flags_t",
+                "flags"
+            ],
+            [
+                "string",
+                "if_name",
+                64
+            ],
+            {
+                "crc": "0xda34feb9",
+                "options": {},
+                "comment": "/** \\brief Memory interface details structure\n    @param context - sender context, to match reply w/ request (memif_dump)\n    @param sw_if_index - index of the interface\n    @param hw_addr - interface MAC address\n    @param id - id associated with the interface\n    @param role - role of the interface in the connection (master/slave)\n    @param mode - interface mode\n    @param zero_copy - zero copy flag present\n    @param socket_id - id of the socket filename used by this interface\n           to establish new connections\n    @param ring_size - the number of entries of RX/TX rings\n    @param buffer_size - size of the buffer allocated for each ring entry\n    @param flags - interface_status flags\n    @param if_name - name of the interface\n\n*/"
+            }
+        ],
+        [
+            "memif_dump",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            {
+                "crc": "0x51077d14",
+                "options": {},
+                "comment": "/** \\brief Dump all memory interfaces\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n*/"
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [
+        [
+            "if_status_flags",
+            [
+                "IF_STATUS_API_FLAG_ADMIN_UP",
+                1
+            ],
+            [
+                "IF_STATUS_API_FLAG_LINK_UP",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "mtu_proto",
+            [
+                "MTU_PROTO_API_L3",
+                0
+            ],
+            [
+                "MTU_PROTO_API_IP4",
+                1
+            ],
+            [
+                "MTU_PROTO_API_IP6",
+                2
+            ],
+            [
+                "MTU_PROTO_API_MPLS",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "link_duplex",
+            [
+                "LINK_DUPLEX_API_UNKNOWN",
+                0
+            ],
+            [
+                "LINK_DUPLEX_API_HALF",
+                1
+            ],
+            [
+                "LINK_DUPLEX_API_FULL",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "sub_if_flags",
+            [
+                "SUB_IF_API_FLAG_NO_TAGS",
+                1
+            ],
+            [
+                "SUB_IF_API_FLAG_ONE_TAG",
+                2
+            ],
+            [
+                "SUB_IF_API_FLAG_TWO_TAGS",
+                4
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AD",
+                8
+            ],
+            [
+                "SUB_IF_API_FLAG_EXACT_MATCH",
+                16
+            ],
+            [
+                "SUB_IF_API_FLAG_DEFAULT",
+                32
+            ],
+            [
+                "SUB_IF_API_FLAG_OUTER_VLAN_ID_ANY",
+                64
+            ],
+            [
+                "SUB_IF_API_FLAG_INNER_VLAN_ID_ANY",
+                128
+            ],
+            [
+                "SUB_IF_API_FLAG_MASK_VNET",
+                254
+            ],
+            [
+                "SUB_IF_API_FLAG_DOT1AH",
+                256
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "rx_mode",
+            [
+                "RX_MODE_API_UNKNOWN",
+                0
+            ],
+            [
+                "RX_MODE_API_POLLING",
+                1
+            ],
+            [
+                "RX_MODE_API_INTERRUPT",
+                2
+            ],
+            [
+                "RX_MODE_API_ADAPTIVE",
+                3
+            ],
+            [
+                "RX_MODE_API_DEFAULT",
+                4
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "if_type",
+            [
+                "IF_API_TYPE_HARDWARE",
+                0
+            ],
+            [
+                "IF_API_TYPE_SUB",
+                1
+            ],
+            [
+                "IF_API_TYPE_P2P",
+                2
+            ],
+            [
+                "IF_API_TYPE_PIPE",
+                3
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "direction",
+            [
+                "RX",
+                0
+            ],
+            [
+                "TX",
+                1
+            ],
+            {
+                "enumtype": "u8"
+            }
+        ],
+        [
+            "memif_role",
+            [
+                "MEMIF_ROLE_API_MASTER",
+                0
+            ],
+            [
+                "MEMIF_ROLE_API_SLAVE",
+                1
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ],
+        [
+            "memif_mode",
+            [
+                "MEMIF_MODE_API_ETHERNET",
+                0
+            ],
+            [
+                "MEMIF_MODE_API_IP",
+                1
+            ],
+            [
+                "MEMIF_MODE_API_PUNT_INJECT",
+                2
+            ],
+            {
+                "enumtype": "u32"
+            }
+        ]
+    ],
+    "enumflags": [],
+    "services": {
+        "memif_socket_filename_add_del": {
+            "reply": "memif_socket_filename_add_del_reply"
+        },
+        "memif_socket_filename_add_del_v2": {
+            "reply": "memif_socket_filename_add_del_v2_reply"
+        },
+        "memif_create": {
+            "reply": "memif_create_reply"
+        },
+        "memif_create_v2": {
+            "reply": "memif_create_v2_reply"
+        },
+        "memif_delete": {
+            "reply": "memif_delete_reply"
+        },
+        "memif_socket_filename_dump": {
+            "reply": "memif_socket_filename_details",
+            "stream": true
+        },
+        "memif_dump": {
+            "reply": "memif_details",
+            "stream": true
+        }
+    },
+    "options": {
+        "version": "3.1.0"
+    },
+    "aliases": {
+        "interface_index": {
+            "type": "u32"
+        },
+        "mac_address": {
+            "type": "u8",
+            "length": 6
+        }
+    },
+    "vl_api_version": "0xd48ac702",
+    "imports": [
+        "vnet/interface_types.api",
+        "vnet/ethernet/ethernet_types.api"
+    ],
+    "counters": [],
+    "paths": []
+}

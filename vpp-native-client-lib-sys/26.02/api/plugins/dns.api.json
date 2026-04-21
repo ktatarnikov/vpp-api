@@ -1,0 +1,254 @@
+{
+    "types": [],
+    "messages": [
+        [
+            "dns_enable_disable",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "enable"
+            ],
+            {
+                "crc": "0x8050327d",
+                "options": {
+                    "vat_help": "[enable][disable]"
+                },
+                "comment": "/** \\brief enable/disable name resolution\n\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_enable - 1 = enable, 0 = disable\n*/"
+            }
+        ],
+        [
+            "dns_enable_disable_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "vat_help": "[enable][disable]"
+                }
+            }
+        ],
+        [
+            "dns_name_server_add_del",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "is_ip6"
+            ],
+            [
+                "u8",
+                "is_add"
+            ],
+            [
+                "u8",
+                "server_address",
+                16
+            ],
+            {
+                "crc": "0x3bb05d8c",
+                "options": {
+                    "vat_help": "<ip-address> [del]"
+                },
+                "comment": "/** \\brief add or delete an upstream name server\n\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_ip6 - an ip6 name server\n    @param is_add - add = 1, delete = 0\n    @param server_address - server ip address\n*/"
+            }
+        ],
+        [
+            "dns_name_server_add_del_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            {
+                "crc": "0xe8d4e804",
+                "options": {
+                    "vat_help": "<ip-address> [del]"
+                }
+            }
+        ],
+        [
+            "dns_resolve_name",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "name",
+                256
+            ],
+            {
+                "crc": "0xc6566676",
+                "options": {
+                    "vat_help": "<hostname>"
+                },
+                "comment": "/** \\brief DNS name resolution request\n\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param name - the name to resolve\n*/"
+            }
+        ],
+        [
+            "dns_resolve_name_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u8",
+                "ip4_set"
+            ],
+            [
+                "u8",
+                "ip6_set"
+            ],
+            [
+                "u8",
+                "ip4_address",
+                4
+            ],
+            [
+                "u8",
+                "ip6_address",
+                16
+            ],
+            {
+                "crc": "0xc2d758c3",
+                "options": {},
+                "comment": "/** \\brief DNS name resolution reply\n\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param retval - return value, 0 => success\n    @param ip4_set - indicates that the ip4 address is valid\n    @param ip6_set - indicates that the ip6 address is valid\n    @param ip4_address - the ip4 name resolution reply\n    @param ip6_address - the ip6 name resolution reply\n*/"
+            }
+        ],
+        [
+            "dns_resolve_ip",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "client_index"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "u8",
+                "is_ip6"
+            ],
+            [
+                "u8",
+                "address",
+                16
+            ],
+            {
+                "crc": "0xae96a1a3",
+                "options": {
+                    "vat_help": "<ip4|ip6>"
+                },
+                "comment": "/** \\brief DNS IP -> name resolution request\n\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param is_ip6 - set if the reverse-DNS request is an ip6 address\n    @param address - the address to map to a name\n*/"
+            }
+        ],
+        [
+            "dns_resolve_ip_reply",
+            [
+                "u16",
+                "_vl_msg_id"
+            ],
+            [
+                "u32",
+                "context"
+            ],
+            [
+                "i32",
+                "retval"
+            ],
+            [
+                "u8",
+                "name",
+                256
+            ],
+            {
+                "crc": "0x49ed78d6",
+                "options": {},
+                "comment": "/** \\brief DNS ip->name resolution reply\n\n    @param client_index - opaque cookie to identify the sender\n    @param context - sender context, to match reply w/ request\n    @param retval - return value, 0 => success\n    @param name - canonical name for the indicated IP address\n*/"
+            }
+        ]
+    ],
+    "unions": [],
+    "enums": [],
+    "enumflags": [],
+    "services": {
+        "dns_enable_disable": {
+            "reply": "dns_enable_disable_reply"
+        },
+        "dns_name_server_add_del": {
+            "reply": "dns_name_server_add_del_reply"
+        },
+        "dns_resolve_name": {
+            "reply": "dns_resolve_name_reply"
+        },
+        "dns_resolve_ip": {
+            "reply": "dns_resolve_ip_reply"
+        }
+    },
+    "options": {
+        "version": "1.0.0"
+    },
+    "aliases": {},
+    "vl_api_version": "0x269575cd",
+    "imports": [],
+    "counters": [],
+    "paths": []
+}
